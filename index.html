@@ -1,1392 +1,1209 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head><style></style>
-<meta charset="utf-8">
-<script>try{if(location.hash==="#reset"){localStorage.removeItem("wf_admin_html");history.replaceState(null,"",location.pathname+location.search)}else if(!window.__wfApplied){var h=localStorage.getItem("wf_admin_html");if(h){document.open();document.write(h.replace(/<head[^>]*>/i,function(m){return m+"<script>window.__wfApplied=1<"+"/script>"}));document.close()}}}catch(e){}</script>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wyvern Forge — صانع سكربتات وواجهات Roblox</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#eef2f0;--panel:#fff;--p2:#e5ece9;--line:#cdd8d3;--text:#14201b;--mute:#5d6d66;--gold:#b8801d;--teal:#0f7f6e;--err:#c23b2e;--code:#f5f8f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0b1210;--panel:#131c19;--p2:#1b2824;--line:#283733;--text:#e8f0ec;--mute:#8da39b;--gold:#e5ac40;--teal:#44c6af;--err:#ff7b6b;--code:#0e1614}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#0b1210;--panel:#131c19;--p2:#1b2824;--line:#283733;--text:#e8f0ec;--mute:#8da39b;--gold:#e5ac40;--teal:#44c6af;--err:#ff7b6b;--code:#0e1614}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Cairo,system-ui,sans-serif;padding-bottom:78px}
-button,input,select,textarea{font:inherit;color:inherit}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
-header h1{margin:0;font-size:19px;font-weight:800;flex:1}header h1 span{color:var(--gold)}
-.btn{background:var(--p2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:40px}
-.btn:hover{border-color:var(--gold)}.pri{background:var(--gold);border-color:var(--gold);color:#16130a;font-weight:700}
-nav{position:fixed;inset:auto 0 0 0;z-index:6;display:flex;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--panel);border-top:1px solid var(--line)}
-nav button{flex:1;border:0;background:none;border-radius:10px;padding:6px 2px;cursor:pointer;color:var(--mute);position:relative;line-height:1.25}
-nav button b{display:block;font-size:19px}nav button.on{background:var(--p2);color:var(--text);font-weight:700}
-nav .n{position:absolute;top:0;inset-inline-end:14%;background:var(--err);color:#fff;border-radius:9px;font-size:11px;padding:0 6px}
-main{max-width:1100px;margin:0 auto;padding:12px}.tab{display:none}.tab.on{display:block}
-.two{display:grid;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
-h2{margin:0 0 4px;font-size:17px}.hint{color:var(--mute);margin:0 0 10px;font-size:13px}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.add{border:1px dashed var(--gold);background:none;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--text)}.add:hover{background:var(--p2)}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.row label{display:flex;flex-direction:column;font-size:12px;color:var(--mute);gap:2px;flex:1;min-width:84px}
-input,select{padding:8px;border:1px solid var(--line);border-radius:9px;background:var(--p2);min-height:40px;width:100%}
-input[type=color]{padding:2px;width:48px;flex:none}input[type=range]{padding:0;accent-color:var(--gold)}
-.ct{display:flex;gap:8px;align-items:center}.ct input{flex:1}.tag{background:var(--c,var(--gold));color:#111;border-radius:7px;padding:2px 9px;font-size:12px;font-weight:700;white-space:nowrap}
-.acts{display:flex}.acts button{background:none;border:0;cursor:pointer;font-size:17px;color:var(--mute);padding:6px 8px}
-.add{min-height:46px;padding:8px 18px;font-size:15px;font-weight:600;border-style:solid;background:var(--p2)}.add:active{transform:scale(.96)}.acts button{font-size:21px;padding:8px 11px}summary{cursor:pointer;font-weight:700;font-size:16px}details[open]>summary{margin-bottom:6px}.empty{text-align:center;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:22px}
-.ltr{direction:ltr;text-align:left}
-.stage{display:flex;justify-content:center;padding:18px;background:var(--p2);border-radius:12px}
-.hp{width:250px;padding:14px;color:#fff;box-shadow:0 10px 30px #0006}.hp h3{margin:0 0 10px;font-size:17px;color:inherit}
-.hp .pb{display:block;width:100%;margin-bottom:8px;padding:9px;border:0;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;min-height:38px}
-.hp .ps{margin-bottom:8px;font-size:13px}.hp .ps input{padding:0;min-height:26px}.hp .pl{font-size:13px;opacity:.8;margin-bottom:8px}
-.st{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;direction:ltr}.st span{background:var(--p2);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px}
-.pill{border-radius:999px;padding:2px 10px;font-size:12px;background:var(--p2)}.pill.ed{background:var(--gold);color:#16130a}
-.row .ck{flex-direction:row;align-items:center;color:var(--text);font-size:14px;min-width:170px;gap:8px}.ck input{width:22px;min-height:22px;flex:none}.stage{position:relative;min-height:380px;align-items:center;overflow:hidden}.hp{transition:transform .2s,opacity .2s}.hp.off{transform:scale(.01);opacity:0;pointer-events:none}.ob{position:absolute;border:0;border-radius:12px;cursor:pointer;font-size:20px;font-weight:700;color:#fff;box-shadow:0 4px 14px #0005;touch-action:none}body{background:radial-gradient(900px 400px at 85% -10%,color-mix(in srgb,var(--gold) 14%,transparent),transparent),radial-gradient(700px 380px at 5% 0%,color-mix(in srgb,var(--teal) 12%,transparent),transparent),var(--bg);background-attachment:fixed}
-header{backdrop-filter:blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}.logo{font-size:28px}header h1 small{display:block;font-size:12px;font-weight:400;color:var(--mute)}
-header h1>span{background:linear-gradient(90deg,var(--gold),#ff8a4c);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pri{background:linear-gradient(135deg,var(--gold),#ff9a4c)}.card{box-shadow:0 2px 14px #0000001a;transition:border-color .15s}.card:hover{border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
-.stats{display:flex;gap:8px;flex-wrap:wrap;max-width:1100px;margin:10px auto 0;padding:0 12px}.stats span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px;color:var(--mute)}.stats b{color:var(--text)}
-.stage{background:radial-gradient(var(--line) 1px,transparent 1px) 0 0/16px 16px,var(--p2)}nav button.on{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 30%,var(--p2)),var(--p2));box-shadow:inset 0 0 0 1px var(--gold)}.tag{box-shadow:0 1px 6px #0003}
-.add.on{background:var(--gold);color:#16130a;border-color:var(--gold)}details.card>summary{list-style:none}details.card>summary::before{content:"◂ ";color:var(--gold)}details[open].card>summary::before{content:"▾ "}
-.hp .ptabs{display:flex;gap:4px;margin-bottom:10px}.hp .ptabs button{flex:1;padding:6px 4px;border:0;border-radius:8px;color:inherit;background:#ffffff1a;cursor:pointer;font:inherit;font-size:13px}
-@media(max-width:879px){.stats{display:none}}
-#adm{position:fixed;inset:0;z-index:50;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}#adm[hidden],#adm [hidden]{display:none}.adm-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;width:min(1000px,100%);max-height:100%;display:flex;flex-direction:column}
-.adm-ta{width:100%;height:min(66vh,620px);direction:ltr;text-align:left;font:12.5px/1.55 "Fira Code",monospace;tab-size:2;white-space:pre;border:1px solid var(--line);border-radius:10px;background:var(--code);color:var(--text);padding:10px;resize:none}
-.cta{width:100%;min-height:120px;font:12.5px/1.5 "Fira Code",monospace;border:1px solid var(--line);border-radius:9px;background:var(--code);padding:8px;margin:6px 0;resize:vertical;direction:ltr;text-align:left}.cb{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}.cb summary{font-size:14px}.hp .pt{width:100%;padding:9px;border-radius:8px;border:0;margin-bottom:8px;background:#ffffff22;color:inherit;font:inherit}.hp .sm{display:flex;align-items:center;gap:8px;margin-bottom:8px}.hp .sb{width:38px;margin:0;padding:6px}.ed{position:relative;direction:ltr;height:min(64vh,540px);border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--code)}
-.ed pre,.ed textarea{position:absolute;inset:0;margin:0;padding:12px;font:13px/1.65 "Fira Code",monospace;tab-size:2;white-space:pre;border:0;width:100%;height:100%;overflow:auto}
-.ed pre{overflow:hidden;pointer-events:none}.ed textarea{background:transparent;color:transparent;-webkit-text-fill-color:transparent;caret-color:var(--text);resize:none;outline:none}
-.k{color:var(--teal)}.s{color:var(--gold)}.c{color:var(--mute);font-style:italic}.nu{color:#c26ad8}.a{color:#4f8fe0}
-.pr{padding:9px 12px;border-radius:9px;margin-bottom:6px;background:var(--p2);border-inline-start:4px solid var(--c)}
-.log{direction:ltr;text-align:left;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:10px;font:12.5px "Fira Code",monospace;min-height:130px;max-height:40vh;overflow:auto;margin-top:10px}
-@media(min-width:880px){body{padding-bottom:0}nav{position:static;border:0;background:none;max-width:1100px;margin:10px auto 0;padding:0 12px}nav button{flex:none;padding:8px 18px;display:flex;gap:8px;align-items:center}nav button b{font-size:16px;display:inline}
-.two{grid-template-columns:1fr 330px;align-items:start}.two .sticky{position:sticky;top:76px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Chicken Invaders — Hyper Galaxy (HTML5)</title>
+  <style>
+    * { box-sizing: border-box; user-select: none; -webkit-user-select: none; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #050812;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+      color: #f8fafc;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(3, 6, 18, 0.78);
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      padding: 16px;
+      text-align: center;
+    }
+    .overlay.active { display: flex; }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 5vw, 48px);
+      color: #facc15;
+      text-shadow: 0 4px 20px rgba(250, 204, 21, 0.35);
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(22px, 4vw, 34px);
+      color: #38bdf8;
+    }
+    .btn {
+      min-width: 260px;
+      max-width: 92vw;
+      padding: 12px 22px;
+      margin: 6px;
+      border: 2px solid rgba(255,255,255,0.22);
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.1s ease, filter 0.15s ease;
+    }
+    .btn:hover:not(:disabled) { transform: scale(1.03); filter: brightness(1.08); }
+    .btn:active:not(:disabled) { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.48; cursor: not-allowed; }
+    .btn-green { background: #16a34a; }
+    .btn-blue { background: #2563eb; }
+    .btn-amber { background: #d97706; }
+    .btn-red { background: #dc2626; }
+    .btn-slate { background: #475569; }
+    .shop-list {
+      width: min(540px, 95vw);
+      max-height: 62vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 8px 0 14px;
+    }
+    .shop-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 10px;
+      padding: 10px 14px;
+      gap: 10px;
+      text-align: right;
+    }
+    .shop-item button {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #eab308;
+      color: #0f172a;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .shop-item button:disabled { background: #475569; color: #cbd5e1; cursor: not-allowed; }
+    #hud {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 5;
+      padding: 12px 18px;
+    }
+    #hud.active { display: block; }
+    .hud-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .hud-col { display: flex; flex-direction: column; gap: 4px; font-size: 18px; font-weight: 700; text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
+    .bar-wrap { width: 200px; height: 14px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.25); border-radius: 7px; overflow: hidden; margin-top: 4px; }
+    .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #38bdf8, #a855f7); transition: width 0.12s linear; }
+    #boss-bar-wrap {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(440px, 65vw);
+      height: 20px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid #a855f7;
+      border-radius: 10px;
+      overflow: hidden;
+      display: none;
+      z-index: 6;
+    }
+    #boss-bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #dc2626, #facc15); }
+    .touch-controls {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: none;
+      justify-content: space-between;
+      z-index: 8;
+      pointer-events: none;
+    }
+    .touch-btn {
+      pointer-events: auto;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(30, 41, 59, 0.72);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .touch-controls.active { display: flex; }
+    }
+  </style>
 </head>
 <body>
-<header><span class="logo">🐉</span><h1>Wyvern <span>Forge</span><small>صانع واجهات وسكربتات Roblox</small></h1><button class="btn" id="admbtn" title="دخول الأدمن">🔒 أدمن</button><button class="btn pri" id="copy">نسخ الكود</button></header>
-<div class="stats" id="stats"></div>
-<nav id="nav"><button data-t="hub" class="on"><b>🎛️</b>الواجهة</button><button data-t="script"><b>🧱</b>السكربت</button><button data-t="code"><b>✍️</b>الكود</button><button data-t="test"><b>▶️</b>الاختبار<span class="n" id="cnt" hidden></span></button></nav>
-<main>
-<div class="tab on" id="t-hub"><div class="two"><div>
- <div class="card" id="tabsbar"></div>
-<div class="card"><h2>🧩 العناصر</h2><p class="hint">اختار نوع العنصر وهيتضاف في التاب الحالي.</p><div class="chips"><button class="add" data-ae="button">🔘 زر</button><button class="add" data-ae="slider">🎚️ سلايدر</button><button class="add" data-ae="toggle">🔀 مفتاح</button><button class="add" data-ae="label">📝 نص</button><button class="add" data-ae="textbox">⌨️ مربع كتابة</button><button class="add" data-ae="dropdown">📋 قائمة</button><button class="add" data-ae="stepper">➕ عدّاد</button><button class="add" data-ae="keybind">🎹 اختصار</button><button class="add" data-ae="divider">➖ فاصل</button></div><div id="els"></div></div>
-<details class="card"><summary>📦 حزم جاهزة</summary><p class="hint">كل حزمة بتضيف مجموعة عناصر مرة واحدة في التاب الحالي.</p><div class="chips" id="packs"></div></details>
-<details class="card"><summary>🎨 الشكل والألوان</summary><div class="chips" id="themes" style="margin:0 0 8px"></div><div class="row"><label>العنوان<input id="ht"></label><label style="flex:none;min-width:60px">اللون<input id="hc" type="color"></label><label style="flex:none;min-width:60px">الخلفية<input id="hb" type="color"></label></div>
-  <div class="row"><label>استدارة الحواف: <b id="rv"></b><input id="hr" type="range" min="0" max="24"></label><label>مكان اللوحة<select id="hp2"><option value="left">يسار</option><option value="center">وسط</option><option value="right">يمين</option></select></label></div></details>
-<details class="card"><summary>⚙️ فتح وقفل وحركة (اختياري)</summary><p class="hint">تحكم في زر فتح وقفل اللوحة، وفي حركتها وسحبها.</p><div class="row"><label class="ck"><input type="checkbox" id="k-showBtn">زر فتح/قفل</label><label class="ck"><input type="checkbox" id="k-startOpen">مفتوحة من البداية</label><label class="ck"><input type="checkbox" id="k-anim">حركة الفتح والقفل</label><label class="ck"><input type="checkbox" id="k-panelDrag">اللوحة تتحرك بالسحب</label><label class="ck"><input type="checkbox" id="k-btnDrag">الزر يتحرك بالسحب</label></div><div class="row"><label>نص الزر<input id="k-btnText" maxlength="6"></label><label>مكان الزر<select id="k-btnPos"><option value="tl">فوق يسار</option><option value="tr">فوق يمين</option><option value="bl">تحت يسار</option><option value="br">تحت يمين</option></select></label><label>اختصار الكيبورد<select id="k-key"><option value="">بدون</option><option>F</option><option>G</option><option>H</option><option>K</option><option>RightShift</option><option>Insert</option></select></label></div><div class="row"><label>حجم الزر: <b id="v-btnSize"></b><input type="range" id="k-btnSize" min="32" max="72"></label><label>عرض اللوحة: <b id="v-width"></b><input type="range" id="k-width" min="200" max="340"></label><label>شفافية اللوحة: <b id="v-alpha"></b><input type="range" id="k-alpha" min="0" max="60"></label></div></details></div>
- <div class="sticky card"><h2>معاينة مباشرة</h2><p class="hint">جرّب العناصر هنا كأنها داخل اللعبة.</p><div class="stage"><div class="hp" id="hp"></div><button class="ob" id="ob"></button></div><div class="st"></div></div></div></div>
-<div class="tab" id="t-script"><h2>سكربت اللاعب</h2><p class="hint">يشتغل مرة واحدة لكل لاعب أول ما يدخل اللعبة. رتّب البلوكات من فوق لتحت.</p><div class="chips" id="pal"></div><div id="blocks"></div></div>
-<div class="tab" id="t-code"><div class="chips" style="align-items:center"><button class="add" data-f="hub">Hub LocalScript</button><button class="add" data-f="script">Server Script</button><span class="pill" id="cs"></span><button class="btn" id="regen" style="margin-inline-start:auto">رجّع الكود الأصلي</button></div>
- <p class="hint">تقدر تعدّل الكود بإيدك. لو عدّلت، التغييرات اللي في الواجهة والبلوكات مش هتغيّره إلا لو رجّعت الكود الأصلي.</p>
- <div class="ed"><pre id="pre"></pre><textarea id="ta" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div></div>
-<div class="tab" id="t-test"><div class="two"><div><h2>الفحص</h2><p class="hint">بنراجع البلوكات والواجهة والكود المكتوب بإيدك.</p><div id="chks"></div></div>
- <div class="sticky card"><h2>المحاكي</h2><div class="row" style="margin:0 0 6px"><button class="btn pri" id="run">شغّل السكربت</button><button class="btn" id="clr">صفّر الحالة</button></div><div class="st" id="st2"></div><div class="log" id="log"></div><p class="hint" style="margin-top:8px">المحاكي بيشغّل كود السكربت (حتى لو عدّلته بإيدك) على مشغّل Lua. صيغ Luau الخاصة زي أنواع المتغيّرات وcontinue مش مدعومة هنا.</p></div></div></div>
-</main>
-<div id="adm" hidden><div class="adm-box">
-<div id="adm-login"><h2>🔒 دخول الأدمن</h2><p class="hint">اكتب الباسورد عشان تفتح محرر كود الموقع.</p><div class="row"><input id="adm-pw" type="password" class="ltr" placeholder="الباسورد" autocomplete="off"><button class="btn pri" id="adm-go" style="flex:none">دخول</button><button class="btn" id="adm-x1" style="flex:none">إغلاق</button></div><p id="adm-err" style="color:var(--err);margin:6px 0 0"></p></div>
-<div id="adm-edit" hidden><div class="row" style="margin:0"><h2 style="flex:1;margin:0">✍️ محرر كود الموقع (HTML كامل)</h2><button class="btn pri" id="adm-ap">تطبيق وحفظ</button><button class="btn" id="adm-rs">رجّع الأصلي</button><button class="btn" id="adm-cp">نسخ</button><button class="btn" id="adm-x2">إغلاق</button></div>
-<p class="hint" id="adm-st" style="margin:6px 0"></p><textarea id="adm-ta" class="adm-ta" spellcheck="false"></textarea>
-<p class="hint" style="margin:6px 0 0">التعديلات بتتحفظ في متصفحك إنت بس وبتتطبّق بعد إعادة التحميل تلقائيًا. لو الصفحة باظت من تعديل، ضيف <b>#reset</b> في آخر الرابط وافتحه عشان ترجع النسخة الأصلية.</p></div>
-</div></div>
-<script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"></script>
-<script>
-const PR={WalkSpeed:[0,100,16],JumpPower:[0,200,50],Gravity:[0,400,196],FOV:[30,120,70],TimeOfDay:[0,24,14],Brightness:[0,10,2],FogEnd:[100,10000,10000],HipHeight:[0,20,2],Health:[0,100,100],CameraZoom:[10,500,128],Transparency:[0,100,0]},SP=["WalkSpeed","JumpPower","Gravity","TimeOfDay","Brightness","FogEnd","HipHeight","Health"];
-const BD={print:{l:"💬 اطبع رسالة",c:"#4f8fe0",f:[["text","text","Welcome!"]]},wait:{l:"⏳ انتظر (ثواني)",c:"#9a7ad6",f:[["secs","number",1]]},setprop:{l:"⚙️ غيّر خاصية",c:"#12a58f",f:[["prop","sel","WalkSpeed"],["value","number",24]]},tp:{l:"📍 انقل اللاعب",c:"#e5ac40",f:[["x","number",0],["y","number",10],["z","number",0]]},stat:{l:"⭐ أضف نقاط",c:"#e5ac40",f:[["name","text","Coins"],["amount","number",10]]},repeat:{l:"🔁 كرّر",c:"#d9604c",f:[["times","number",3]]},end:{l:"⏹️ نهاية التكرار",c:"#d9604c",f:[]}};
-const ET={button:["زر","#e5ac40"],slider:["سلايدر","#44c6af"],toggle:["مفتاح","#9a7ad6"],label:["نص","#8da39b"],textbox:["مربع كتابة","#4f8fe0"],dropdown:["قائمة","#d9604c"],stepper:["عدّاد","#12a58f"],keybind:["اختصار","#e5ac40"],divider:["فاصل","#8da39b"]};
-const HT={button:34,toggle:34,slider:46,label:20,textbox:34,dropdown:34,stepper:34,keybind:20,divider:10};
-const ED={button:{label:"زر جديد",prop:"WalkSpeed",val:"50"},slider:{label:"السرعة",prop:"WalkSpeed",min:0,max:100,val:16},toggle:{label:"وضع الليل",prop:"TimeOfDay",val:0},label:{label:"نص توضيحي"},textbox:{label:"اكتب هنا"},dropdown:{label:"اختيار",opts:"خيار 1,خيار 2,خيار 3"},stepper:{label:"عدّاد",prop:"WalkSpeed",min:0,max:100,step:5,val:16},keybind:{label:"اختصار",key:"F"},divider:{label:""}};
-const D_B=[{type:"print",v:{text:"Welcome!"}},{type:"setprop",v:{prop:"WalkSpeed",value:24}},{type:"repeat",v:{times:3}},{type:"stat",v:{name:"Coins",amount:10}},{type:"wait",v:{secs:1}},{type:"end",v:{}}];
-const D_H={title:"Wyvern Hub",accent:"#c9892b",panel:"#17201c",radius:12,pos:"left",tabs:[{name:"الرئيسية"}],font:"Gotham",text:"#ffffff",stroke:false,theme:"wyvern",showBtn:true,startOpen:true,anim:true,panelDrag:true,btnDrag:true,btnText:"☰",btnPos:"tl",key:"",btnSize:44,width:250,alpha:0,elements:[{type:"slider",...ED.slider},{type:"slider",label:"القفز",prop:"JumpPower",min:0,max:200,val:50},{type:"toggle",...ED.toggle},{type:"button",label:"ارجع للبداية",prop:"Teleport",val:"0,10,0"},{type:"label",label:"صُنع بواسطة Wyvern Forge"}]};
-let blocks,hub,ov={hub:null,script:null},cur="hub",sim,pv={open:true};
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"),q=s=>String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g," "),num=v=>{const n=parseFloat(v);return isNaN(n)?0:n};
-const clone=o=>JSON.parse(JSON.stringify(o));
-function save(){try{localStorage.setItem("wf2",JSON.stringify({blocks,hub,ov}))}catch(e){}}
-function load(){try{const d=JSON.parse(localStorage.getItem("wf2")||"null");if(d&&d.blocks&&d.hub){blocks=d.blocks;hub={...clone(D_H),...d.hub};ov=d.ov||ov;return}}catch(e){}blocks=clone(D_B);hub=clone(D_H)}
-/* ---- code generation ---- */
-function genScript(){
- const L=['local Players = game:GetService("Players")',''];
- if(blocks.some(b=>b.type==="stat"))L.push(`local function addStat(player, name, amount)
-  local folder = player:FindFirstChild("leaderstats")
-  if not folder then
-    folder = Instance.new("Folder")
-    folder.Name = "leaderstats"
-    folder.Parent = player
-  end
-  local stat = folder:FindFirstChild(name)
-  if not stat then
-    stat = Instance.new("IntValue")
-    stat.Name = name
-    stat.Parent = folder
-  end
-  stat.Value += amount
-end
-`);
- L.push(`local function onPlayer(player)
-  local character = player.Character or player.CharacterAdded:Wait()
-  local humanoid = character:WaitForChild("Humanoid")
-  local root = character:WaitForChild("HumanoidRootPart")`);
- let d=1;const I=()=>"  ".repeat(d),SM={WalkSpeed:v=>[`humanoid.WalkSpeed = ${v}`],JumpPower:v=>["humanoid.UseJumpPower = true",`humanoid.JumpPower = ${v}`],Gravity:v=>[`workspace.Gravity = ${v}`],TimeOfDay:v=>[`game:GetService("Lighting").ClockTime = ${v}`],Brightness:v=>[`game:GetService("Lighting").Brightness = ${v}`],FogEnd:v=>[`game:GetService("Lighting").FogEnd = ${v}`],HipHeight:v=>[`humanoid.HipHeight = ${v}`],Health:v=>[`humanoid.Health = ${v}`]};
- blocks.forEach(b=>{const v=b.v;
-  if(b.type==="end"){if(d>1)d--;L.push(I()+"end");return}
-  if(b.type==="print")L.push(I()+`print("${q(v.text)}")`);
-  if(b.type==="wait")L.push(I()+`task.wait(${num(v.secs)})`);
-  if(b.type==="setprop")(SM[v.prop]||SM.WalkSpeed)(num(v.value)).forEach(x=>L.push(I()+x));
-  if(b.type==="tp")L.push(I()+`root.CFrame = CFrame.new(${num(v.x)}, ${num(v.y)}, ${num(v.z)})`);
-  if(b.type==="stat")L.push(I()+`addStat(player, "${q(v.name)}", ${num(v.amount)})`);
-  if(b.type==="repeat"){L.push(I()+`for _ = 1, ${Math.max(0,Math.floor(num(v.times)))} do`);d++}});
- while(d>1){d--;L.push(I()+"end")}
- L.push(`end
+  <canvas id="gameCanvas"></canvas>
 
-Players.PlayerAdded:Connect(onPlayer)
-for _, player in Players:GetPlayers() do
-  task.spawn(onPlayer, player)
-end`);return L.join("\n")}
-const rgb=h=>{const n=parseInt(h.slice(1),16);return `Color3.fromRGB(${n>>16}, ${n>>8&255}, ${n&255})`};
-const lum=h=>{const n=parseInt(h.slice(1),16);return .299*(n>>16)+.587*(n>>8&255)+.114*(n&255)};
-const TH={wyvern:{n:"Wyvern",accent:"#c9892b",panel:"#17201c",text:"#ffffff",radius:12,alpha:0,font:"Gotham",stroke:false},neon:{n:"نيون",accent:"#00e5ff",panel:"#0a0f1f",text:"#e6faff",radius:6,alpha:10,font:"Code",stroke:true},glass:{n:"زجاج",accent:"#5b8cff",panel:"#1b2233",text:"#ffffff",radius:18,alpha:35,font:"Gotham",stroke:true},light:{n:"فاتح",accent:"#2f7de1",panel:"#f4f6fa",text:"#18202c",radius:10,alpha:0,font:"SourceSans",stroke:false},ocean:{n:"محيط",accent:"#1fb5c9",panel:"#0b2a3a",text:"#e8fbff",radius:14,alpha:0,font:"Gotham",stroke:false},sakura:{n:"ساكورا",accent:"#ec6fa0",panel:"#2a1722",text:"#ffe9f2",radius:20,alpha:0,font:"FredokaOne",stroke:true},forest:{n:"غابة",accent:"#4caf50",panel:"#142218",text:"#eaf6ea",radius:10,alpha:0,font:"SourceSans",stroke:false},sunset:{n:"غروب",accent:"#ff7a45",panel:"#2b1612",text:"#fff1e8",radius:14,alpha:0,font:"Gotham",stroke:false},mono:{n:"أبيض وأسود",accent:"#8a8a8a",panel:"#111111",text:"#ffffff",radius:0,alpha:0,font:"Code",stroke:true},retro:{n:"ريترو",accent:"#f5c518",panel:"#1d1b3a",text:"#ffe9a8",radius:0,alpha:0,font:"Arcade",stroke:true}};
-const FF={Gotham:"Cairo,sans-serif",Arcade:'"Fira Code",monospace',FredokaOne:"Cairo,sans-serif",SourceSans:"system-ui,sans-serif",Code:'"Fira Code",monospace'};
-const NEWT=["textbox","dropdown","stepper","keybind","divider"],pvv={},ARGS={toggle:"on",slider:"value",stepper:"value",textbox:"text",dropdown:"choice"};
-const opts=e=>{const a=String(e.opts||"").split(",").map(s=>s.trim()).filter(Boolean);return a.length?a:["-"]};
-function elBodyOld(e){const P=e.prop;
- if(e.type==="button"){if(P==="Print")return `print("${q(e.val)}")`;if(P==="Teleport"){const p=String(e.val).split(",").map(num);return `local root = getCharacter():FindFirstChild("HumanoidRootPart")\nif root then\n  root.CFrame = CFrame.new(${p[0]||0}, ${p[1]||0}, ${p[2]||0})\nend`}return `setProp("${P}", ${num(e.val)})`}
- if(e.type==="toggle")return `setProp("${P}", on and ${num(e.val)} or ${PR[P]?PR[P][2]:0})`;
- if(e.type==="slider"||e.type==="stepper")return `setProp("${P}", value)`;
- if(e.type==="textbox")return `print("Entered: " .. text)`;
- if(e.type==="dropdown")return `print("Selected: " .. choice)`;
- if(e.type==="keybind")return `print("${q(e.label)} pressed")`;return ""}
-function newEl(e,y,lb,pf){pf=pf||"frame";const b=(e.code!=null&&e.code!==""?e.code:elBody(e)).split("\n").map(l=>"  "+l).join("\n"),fn=`function(${ARGS[e.type]||""})\n${b}\nend`;
- if(e.type==="button")return `makeButton(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="toggle")return `makeToggle(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="slider")return `makeSlider(${pf}, ${y}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.val)}, ${fn})`;
- if(e.type==="stepper")return `makeStepper(${pf}, ${y}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.step)||1}, ${num(e.val)}, ${fn})`;
- if(e.type==="textbox")return `makeTextBox(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="dropdown")return `makeDropdown(${pf}, ${y}, "${lb}", {${opts(e).map(o=>`"${q(o)}"`).join(", ")}}, ${fn})`;
- if(e.type==="keybind")return `makeKeybind(Enum.KeyCode.${e.key||"F"}, ${fn})\nmakeLabel(${pf}, ${y}, "${lb} [${e.key||"F"}]", 20)`;
- return `makeDivider(${pf}, ${y})`}
-function newF(e,i){const E=(k,l,t)=>`<label>${l}<input class="ltr" ${t||""} data-e="${i}" data-k="${k}" value="${esc(e[k]??"")}"></label>`;
- if(e.type==="dropdown")return E("opts","الخيارات (بينها فاصلة)");
- if(e.type==="keybind")return `<label>المفتاح<select class="ltr" data-e="${i}" data-k="key">${"QWERTYUIOPASDFGHJKLZXCVBNM".split("").map(c=>`<option${c===e.key?" selected":""}>${c}</option>`).join("")}</select></label>`;
- if(e.type==="stepper")return `<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label>`+E("min","أقل",'type="number"')+E("max","أعلى",'type="number"')+E("step","الخطوة",'type="number"')+E("val","الافتراضي",'type="number"');return ""}
-function codeBox(e,i){if(e.type==="label"||e.type==="divider")return"";const a=ARGS[e.type]?`المتغيّر المتاح: <b>${ARGS[e.type]}</b> — `:"",v=e.code!=null&&e.code!==""?e.code:elBody(e);
- return `<details class="cb"><summary>✏️ كود العنصر${e.code?" ●":""}</summary><p class="hint">${a}اكتب كود Luau اللي يشتغل لما العنصر يتفعّل. تقدر تستخدم setProp و getCharacter(). المعاينة بتشغّله فعلًا لما تضغط على العنصر.</p><textarea class="cta" data-ec="${i}" spellcheck="false">${esc(v)}</textarea><button class="btn" data-ecr="${i}">رجّع الكود الأصلي</button></details>`}
-function pvEl(e,i){const l=esc(e.label),bs=`background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}`;
- if(e.type==="textbox")return `<input class="pt" data-pt="${i}" placeholder="${l}">`;
- if(e.type==="dropdown")return `<button class="pb" data-dd="${i}" style="${bs}">${l}: ${esc(opts(e)[pvv[i]||0]||"")}</button>`;
- if(e.type==="stepper")return `<div class="sm"><button class="pb sb" data-sm="${i}" style="${bs}">−</button><span style="flex:1;text-align:center">${l}: <b>${pvv["s"+i]??num(e.val)}</b></span><button class="pb sb" data-sp="${i}" style="${bs}">+</button></div>`;
- if(e.type==="keybind")return `<div class="pl">${l} [${e.key||"F"}]</div>`;
- return `<hr style="border:0;border-top:2px solid #ffffff33;margin:4px 0 12px">`}
-function drawThemes(){$("#themes").innerHTML=Object.entries(TH).map(([k,t])=>`<button class="add" data-th="${k}" style="border:2px solid ${hub.theme===k?t.accent:"var(--line)"}"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${t.accent};margin-inline-end:6px"></span>${t.n}</button>`).join("")}
-function genHub(){
- const T=hub.tabs&&hub.tabs.length?hub.tabs:[{name:"الرئيسية"}],multi=T.length>1,E=hub.elements,Y=[],TI=E.map(e=>Math.min(e.tab||0,T.length-1)),ys=T.map(()=>multi?4:48);E.forEach((e,i)=>{Y.push(ys[TI[i]]);ys[TI[i]]+=HT[e.type]+8});const H=(multi?84:0)+Math.max(...ys)+4,has=t=>E.some(e=>e.type===t);
- const W=Math.round(num(hub.width))||250,TS=Math.round(num(hub.btnSize))||44,uis=has("slider")||has("keybind")||hub.panelDrag||(hub.showBtn&&hub.btnDrag)||hub.key,bpos={tl:`UDim2.new(0, 16, 0, 16)`,tr:`UDim2.new(1, -${TS+16}, 0, 16)`,bl:`UDim2.new(0, 16, 1, -${TS+16})`,br:`UDim2.new(1, -${TS+16}, 1, -${TS+16})`}[hub.btnPos]||"UDim2.new(0, 16, 0, 16)";const pos=hub.pos==="left"?`UDim2.new(0, 16, 0.5, ${-Math.round(H/2)})`:hub.pos==="right"?`UDim2.new(1, -${W+16}, 0.5, ${-Math.round(H/2)})`:`UDim2.new(0.5, -${W/2}, 0.5, ${-Math.round(H/2)})`;
- const L=[`local Players = game:GetService("Players")`,uis?`local UserInputService = game:GetService("UserInputService")`:null,hub.anim?`local TweenService = game:GetService("TweenService")`:null,`local player = Players.LocalPlayer
+  <div id="boss-bar-wrap">
+    <div id="boss-bar-fill"></div>
+  </div>
 
-local ACCENT = ${rgb(hub.accent)}
-local PANEL = ${rgb(hub.panel)}
-local MUTED = Color3.fromRGB(60, 70, 66)
-local TEXT = ${rgb(hub.text)}
-local BTEXT = ${lum(hub.accent)>150?"Color3.new(0, 0, 0)":"Color3.new(1, 1, 1)"}
-local FONT = Enum.Font.${hub.font}
+  <div id="hud">
+    <div class="hud-row">
+      <div class="hud-col">
+        <div id="hud-score">النقاط: 0</div>
+        <div id="hud-coins" style="color:#facc15">الفلوس: 0</div>
+        <div id="hud-combo" style="color:#fb923c"></div>
+        <div id="hud-buffs" style="color:#38bdf8; font-size:15px;"></div>
+      </div>
+      <div class="hud-col" style="text-align:left;">
+        <div id="hud-wave" style="color:#38bdf8">L1 - Wave 1/3</div>
+        <div id="hud-hp" style="color:#4ade80">الصحة: 3 / 3</div>
+        <div class="bar-wrap"><div id="nova-bar-fill" class="bar-fill"></div></div>
+      </div>
+    </div>
+  </div>
 
-local function getCharacter()
-  return player.Character or player.CharacterAdded:Wait()
-end
+  <div id="touch-controls" class="touch-controls">
+    <div style="display:flex; gap:12px;">
+      <button class="touch-btn" id="btn-left">◀</button>
+      <button class="touch-btn" id="btn-right">▶</button>
+    </div>
+    <button class="touch-btn" id="btn-nova" style="background:rgba(147,51,234,0.82); font-size:15px;">NOVA</button>
+  </div>
 
-local function setProp(name, value)
-  local humanoid = getCharacter():FindFirstChildOfClass("Humanoid")
-  if name == "WalkSpeed" and humanoid then
-    humanoid.WalkSpeed = value
-  elseif name == "JumpPower" and humanoid then
-    humanoid.UseJumpPower = true
-    humanoid.JumpPower = value
-  elseif name == "Gravity" then
-    workspace.Gravity = value
-  elseif name == "FOV" then
-    workspace.CurrentCamera.FieldOfView = value
-  elseif name == "TimeOfDay" then
-    game:GetService("Lighting").ClockTime = value
-  elseif name == "Brightness" then
-    game:GetService("Lighting").Brightness = value
-  elseif name == "FogEnd" then
-    game:GetService("Lighting").FogEnd = value
-  elseif name == "HipHeight" and humanoid then
-    humanoid.HipHeight = value
-  elseif name == "Health" and humanoid then
-    humanoid.Health = value
-  elseif name == "CameraZoom" then
-    player.CameraMaxZoomDistance = value
-  elseif name == "Transparency" then
-    for _, part in getCharacter():GetDescendants() do
-      if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
-        part.Transparency = value / 100
-      end
-    end
-  end
-end
+  <!-- القائمة الرئيسية -->
+  <div id="screen-menu" class="overlay active">
+    <h1>CHICKEN INVADERS<br/>HYPER GALAXY</h1>
+    <button class="btn btn-green" id="btn-play-current">PLAY CURRENT LEVEL</button>
+    <button class="btn btn-blue" id="btn-open-levels">SELECT LEVEL (1–5)</button>
+    <button class="btn btn-amber" id="btn-open-shop">UPGRADE SHOP</button>
+  </div>
 
-local function makeLabel(parent, y, text, size)
-  local label = Instance.new("TextLabel")
-  label.Size = UDim2.new(1, -24, 0, size)
-  label.Position = UDim2.fromOffset(12, y)
-  label.BackgroundTransparency = 1
-  label.Font = FONT
-  label.TextSize = size - 6
-  label.TextXAlignment = Enum.TextXAlignment.Left
-  label.TextColor3 = TEXT
-  label.Text = text
-  label.Parent = parent
-  return label
-end
+  <!-- شاشة اختيار الليفلات -->
+  <div id="screen-levels" class="overlay">
+    <h2>SELECT GALAXY SECTOR (LEVELS)</h2>
+    <div id="levels-container" style="display:flex; flex-direction:column; align-items:center;"></div>
+    <button class="btn btn-red" id="btn-levels-back" style="margin-top:14px;">BACK TO MENU</button>
+  </div>
 
-local function makeButton(parent, y, text, onClick)
-  local button = Instance.new("TextButton")
-  button.Size = UDim2.new(1, -24, 0, 34)
-  button.Position = UDim2.fromOffset(12, y)
-  button.BackgroundColor3 = ACCENT
-  button.Font = FONT
-  button.TextSize = 14
-  button.TextColor3 = BTEXT
-  button.Text = text
-  button.Parent = parent
-  Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
-  button.Activated:Connect(onClick)
-  return button
-end`,has("toggle")?`
-local function makeToggle(parent, y, text, onChange)
-  local on = false
-  local button
-  button = makeButton(parent, y, text .. ": OFF", function()
-    on = not on
-    button.Text = text .. (on and ": ON" or ": OFF")
-    button.BackgroundColor3 = on and ACCENT or MUTED
-    onChange(on)
-  end)
-  button.BackgroundColor3 = MUTED
-end`:null,has("slider")?`
-local function makeSlider(parent, y, text, min, max, default, onChange)
-  local label = makeLabel(parent, y, "", 18)
-  local track = Instance.new("Frame")
-  track.Size = UDim2.new(1, -24, 0, 8)
-  track.Position = UDim2.fromOffset(12, y + 28)
-  track.BackgroundColor3 = MUTED
-  track.Parent = parent
-  Instance.new("UICorner", track).CornerRadius = UDim.new(1, 0)
-  local fill = Instance.new("Frame")
-  fill.BackgroundColor3 = ACCENT
-  fill.Parent = track
-  Instance.new("UICorner", fill).CornerRadius = UDim.new(1, 0)
-  local function set(alpha, fire)
-    alpha = math.clamp(alpha, 0, 1)
-    local value = math.floor(min + (max - min) * alpha + 0.5)
-    fill.Size = UDim2.fromScale(alpha, 1)
-    label.Text = text .. ": " .. value
-    if fire then onChange(value) end
-  end
-  local function fromInput(input)
-    set((input.Position.X - track.AbsolutePosition.X) / track.AbsoluteSize.X, true)
-  end
-  set((default - min) / (max - min), false)
-  local dragging = false
-  track.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = true
-      fromInput(input)
-    end
-  end)
-  UserInputService.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-      fromInput(input)
-    end
-  end)
-  UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = false
-    end
-  end)
-end`:null,`
-local gui = Instance.new("ScreenGui")
-gui.Name = "WyvernHub"
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+  <!-- شاشة المتجر -->
+  <div id="screen-shop" class="overlay">
+    <h2>HYPER ARMORY & SHOP</h2>
+    <div id="shop-coins" style="color:#facc15; font-size:21px; font-weight:700;"></div>
+    <div id="shop-banner" style="color:#4ade80; font-size:16px; min-height:24px; margin-top:4px;"></div>
+    <div id="shop-list" class="shop-list"></div>
+    <button class="btn btn-red" id="btn-shop-back">BACK TO MENU</button>
+  </div>
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.fromOffset(${W}, ${H})
-frame.Position = ${pos}
-frame.BackgroundColor3 = PANEL
-frame.BackgroundTransparency = ${num(hub.alpha)/100}${hub.stroke?'\nlocal stroke = Instance.new("UIStroke")\nstroke.Color = ACCENT\nstroke.Thickness = 2\nstroke.Parent = frame':""}
-frame.Parent = gui
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, ${num(hub.radius)})
+  <!-- شاشة الخسارة -->
+  <div id="screen-gameover" class="overlay">
+    <h1 style="color:#f87171;">GAME OVER</h1>
+    <div id="go-stats" style="font-size:21px; line-height:1.7; margin-bottom:16px;"></div>
+    <button class="btn btn-green" id="btn-retry">RETRY LEVEL</button>
+    <button class="btn btn-amber" id="btn-go-shop">GO TO SHOP</button>
+    <button class="btn btn-slate" id="btn-go-menu">MAIN MENU</button>
+  </div>
 
-local title = makeLabel(frame, 8, "${q(hub.title)}", 30)
-title.Font = FONT
-title.TextSize = 18`];
- if(has("stepper"))L.push(`
-local function makeStepper(parent, y, text, min, max, step, default, onChange)
-  local value = default
-  local label = makeLabel(parent, y, text .. ": " .. value, 34)
-  label.TextSize = 14
-  label.TextXAlignment = Enum.TextXAlignment.Center
-  local function bump(delta)
-    value = math.clamp(value + delta, min, max)
-    label.Text = text .. ": " .. value
-    onChange(value)
-  end
-  makeButton(parent, y, "-", function() bump(-step) end).Size = UDim2.fromOffset(34, 34)
-  local plus = makeButton(parent, y, "+", function() bump(step) end)
-  plus.Size = UDim2.fromOffset(34, 34)
-  plus.Position = UDim2.new(1, -46, 0, y)
-end`);
- if(has("textbox"))L.push(`
-local function makeTextBox(parent, y, placeholder, onEnter)
-  local box = Instance.new("TextBox")
-  box.Size = UDim2.new(1, -24, 0, 34)
-  box.Position = UDim2.fromOffset(12, y)
-  box.BackgroundColor3 = MUTED
-  box.Font = FONT
-  box.TextSize = 14
-  box.TextColor3 = TEXT
-  box.PlaceholderText = placeholder
-  box.Text = ""
-  box.ClearTextOnFocus = false
-  box.Parent = parent
-  Instance.new("UICorner", box).CornerRadius = UDim.new(0, 8)
-  box.FocusLost:Connect(function(enterPressed)
-    if enterPressed then onEnter(box.Text) end
-  end)
-end`);
- if(has("dropdown"))L.push(`
-local function makeDropdown(parent, y, text, options, onSelect)
-  local index = 1
-  local button
-  button = makeButton(parent, y, text .. ": " .. options[index], function()
-    index = index % #options + 1
-    button.Text = text .. ": " .. options[index]
-    onSelect(options[index])
-  end)
-end`);
- if(has("divider"))L.push(`
-local function makeDivider(parent, y)
-  local line = Instance.new("Frame")
-  line.Size = UDim2.new(1, -24, 0, 2)
-  line.Position = UDim2.fromOffset(12, y + 4)
-  line.BackgroundColor3 = MUTED
-  line.BorderSizePixel = 0
-  line.Parent = parent
-end`);
- if(has("keybind"))L.push(`
-local function makeKeybind(keyCode, callback)
-  UserInputService.InputBegan:Connect(function(input, processed)
-    if not processed and input.KeyCode == keyCode then callback() end
-  end)
-end`);
- if(multi){const tw=Math.floor((W-24-(T.length-1)*4)/T.length);L.push(`\nlocal pages = {}\nlocal tabButtons = {}\nlocal function showTab(index)\n  for i, page in pages do\n    page.Visible = i == index\n    tabButtons[i].BackgroundColor3 = i == index and ACCENT or MUTED\n  end\nend`);T.forEach((t,i)=>L.push(`\ndo -- tab: ${q(t.name)}\n  local page = Instance.new("Frame")\n  page.Size = UDim2.new(1, 0, 1, -84)\n  page.Position = UDim2.fromOffset(0, 84)\n  page.BackgroundTransparency = 1\n  page.Parent = frame\n  pages[${i+1}] = page\n  local tabButton = makeButton(frame, 44, "${q(t.name)}", function()\n    showTab(${i+1})\n  end)\n  tabButton.Size = UDim2.fromOffset(${tw}, 30)\n  tabButton.Position = UDim2.fromOffset(${12+i*(tw+4)}, 44)\n  tabButton.TextSize = 13\n  tabButtons[${i+1}] = tabButton\nend`))}
- E.forEach((e,i)=>{const yy=Y[i],lb=q(e.label),pf=multi?`pages[${TI[i]+1}]`:"frame";L.push("");if(e.type!=="label"){L.push(newEl(e,yy,lb,pf));return}
-  if(e.type==="label")L.push(`makeLabel(${pf}, ${yy}, "${lb}", 20)`);
-  if(e.type==="slider")L.push(`makeSlider(frame, ${yy}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.val)}, function(value)\n  setProp("${e.prop}", value)\nend)`);
-  if(e.type==="toggle")L.push(`makeToggle(frame, ${yy}, "${lb}", function(on)\n  setProp("${e.prop}", on and ${num(e.val)} or ${PR[e.prop]?PR[e.prop][2]:0})\nend)`);
-  if(e.type==="button"){let body=`setProp("${e.prop}", ${num(e.val)})`;
-   if(e.prop==="Print")body=`print("${q(e.val)}")`;
-   if(e.prop==="Teleport"){const p=String(e.val).split(",").map(num);body=`local root = getCharacter():FindFirstChild("HumanoidRootPart")\n  if root then\n    root.CFrame = CFrame.new(${p[0]||0}, ${p[1]||0}, ${p[2]||0})\n  end`}
-   L.push(`makeButton(frame, ${yy}, "${lb}", function()\n  ${body}\nend)`)}});
- if(multi)L.push("\nshowTab(1)");
- if(hub.panelDrag||(hub.showBtn&&hub.btnDrag))L.push(`
-local function makeDraggable(target, handle)
-  local dragging, startInput, startPos
-  handle.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = true
-      startInput = input.Position
-      startPos = target.Position
-      input.Changed:Connect(function()
-        if input.UserInputState == Enum.UserInputState.End then dragging = false end
-      end)
-    end
-  end)
-  UserInputService.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-      local delta = input.Position - startInput
-      target.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-  end)
-end`);
- if(hub.panelDrag)L.push("\ntitle.Active = true\nmakeDraggable(frame, title)");
- L.push(`\nlocal isOpen = ${hub.startOpen?"true":"false"}\nframe.Visible = isOpen`);
- if(hub.anim)L.push(`local scale = Instance.new("UIScale")\nscale.Scale = isOpen and 1 or 0.01\nscale.Parent = frame`);
- L.push(`\nlocal function setOpen(open)\n  isOpen = open\n`+(hub.anim?`  if open then frame.Visible = true end\n  local tween = TweenService:Create(scale, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {Scale = open and 1 or 0.01})\n  tween:Play()\n  if not open then\n    tween.Completed:Connect(function()\n      if not isOpen then frame.Visible = false end\n    end)\n  end`:`  frame.Visible = open`)+`\nend`);
- if(hub.showBtn){L.push(`\nlocal openButton = makeButton(gui, 0, "${q(hub.btnText)}", function()\n  setOpen(not isOpen)\nend)\nopenButton.Size = UDim2.fromOffset(${TS}, ${TS})\nopenButton.Position = ${bpos}\nopenButton.TextSize = 20`);if(hub.btnDrag)L.push("makeDraggable(openButton, openButton)")}
- if(hub.key)L.push(`\nUserInputService.InputBegan:Connect(function(input, processed)\n  if not processed and input.KeyCode == Enum.KeyCode.${hub.key} then\n    setOpen(not isOpen)\n  end\nend)`);
- return L.filter(x=>x!==null).join("\n")}
-const eff=k=>ov[k]!=null?ov[k]:(k==="hub"?genHub():genScript());
-function hl(c){return esc(c).replace(/(--.*$)|("(?:[^"\\]|\\.)*")|\b(local|function|end|for|do|in|if|then|else|elseif|while|return|repeat|until|true|false|nil|not|and|or)\b|\b(\d+\.?\d*)\b|\b(game|workspace|Players|Instance|Vector3|CFrame|UDim2|UDim|Color3|Enum|task|print|math)\b/gm,(m,c1,s,k,n,a)=>c1?`<span class="c">${c1}</span>`:s?`<span class="s">${s}</span>`:k?`<span class="k">${k}</span>`:n?`<span class="nu">${n}</span>`:`<span class="a">${a}</span>`)}
-/* ---- checks ---- */
-function lint(code,name){const R=[],t=code.replace(/--.*$/gm,"").replace(/"(?:[^"\\\n]|\\.)*"/g,"S"),cnt=r=>(t.match(r)||[]).length;
- if(t.includes('"'))R.push(["err",`${name}: في نص (string) مش مقفول بعلامة تنصيص.`]);
- const o=cnt(/\bfunction\b/g)+cnt(/\bif\b/g)+cnt(/\bdo\b/g),e=cnt(/\bend\b/g);
- if(o>e)R.push(["err",`${name}: ناقص ${o-e} كلمة end لقفل الدوال أو الشروط أو الحلقات.`]);if(e>o)R.push(["err",`${name}: في ${e-o} كلمة end زيادة.`]);
- if(cnt(/\(/g)!==cnt(/\)/g))R.push(["err",`${name}: الأقواس ( ) مش متوازنة.`]);return R}
-function checks(){const R=[],add=(l,m)=>R.push([l,m]);
- if(!blocks.length)add("warn","السكربت فاضي، مفيش حاجة هتحصل لما اللاعب يدخل.");
- const st=[];blocks.forEach((b,i)=>{const v=b.v,n=i+1;
-  if(b.type==="repeat"){st.push({i,w:false,t:num(v.times)});if(num(v.times)<=0)add("warn",`بلوك ${n}: التكرار 0 مرة، اللي جواه مش هيشتغل.`);if(num(v.times)>1000)add("warn",`بلوك ${n}: التكرار أكتر من 1000 مرة وممكن يهنّج السيرفر.`)}
-  if(b.type==="wait"){st.forEach(s=>s.w=true);if(num(v.secs)<0)add("err",`بلوك ${n}: مينفعش الانتظار يبقى بالسالب.`);if(num(v.secs)>60)add("warn",`بلوك ${n}: الانتظار أكتر من 60 ثانية.`)}
-  if(b.type==="end"){const s=st.pop();if(!s)add("err",`بلوك ${n}: "نهاية التكرار" من غير "كرّر" قبله.`);else if(s.t>50&&!s.w)add("warn",`التكرار عند بلوك ${s.i+1} كبير ومن غير انتظار، ضيف بلوك انتظر.`)}
-  if(b.type==="print"&&!String(v.text).trim())add("warn",`بلوك ${n}: الرسالة فاضية.`);
-  if(b.type==="setprop"&&num(v.value)<0)add("err",`بلوك ${n}: القيمة مينفعش تبقى سالبة.`);
-  if(b.type==="setprop"&&v.prop==="WalkSpeed"&&num(v.value)>100)add("warn",`بلوك ${n}: سرعة فوق 100 بتخلي التحكم صعب.`);
-  if(b.type==="stat"&&!String(v.name).trim())add("err",`بلوك ${n}: لازم تكتب اسم للنقاط.`);
-  if(b.type==="tp"&&num(v.y)<-500)add("warn",`بلوك ${n}: ارتفاع أقل من -500 هيوقّع اللاعب في الفراغ.`)});
- st.forEach(s=>add("warn",`"كرّر" عند بلوك ${s.i+1} من غير نهاية، الكود بيقفله تلقائيًا.`));
- const seen={};hub.elements.forEach((e,i)=>{const n=i+1;
-  if(e.type!=="label"&&e.type!=="divider"&&!String(e.label).trim())add("err",`عنصر ${n}: الاسم فاضي.`);
-  if(e.type!=="label"&&e.type!=="divider"&&seen[e.label])add("warn",`عنصر ${n}: الاسم "${e.label}" مكرر.`);seen[e.label]=1;
-  if(e.prop==="Sound"&&!/^\d+$/.test(String(e.val).trim()))add("warn",`عنصر ${n}: رقم الصوت لازم يبقى أرقام بس.`);if(e.prop==="Notify"&&!String(e.val).trim())add("warn",`عنصر ${n}: نص الإشعار فاضي.`);if(e.prop==="Teleport"&&!/^\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*$/.test(e.val))add("err",`عنصر ${n}: الانتقال محتاج 3 أرقام زي 0,10,0.`);
-  if(e.type==="slider"){if(num(e.min)>=num(e.max))add("err",`عنصر ${n}: الحد الأدنى لازم يبقى أقل من الأعلى.`);else if(num(e.val)<num(e.min)||num(e.val)>num(e.max))add("warn",`عنصر ${n}: القيمة الافتراضية خارج المدى.`)}});
- if(!hub.showBtn&&!hub.startOpen&&!hub.key)add("err","اللوحة مقفولة من البداية ومفيش زر أو اختصار يفتحها.");if(!hub.showBtn&&!hub.key&&hub.anim)add("warn","مفيش زر أو اختصار لقفل اللوحة، فحركة الفتح والقفل مش هتظهر.");if(String(hub.btnText).length>3)add("warn","نص الزر طويل، الأفضل رمز أو كلمة قصيرة.");hub.tabs.forEach((t,i)=>{if(!String(t.name).trim())add("err",`تاب ${i+1}: الاسم فاضي.`);if(!hub.elements.some(e=>tabOf(e)===i))add("warn",`التاب "${t.name}" فاضي.`)});if(Math.max(0,...hub.tabs.map((_,i)=>hub.elements.filter(e=>tabOf(e)===i).length))>8)add("warn","اللوحة فيها أكتر من 8 عناصر وممكن متتحملش على الشاشات الصغيرة.");
- if(!hub.elements.length)add("warn","اللوحة فاضية، ضيف عناصر من تبويب الواجهة.");
- [["hub","Hub"],["script","Server"]].forEach(([k,n])=>{if(ov[k]!=null)lint(ov[k],n).forEach(r=>R.push(r))});return R}
-function drawChecks(){const R=checks(),er=R.filter(r=>r[0]==="err").length,c=$("#cnt");c.hidden=!R.length;c.textContent=R.length;c.style.background=er?"var(--err)":"var(--gold)";
- $("#chks").innerHTML=R.length?R.map(r=>`<div class="pr" style="--c:${r[0]==="err"?"var(--err)":"var(--gold)"}"><b>${r[0]==="err"?"خطأ":"تنبيه"}</b> — ${esc(r[1])}</div>`).join(""):'<div class="pr" style="--c:var(--teal)"><b>تمام ✓</b> مفيش أي مشاكل في السكربت أو الواجهة أو الكود.</div>'}
-/* ---- builders ---- */
-function drawPal(){$("#pal").innerHTML=Object.entries(BD).map(([k,d])=>`<button class="add" data-add="${k}" style="border-color:${d.c}">＋ ${d.l}</button>`).join("")}
-function mv(a,i,d){const j=i+d;if(j<0||j>=a.length)return false;[a[i],a[j]]=[a[j],a[i]];return true}
-function drawBlocks(){let dp=0;$("#blocks").innerHTML=blocks.length?blocks.map((b,i)=>{const d=BD[b.type];if(b.type==="end")dp=Math.max(0,dp-1);const pad=dp*18;if(b.type==="repeat")dp++;
- const f=d.f.map(([k,t])=>`<label>${k}${t==="sel"?`<select class="ltr" data-i="${i}" data-k="${k}">${SP.map(p=>`<option value="${p}"${p===b.v[k]?" selected":""}>${PN[p]}</option>`).join("")}</select>`:`<input class="ltr" data-i="${i}" data-k="${k}" type="${t}" value="${esc(b.v[k]??"")}">`}</label>`).join("");
- return `<div class="card" style="margin-inline-start:${pad}px;border-inline-start:5px solid ${d.c}"><div class="ct"><span class="tag" style="--c:${d.c}">${d.l}</span><span style="flex:1"></span><span class="acts"><button data-bu="${i}">↑</button><button data-bd="${i}">↓</button><button data-brm="${i}">✕</button></span></div>${f?`<div class="row">${f}</div>`:""}</div>`}).join(""):'<div class="empty">لسه مفيش بلوكات. اضغط على أي بلوك فوق عشان تبدأ.</div>'}
-const PN={WalkSpeed:"السرعة",JumpPower:"القفز",Gravity:"الجاذبية",FOV:"زاوية الرؤية",TimeOfDay:"الوقت في اللعبة",Teleport:"انتقال لمكان",Print:"طباعة نص"};
-const ACT={Heal:"علاج كامل",Kill:"إعادة الظهور (قتل الشخصية)",Sit:"قعود / وقوف",Explode:"انفجار عند اللاعب",Notify:"إشعار على الشاشة",Launch:"قذف لفوق",Freeze:"تجميد / فك تجميد",Spin:"لفّ الشخصية",Sound:"تشغيل صوت"};
-const NOVAL=["Heal","Kill","Sit","Explode","Freeze"],VLB={Teleport:"الإحداثيات x,y,z",Print:"النص",Notify:"نص الإشعار",Launch:"القوة",Spin:"الدرجات",Sound:"رقم الصوت (ID)"},DVL={Teleport:"0,10,0",Print:"Hello",Notify:"تم!",Launch:"80",Spin:"90",Sound:""};
-const VL=p=>VLB[p]||"القيمة",DV=p=>p in DVL?DVL[p]:PR[p]?String(Math.round(PR[p][1]/2)):"";
-Object.assign(PN,{Brightness:"سطوع الإضاءة",FogEnd:"مسافة الضباب",HipHeight:"ارتفاع الجسم",Health:"الصحة",CameraZoom:"أقصى زوم للكاميرا",Transparency:"شفافية الشخصية %"},ACT);
-const mkS=(label,prop)=>({type:"slider",label,prop,min:PR[prop][0],max:PR[prop][1],val:PR[prop][2]}),mkB=(label,prop,val)=>({type:"button",label,prop,val:val||""});
-const PACKS={player:{n:"⚔️ أدوات اللاعب",els:[mkS("السرعة","WalkSpeed"),mkS("القفز","JumpPower"),mkS("الجاذبية","Gravity"),mkB("علاج كامل","Heal"),mkB("قذف لفوق","Launch","80"),mkB("قعود / وقوف","Sit")]},
- light:{n:"🌅 الإضاءة والجو",els:[mkS("السطوع","Brightness"),mkS("الوقت","TimeOfDay"),mkS("الضباب","FogEnd"),{type:"toggle",label:"وضع الليل",prop:"TimeOfDay",val:0}]},
- cam:{n:"🎥 الكاميرا والشكل",els:[mkS("زاوية الرؤية","FOV"),mkS("زوم الكاميرا","CameraZoom"),mkS("شفافية الشخصية","Transparency"),{type:"stepper",label:"ارتفاع الجسم",prop:"HipHeight",min:0,max:20,step:1,val:2}]},
- fun:{n:"💥 مؤثرات",els:[mkB("انفجار","Explode"),mkB("لفّ 90°","Spin","90"),mkB("تجميد","Freeze"),mkB("إشعار","Notify","أهلًا بيك!"),mkB("إعادة الظهور","Kill")]}};
-function drawPacks(){$("#packs").innerHTML=Object.entries(PACKS).map(([k,t])=>`<button class="add" data-pk="${k}">${t.n}</button>`).join("")}
-function actBody(P,val){const n=num(val),H=t=>`local humanoid = getCharacter():FindFirstChildOfClass("Humanoid")\nif humanoid then\n  ${t}\nend`,R=t=>`local root = getCharacter():FindFirstChild("HumanoidRootPart")\nif root then\n  ${t.replace(/\n/g,"\n  ")}\nend`;
- if(P==="Heal")return H("humanoid.Health = humanoid.MaxHealth");
- if(P==="Kill")return H("humanoid.Health = 0");
- if(P==="Sit")return H("humanoid.Sit = not humanoid.Sit");
- if(P==="Explode")return R(`local boom = Instance.new("Explosion")\nboom.Position = root.Position\nboom.BlastPressure = 0\nboom.BlastRadius = 8\nboom.Parent = workspace`);
- if(P==="Launch")return R(`root.AssemblyLinearVelocity = Vector3.new(0, ${n||80}, 0)`);
- if(P==="Freeze")return R("root.Anchored = not root.Anchored");
- if(P==="Spin")return R(`root.CFrame = root.CFrame * CFrame.Angles(0, math.rad(${n||90}), 0)`);
- if(P==="Notify")return `game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Wyvern", Text = "${q(val)}", Duration = 3})`;
- if(P==="Sound")return `local sound = Instance.new("Sound")\nsound.SoundId = "rbxassetid://${String(val).replace(/\D/g,"")}"\nsound.Parent = workspace\nsound:Play()\ngame:GetService("Debris"):AddItem(sound, 10)`;
- return elBodyOld({type:"button",prop:P,val})}
-function elBody(e){const m=e.more||[];
- if(e.type==="button")return [actBody(e.prop,e.val)].concat(m.map(x=>actBody(x.prop,x.val))).join("\n");
- let b=elBodyOld(e);
- if(e.type==="slider"||e.type==="stepper")b+=m.map(x=>`\nsetProp("${x.prop}", value)`).join("");
- if(e.type==="toggle")b+=m.map(x=>`\nsetProp("${x.prop}", on and ${num(x.val)} or ${PR[x.prop]?PR[x.prop][2]:0})`).join("");
- return b}
-function actSim(P,val){const n=num(val);
- if(P==="Print")say(val);
- else if(P==="Teleport"){const p=String(val).split(",").map(num);sim.pos=[p[0]||0,p[1]||0,p[2]||0];say(`Teleported to (${sim.pos.join(", ")})`)}
- else if(P==="Heal")setP("Health",100);
- else if(P==="Kill")setP("Health",0);
- else if(P==="Sit"){sim.sit=!sim.sit;say(sim.sit?"Sit = true":"Sit = false")}
- else if(P==="Explode")say(`💥 Explosion at (${sim.pos.join(", ")})`);
- else if(P==="Launch"){sim.pos=[sim.pos[0],sim.pos[1]+(n||80),sim.pos[2]];say(`Launched up ${n||80}`)}
- else if(P==="Freeze"){sim.frozen=!sim.frozen;say(sim.frozen?"Anchored = true":"Anchored = false")}
- else if(P==="Spin")say(`Rotated ${n||90}°`);
- else if(P==="Notify")say(`🔔 ${val}`);
- else if(P==="Sound")say(`🔊 rbxassetid://${String(val).replace(/\D/g,"")}`);
- else setP(P,n)}
-function moreBox(e,i){if(!["button","slider","toggle","stepper"].includes(e.type))return"";const m=e.more||[],isB=e.type==="button",ex=isB?["Teleport","Print"].concat(Object.keys(ACT)):[];
- return `<div class="cb"><b>➕ إجراءات إضافية</b><p class="hint">${isB?"بتشتغل بالترتيب بعد الإجراء الأساسي.":"بتتغيّر مع نفس العنصر."}</p>`+m.map((x,j)=>`<div class="row"><select class="ltr" data-m="${i}:${j}" data-mk="prop">${propOpts(x.prop,ex)}</select>${(isB&&NOVAL.includes(x.prop))||(!isB&&e.type!=="toggle")?"":`<input class="ltr" data-m="${i}:${j}" data-mk="val" value="${esc(x.val??"")}" placeholder="${isB?VL(x.prop):"القيمة وهو شغّال"}">`}<button class="btn" data-mrm="${i}:${j}">✕</button></div>`).join("")+`<button class="add" data-madd="${i}">＋ إجراء إضافي</button></div>`}
-let pvTab=0,curTab=0;
-const tabOf=e=>Math.min(e.tab||0,hub.tabs.length-1);
-function drawTabs(){if(curTab>=hub.tabs.length)curTab=0;const T=hub.tabs;$("#tabsbar").innerHTML=`<h2>📑 التابات</h2><p class="hint">كل تاب ليه عناصره. اختار تاب وضيف فيه، وبعدها ضيف تاب جديد.</p><div class="chips" style="margin:0 0 8px">${T.map((t,i)=>`<button class="add${i===curTab?" on":""}" data-tab="${i}">${esc(t.name)} <small>(${hub.elements.filter(e=>tabOf(e)===i).length})</small></button>`).join("")}<button class="add" data-tabadd="1">＋ تاب جديد</button></div><div class="row"><label>اسم التاب<input id="tabname" value="${esc(T[curTab].name)}"></label>${T.length>1?`<button class="btn" data-tabrm="1">🗑 احذف التاب وعناصره</button>`:""}</div>`}
-function tabBar(){if(hub.tabs.length<2)return"";if(pvTab>=hub.tabs.length)pvTab=0;return `<div class="ptabs">`+hub.tabs.map((t,i)=>`<button data-ptab="${i}" style="${i===pvTab?`background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}`:""}">${esc(t.name)}</button>`).join("")+`</div>`}
-function propOpts(sel,extra){return Object.keys(PR).concat(extra||[]).map(p=>`<option value="${p}"${p===sel?" selected":""}>${PN[p]}</option>`).join("")}
-function drawEls(){$("#els").innerHTML=hub.elements.some(e=>tabOf(e)===curTab)?hub.elements.map((e,i)=>{if(tabOf(e)!==curTab)return"";const t=ET[e.type];let f="";
- if(e.type==="button")f=`<label>الإجراء<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop,["Teleport","Print"].concat(Object.keys(ACT)))}</select></label>${NOVAL.includes(e.prop)?"":`<label>${VL(e.prop)}<input class="ltr" data-e="${i}" data-k="val" value="${esc(e.val)}"></label>`}`;
- if(e.type==="toggle")f=`<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label><label>قيمتها وهو شغّال<input class="ltr" type="number" data-e="${i}" data-k="val" value="${esc(e.val)}"></label>`;
- if(e.type==="slider")f=`<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label><label>أقل<input class="ltr" type="number" data-e="${i}" data-k="min" value="${e.min}"></label><label>أعلى<input class="ltr" type="number" data-e="${i}" data-k="max" value="${e.max}"></label><label>الافتراضي<input class="ltr" type="number" data-e="${i}" data-k="val" value="${e.val}"></label>`;
- f+=newF(e,i);return `<div class="card"><div class="ct"><span class="tag" style="--c:${t[1]}">${t[0]}</span><input data-e="${i}" data-k="label" value="${esc(e.label)}"><span class="acts"><button data-eu="${i}">↑</button><button data-ed="${i}">↓</button><button data-erm="${i}">✕</button></span></div>${f?`<div class="row">${f}</div>`:""}${moreBox(e,i)}${codeBox(e,i)}</div>`}).join(""):'<div class="empty">اللوحة فاضية. ضيف زر أو سلايدر من فوق.</div>'}
-function drawSet(){$("#ht").value=hub.title;$("#hc").value=hub.accent;$("#hb").value=hub.panel;$("#hr").value=hub.radius;$("#rv").textContent=hub.radius;$("#hp2").value=hub.pos;$$("[id^=k-]").forEach(i=>{const k=i.id.slice(2);if(i.type==="checkbox")i.checked=!!hub[k];else i.value=hub[k];const v=$("#v-"+k);if(v)v.textContent=hub[k]})}
-function drawPrev(){const p=$("#hp"),o=$("#ob"),n=parseInt(hub.panel.slice(1),16);p.style.background=`rgba(${n>>16},${n>>8&255},${n&255},${1-hub.alpha/100})`;p.style.borderRadius=hub.radius+"px";p.style.width=hub.width+"px";p.style.color=hub.text;p.style.border=hub.stroke?`2px solid ${hub.accent}`:"0";p.style.fontFamily=FF[hub.font]||"inherit";p.style.transition=hub.anim?"":"none";p.classList.toggle("off",!pv.open);o.hidden=!hub.showBtn;o.textContent=hub.btnText;o.style.width=o.style.height=hub.btnSize+"px";o.style.background=hub.accent;o.style.color=lum(hub.accent)>150?"#000":"#fff";o.style.top=o.style.bottom=o.style.left=o.style.right="auto";o.style[hub.btnPos[0]==="t"?"top":"bottom"]="12px";o.style[hub.btnPos[1]==="l"?"left":"right"]="12px";
- p.innerHTML=`<h3>${esc(hub.title)}</h3>`+tabBar()+hub.elements.map((e,i)=>tabOf(e)!==pvTab?"":NEWT.includes(e.type)?pvEl(e,i):e.type==="button"?`<button class="pb" data-pb="${i}" style="background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}">${esc(e.label)}</button>`:e.type==="toggle"?`<button class="pb" data-tg="${i}" style="background:#3c4642">${esc(e.label)}: OFF</button>`:e.type==="slider"?`<div class="ps">${esc(e.label)}: <b>${e.val}</b><input type="range" data-sl="${i}" min="${e.min}" max="${e.max}" value="${e.val}" style="accent-color:${hub.accent}"></div>`:`<div class="pl">${esc(e.label)}</div>`).join("")}
-/* ---- simulator ---- */
-function fresh(){sim={t:0,pr:Object.fromEntries(Object.entries(PR).map(([k,v])=>[k,v[2]])),pos:[0,3,0],stats:{},log:[]}}
-function say(m,c){sim.log.push(`<div style="color:${c||"inherit"}">[${sim.t.toFixed(1)}s] ${esc(m)}</div>`)}
-function setP(p,v,quiet){sim.pr[p]=v;if(!quiet)say(`${p} = ${v}`)}
-function drawSim(){const h=Object.entries(sim.pr).map(([k,v])=>`<span>${k} ${v}</span>`).join("")+`<span>Pos ${sim.pos.join(", ")}</span>`+Object.entries(sim.stats).map(([k,v])=>`<span>${esc(k)}: ${v}</span>`).join("");
- $$(".st").forEach(e=>e.innerHTML=h);$("#log").innerHTML=sim.log.join("")||'<span style="color:var(--mute)">اضغط "شغّل السكربت" أو جرّب أزرار اللوحة.</span>';$("#log").scrollTop=1e6}
-const PRE=`
-local js=require("js")
-local B=js.global.__B
-local function any()
-  return setmetatable({},{__index=function() return any() end,__call=function() return any() end})
-end
-math.clamp=function(v,a,b) return math.min(b,math.max(a,v)) end
-math.round=function(v) return math.floor(v+0.5) end
-typeof=type
-function __iter(t)
-  if type(t)=="function" then return t end
-  if #t>0 then return ipairs(t) end
-  return pairs(t)
-end
-local function fmt(...)
-  local t={}
-  for i=1,select("#",...) do t[#t+1]=tostring((select(i,...))) end
-  return table.concat(t," ")
-end
-print=function(...) B:log(fmt(...)) end
-warn=function(...) B:warn(fmt(...)) end
-local function bridge(map)
-  return {
-    __index=function(t,k) if map[k] then return B:get(map[k]) end end,
-    __newindex=function(t,k,v) if map[k] then B:set(map[k],v) else rawset(t,k,v) end end
-  }
-end
-local cfmt={__mul=function(a) return a end}
-CFrame=setmetatable({new=function(x,y,z) return setmetatable({X=x or 0,Y=y or 0,Z=z or 0},cfmt) end},{__index=function() return any() end})
-local humanoid=setmetatable({Name="Humanoid",UseJumpPower=true,MaxHealth=100,Sit=false},bridge({WalkSpeed="WalkSpeed",JumpPower="JumpPower",Health="Health",HipHeight="HipHeight"}))
-local root=setmetatable({Name="HumanoidRootPart"},{
-  __index=function(t,k) if k=="CFrame" then return CFrame.new(B:get("x"),B:get("y"),B:get("z")) end end,
-  __newindex=function(t,k,v) if k=="CFrame" then B:tp(v.X or 0,v.Y or 0,v.Z or 0) else rawset(t,k,v) end end
-})
-local char={Name="Character",Humanoid=humanoid,HumanoidRootPart=root}
-function char:FindFirstChildOfClass(c) if c=="Humanoid" then return humanoid end end
-function char:FindFirstChild(n) return rawget(self,n) end
-function char:WaitForChild(n) return rawget(self,n) end
-local function newInst(class)
-  local o={ClassName=class,Name=class,_kids={}}
-  return setmetatable(o,{
-    __index=function(t,k)
-      if k=="Value" then return rawget(t,"_v") or 0 end
-      if k=="FindFirstChild" or k=="WaitForChild" then return function(self,n) return self._kids[n] end end
-      if k=="Destroy" then return function() end end
-      return any()
-    end,
-    __newindex=function(t,k,v)
-      if k=="Value" then
-        rawset(t,"_v",v)
-        local p=rawget(t,"Parent")
-        if p and rawget(p,"Name")=="leaderstats" then B:stat(t.Name,v) end
-        return
-      end
-      rawset(t,k,v)
-      if k=="Parent" and type(v)=="table" and rawget(v,"_kids") then v._kids[t.Name]=t end
-    end
-  })
-end
-local player=newInst("Player")
-player.Name="Player1"
-player.Character=char
-player.CharacterAdded={Wait=function() return char end,Connect=function() return any() end}
-local got,handlers=false,{}
-Players={LocalPlayer=player,
-  GetPlayers=function() got=true return {player} end,
-  PlayerAdded={Connect=function(self,f) handlers[#handlers+1]=f return any() end}}
-local lighting=setmetatable({},bridge({ClockTime="TimeOfDay"}))
-workspace=setmetatable({CurrentCamera=setmetatable({},bridge({FieldOfView="FOV"}))},bridge({Gravity="Gravity"}))
-local services={Players=Players,Lighting=lighting,Workspace=workspace}
-game={GetService=function(self,n) return services[n] or any() end,Workspace=workspace}
-task={wait=function(n) B:wait(n or 0) return n or 0 end,spawn=function(f,...) f(...) end,defer=function(f,...) f(...) end,delay=function(t,f,...) B:wait(t) f(...) end}
-wait=function(n) B:wait(n or 0) return n or 0 end
-Instance={new=function(c,p) local o=newInst(c) if p then o.Parent=p end return o end}
-Enum=any() UDim2=any() UDim=any() Color3=any() Vector3=any() TweenInfo=any()
-function getCharacter() return char end
-function setProp(n,v) B:set(n,v) end
-_G.player=player
-function __fire() if not got then for _,f in ipairs(handlers) do f(player) end end end
-`;
-window.__B={log:m=>say(String(m)),warn:m=>say("\u26a0 "+m,"var(--gold)"),wait:n=>{sim.t+=Math.max(0,+n||0);if(sim.t>600)throw new Error("\u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0639\u062f\u0651\u0649 10 \u062f\u0642\u0627\u064a\u0642 \u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629")},get:k=>k==="x"?sim.pos[0]:k==="y"?sim.pos[1]:k==="z"?sim.pos[2]:sim.pr[k],set:(k,v)=>setP(k,+v),tp:(x,y,z)=>{sim.pos=[+x,+y,+z];say(`Teleported to (${sim.pos.join(", ")})`)},stat:(n,v)=>{sim.stats[n]=+v;say(`${n} = ${v}`)}};
-let luaOK=false;
-function luau(c){return c.replace(/^([ \t]*)([\w.\[\]"']+?)[ \t]*(\+|-|\*|\/|\.\.)=[ \t]*(.+)$/gm,"$1$2 = $2 $3 ($4)").replace(/\bfor\s+([\w\s,]+?)\s+in\s+(.+?)\s+do\b/g,(m,v,x)=>/^\s*(i?pairs|next)\b/.test(x)?m:`for ${v} in __iter(${x}) do`)}
-function runLua(code,fire,reset){
- if(typeof fengari==="undefined"){say("\u0645\u0634\u063a\u0651\u0644 Lua \u0645\u0634 \u0645\u062a\u062d\u0645\u0651\u0644 (\u0645\u062d\u062a\u0627\u062c \u0625\u0646\u062a\u0631\u0646\u062a).","var(--err)");return false}
- try{if(reset||!luaOK){fengari.load(PRE,"=prelude")();luaOK=true}
-  fengari.load("if debug and debug.sethook then pcall(debug.sethook,function() error('timeout') end,'',3000000) end","=h")();
-  try{fengari.load(luau(code),"=code")();if(fire)fengari.load("__fire()","=fire")()}
-  finally{fengari.load("if debug and debug.sethook then pcall(debug.sethook) end","=h")()}
-  return true}catch(e){const m=String(e&&e.message||e);say(/timeout/.test(m)?"\u0627\u0644\u0643\u0648\u062f \u0634\u063a\u0651\u0627\u0644 \u0644\u0648\u0642\u062a \u0637\u0648\u064a\u0644 \u062c\u062f\u064b\u0627 (\u062d\u0644\u0642\u0629 \u0644\u0627 \u0646\u0647\u0627\u0626\u064a\u0629\u061f)":"\u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u0643\u0648\u062f: "+m,"var(--err)");return false}}
-function runBody(e,a,v){runLua((a?`local ${a} = ${typeof v==="number"||typeof v==="boolean"?String(v):JSON.stringify(String(v))}\n`:"")+e.code)}
-function runScript(){fresh();say("Player joined","var(--teal)");if(typeof fengari!=="undefined"){runLua(eff("script"),true,true);say("Script finished","var(--teal)");drawSim();return}const lp=[];let i=0,g=0;
- while(i<blocks.length&&g++<5000){const b=blocks[i],v=b.v;
-  if(b.type==="print")say(v.text);
-  else if(b.type==="wait")sim.t+=Math.max(0,num(v.secs));
-  else if(b.type==="setprop")setP(v.prop,num(v.value));
-  else if(b.type==="tp"){sim.pos=[num(v.x),num(v.y),num(v.z)];say(`Teleported to (${sim.pos.join(", ")})`)}
-  else if(b.type==="stat"){sim.stats[v.name]=(sim.stats[v.name]||0)+num(v.amount);say(`${v.name} += ${num(v.amount)} → ${sim.stats[v.name]}`)}
-  else if(b.type==="repeat"){const t=Math.floor(num(v.times));if(t<=0){let d=1,j=i+1;while(j<blocks.length&&d){if(blocks[j].type==="repeat")d++;if(blocks[j].type==="end")d--;j++}i=j;continue}lp.push({s:i,n:t})}
-  else if(b.type==="end"&&lp.length){const l=lp[lp.length-1];if(--l.n>0){i=l.s+1;continue}lp.pop()}
-  i++}
- if(g>=5000)say("تم الإيقاف: خطوات كتير جدًا، راجع التكرار.","var(--err)");say("Script finished","var(--teal)");drawSim()}
-/* ---- code editor ---- */
-function syncEd(){const t=eff(cur);$("#ta").value=t;paintEd();$$("[data-f]").forEach(b=>b.style.background=b.dataset.f===cur?"var(--p2)":"")}
-function paintEd(){const t=$("#ta").value;$("#pre").innerHTML=hl(t)+"\n";const e=ov[cur]!=null,s=$("#cs");s.textContent=e?"":"مولّد تلقائيًا";s.style.display=e?"none":"";s.className="pill"}
-function drawStats(){const m=hub.elements.reduce((a,e)=>a+(e.more||[]).length+(["button","slider","toggle","stepper"].includes(e.type)?1:0),0);$("#stats").innerHTML=`<span>التابات: <b>${hub.tabs.length}</b></span><span>العناصر: <b>${hub.elements.length}</b></span><span>الإجراءات: <b>${m}</b></span><span>بلوكات السكربت: <b>${blocks.length}</b></span><span>المشاكل: <b>${checks().length}</b></span>`}
-function refresh(){save();syncEd();drawChecks();drawStats()}
-/* ---- events ---- */
-document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;const d=t.dataset;
- if(d.t){$$("nav button").forEach(x=>x.classList.toggle("on",x===t));$$(".tab").forEach(x=>x.classList.toggle("on",x.id==="t-"+d.t));scrollTo(0,0);if(d.t==="code")syncEd();return}
- if(d.add){const v={};BD[d.add].f.forEach(([k,,x])=>v[k]=x);blocks.push({type:d.add,v});drawBlocks();refresh()}
- if(d.brm!==undefined){blocks.splice(+d.brm,1);drawBlocks();refresh()}
- if(d.bu!==undefined&&mv(blocks,+d.bu,-1)){drawBlocks();refresh()}
- if(d.bd!==undefined&&mv(blocks,+d.bd,1)){drawBlocks();refresh()}
- if(d.ae){hub.elements.push({type:d.ae,tab:curTab,...clone(ED[d.ae])});drawTabs();drawEls();drawPrev();refresh()}
- if(d.erm!==undefined){hub.elements.splice(+d.erm,1);drawTabs();drawEls();drawPrev();refresh()}
- if(d.eu!==undefined&&mv(hub.elements,+d.eu,-1)){drawEls();drawPrev();refresh()}
- if(d.ed!==undefined&&mv(hub.elements,+d.ed,1)){drawEls();drawPrev();refresh()}
- if(d.pb!==undefined){const b=hub.elements[+d.pb];say(`زر: ${b.label}`,"var(--gold)");if(b.code)runBody(b);else if(b.prop==="Print")say(b.val);else if(b.prop==="Teleport"){const p=String(b.val).split(",").map(num);sim.pos=[p[0]||0,p[1]||0,p[2]||0];say(`Teleported to (${sim.pos.join(", ")})`)}else actSim(b.prop,b.val);if(!b.code)(b.more||[]).forEach(m=>actSim(m.prop,m.val));drawSim()}
- if(d.tg!==undefined){const b=hub.elements[+d.tg],on=t.dataset.on!=="1";t.dataset.on=on?"1":"";t.textContent=`${b.label}: ${on?"ON":"OFF"}`;t.style.background=on?hub.accent:"#3c4642";if(b.code)runBody(b,"on",on);else{setP(b.prop,on?num(b.val):PR[b.prop][2]);(b.more||[]).forEach(m=>setP(m.prop,on?num(m.val):PR[m.prop]?PR[m.prop][2]:0))}drawSim()}
- if(t.id==="ob"){if(t._moved){t._moved=0;return}pv.open=!pv.open;drawPrev();return}
- if(d.dd!==undefined){const i=+d.dd,o=opts(hub.elements[i]);pvv[i]=((pvv[i]||0)+1)%o.length;say(`${hub.elements[i].label}: ${o[pvv[i]]}`,"var(--gold)");if(hub.elements[i].code)runBody(hub.elements[i],"choice",o[pvv[i]]);drawPrev();drawSim();return}
- if(d.sm!==undefined||d.sp!==undefined){const i=+(d.sm??d.sp),x=hub.elements[i],k="s"+i,v=Math.min(num(x.max),Math.max(num(x.min),(pvv[k]??num(x.val))+(d.sp!==undefined?1:-1)*(num(x.step)||1)));pvv[k]=v;if(x.code)runBody(x,"value",v);else{if(PR[x.prop])setP(x.prop,v);(x.more||[]).forEach(m=>setP(m.prop,v))}say(`${x.label}: ${v}`,"var(--gold)");drawPrev();drawSim();return}
- if(d.ecr!==undefined){delete hub.elements[+d.ecr].code;drawEls();refresh();return}
- if(d.tab!==undefined){curTab=+d.tab;pvTab=curTab;drawTabs();drawEls();drawPrev();return}
- if(d.tabadd){hub.tabs.push({name:"تاب "+(hub.tabs.length+1)});curTab=pvTab=hub.tabs.length-1;drawTabs();drawEls();drawPrev();refresh();return}
- if(d.tabrm){const i=curTab;hub.elements=hub.elements.filter(x=>tabOf(x)!==i);hub.elements.forEach(x=>{if((x.tab||0)>i)x.tab=(x.tab||0)-1});hub.tabs.splice(i,1);curTab=pvTab=Math.max(0,i-1);drawTabs();drawEls();drawPrev();refresh();return}
- if(d.ptab!==undefined){pvTab=+d.ptab;drawPrev();return}
- if(d.madd!==undefined){const x=hub.elements[+d.madd],b=x.type==="button";(x.more=x.more||[]).push({prop:b?"Notify":"Brightness",val:b?"تم!":"5"});drawEls();refresh();return}
- if(d.mrm!==undefined){const[a,b]=d.mrm.split(":");hub.elements[+a].more.splice(+b,1);drawEls();refresh();return}
- if(d.pk){hub.elements.push(...clone(PACKS[d.pk].els).map(x=>({...x,tab:curTab})));drawTabs();drawEls();drawPrev();refresh();return}
- if(d.th){const {n,...x}=TH[d.th];Object.assign(hub,x,{theme:d.th});drawSet();drawThemes();drawPrev();refresh();return}
- if(d.f){cur=d.f;syncEd()}
- if(t.id==="regen"){ov[cur]=null;refresh()}
- if(t.id==="run")runScript();if(t.id==="clr"){fresh();drawSim()}
- if(t.id==="copy"){const x=eff(cur),ok=()=>{t.textContent="تم النسخ ✓";setTimeout(()=>t.textContent="نسخ الكود",1400)},fb=()=>{const a=document.createElement("textarea");a.value=x;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(_){}a.remove()};try{navigator.clipboard.writeText(x).then(ok,fb)}catch(_){fb()}}});
-document.addEventListener("input",e=>{const t=e.target,d=t.dataset;
- if(d.i!==undefined){blocks[+d.i].v[d.k]=t.value;refresh()}
- if(d.e!==undefined&&!d.re){hub.elements[+d.e][d.k]=t.value;drawPrev();refresh()}
- if(d.sl!==undefined){const b=hub.elements[+d.sl];t.previousElementSibling.textContent=t.value;if(!b.code){setP(b.prop,num(t.value),true);(b.more||[]).forEach(m=>setP(m.prop,num(t.value),true))}drawSim()}
- if(d.m!==undefined&&d.mk==="val"){const[a,b]=d.m.split(":");hub.elements[+a].more[+b].val=t.value;refresh()}
- if(d.ec!==undefined){hub.elements[+d.ec].code=t.value;refresh()}
- if(t.id==="tabname"){hub.tabs[curTab].name=t.value;drawPrev();refresh()}
- if(t.id==="ht"){hub.title=t.value;drawPrev();refresh()}
- if(t.id==="hc"||t.id==="hb"){hub[t.id==="hc"?"accent":"panel"]=t.value;drawPrev();refresh()}
- if(t.id==="hr"){hub.radius=+t.value;$("#rv").textContent=t.value;drawPrev();refresh()}
- if(t.id&&t.id.startsWith("k-")){const k=t.id.slice(2);hub[k]=t.type==="checkbox"?t.checked:t.type==="range"?+t.value:t.value;const v=$("#v-"+k);if(v)v.textContent=t.value;if(k==="startOpen")pv.open=hub.startOpen;drawPrev();refresh()}
- if(t.id==="ta"){ov[cur]=t.value;paintEd();save();drawChecks()}});
-document.addEventListener("change",e=>{const t=e.target,d=t.dataset;
- if(d.i!==undefined){drawBlocks()}
- if(d.re){const el=hub.elements[+d.e],p=t.value;el.prop=p;
-  if(el.type==="slider"||el.type==="stepper"){[el.min,el.max,el.val]=PR[p]}else if(el.type==="toggle")el.val=PR[p][0];else el.val=DV(p);drawEls();drawPrev();refresh()}
- if(d.m!==undefined&&d.mk==="prop"){const[a,b]=d.m.split(":"),el=hub.elements[+a],x=el.more[+b];x.prop=t.value;x.val=el.type==="button"?DV(t.value):"5";drawEls();refresh()}
- if(t.id==="tabname")drawTabs();
- if(t.id==="hp2"){hub.pos=t.value;refresh()}
- if(d.sl!==undefined){const b=hub.elements[+d.sl];say(`${b.label}: ${t.value}`,"var(--gold)");if(b.code)runBody(b,"value",num(t.value));drawSim()}});
-$("#ta").addEventListener("scroll",e=>{$("#pre").scrollTop=e.target.scrollTop;$("#pre").scrollLeft=e.target.scrollLeft});
-$("#ta").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart;t.setRangeText("  ",s,t.selectionEnd,"end");t.dispatchEvent(new Event("input"))}});
-const AH="717c28c9bb586c82578a84394b29435fd2ee7e44f7d46458c5971317c97a0bf0",AC="1166955294057941",MK='<script type="text/plain" id="wf-src"><'+'/script>',A=id=>document.getElementById(id);
-function cyrb(s){let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return String(4294967296*(2097151&b)+(a>>>0))}
-async function okPass(p){try{if(window.crypto&&crypto.subtle){const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(p));return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("")===AH}}catch(e){}return cyrb(p)===AC}
-function srcNow(){const el=A("wf-src");if(el&&el.textContent.trim())return el.textContent.split("<"+"@@/script").join("</"+"script");return "<!DOCTYPE html>\n"+document.documentElement.outerHTML}
-function embed(src){if(!src.includes(MK))return src;return src.replace(MK,()=>'<script type="text/plain" id="wf-src">'+src.split("</"+"script").join("<"+"@@/script")+"<"+"/script>")}
-function admView(ed){A("adm-login").hidden=ed;A("adm-edit").hidden=!ed;if(ed){A("adm-ta").value=srcNow();let m=false;try{m=!!localStorage.getItem("wf_admin_html")}catch(e){}A("adm-st").textContent=m?"فيه تعديلات محفوظة مطبّقة حاليًا.":"دي النسخة الأصلية من الموقع."}else{A("adm-pw").value="";A("adm-err").textContent="";setTimeout(()=>A("adm-pw").focus(),60)}}
-function admOpen(){A("adm").hidden=false;let ok=false;try{ok=sessionStorage.getItem("wf_admin")==="1"}catch(e){}admView(ok)}
-async function admLogin(){if(await okPass(A("adm-pw").value)){try{sessionStorage.setItem("wf_admin","1")}catch(e){}admView(true)}else A("adm-err").textContent="الباسورد غلط."}
-A("admbtn").onclick=admOpen;A("adm-go").onclick=admLogin;A("adm-pw").onkeydown=e=>{if(e.key==="Enter")admLogin()};
-A("adm-x1").onclick=A("adm-x2").onclick=()=>{A("adm").hidden=true};
-A("adm-ap").onclick=()=>{try{localStorage.setItem("wf_admin_html",embed(A("adm-ta").value));location.reload()}catch(e){A("adm-st").textContent="مقدرتش أحفظ: "+e.message}};
-A("adm-rs").onclick=()=>{try{localStorage.removeItem("wf_admin_html")}catch(e){}location.reload()};
-A("adm-cp").onclick=()=>{const t=A("adm-ta");t.select();try{document.execCommand("copy");A("adm-st").textContent="تم النسخ ✓"}catch(e){}};
-A("adm-ta").onkeydown=e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target;t.setRangeText("  ",t.selectionStart,t.selectionEnd,"end")}};
-load();pv.open=hub.startOpen;fresh();drawPal();drawBlocks();drawSet();drawTabs();drawEls();drawPrev();drawThemes();drawPacks();drawSim();refresh();
-function dragify(el,h,flag){let s=null;h.addEventListener("pointerdown",e=>{if(!hub[flag]||(e.target!==h&&e.target.closest("input,button")))return;s={x:e.clientX,y:e.clientY,tx:el._x||0,ty:el._y||0};h.setPointerCapture(e.pointerId)});h.addEventListener("pointermove",e=>{if(!s)return;const dx=e.clientX-s.x,dy=e.clientY-s.y;if(Math.abs(dx)+Math.abs(dy)<4&&!s.m)return;s.m=1;el._x=s.tx+dx;el._y=s.ty+dy;el.style.translate=el._x+"px "+el._y+"px"});h.addEventListener("pointerup",()=>{if(s&&s.m)el._moved=1;s=null})}
-dragify($("#hp"),$("#hp"),"panelDrag");document.addEventListener("keydown",e=>{const t=e.target;if(e.key==="Enter"&&t.dataset&&t.dataset.pt!==undefined){say(`${hub.elements[+t.dataset.pt].label}: ${t.value}`,"var(--gold)");{const x=hub.elements[+t.dataset.pt];if(x.code)runBody(x,"text",t.value)}drawSim();return}if(/INPUT|TEXTAREA|SELECT/.test(t.tagName))return;hub.elements.forEach(x=>{if(x.type==="keybind"&&String(x.key||"F").toLowerCase()===e.key.toLowerCase()){say(`${x.label} [${x.key}]`,"var(--gold)");if(x.code)runBody(x);drawSim()}})});dragify($("#ob"),$("#ob"),"btnDrag");
-</script>
-<script type="text/plain" id="wf-src"><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<script>try{if(location.hash==="#reset"){localStorage.removeItem("wf_admin_html");history.replaceState(null,"",location.pathname+location.search)}else if(!window.__wfApplied){var h=localStorage.getItem("wf_admin_html");if(h){document.open();document.write(h.replace(/<head[^>]*>/i,function(m){return m+"<script>window.__wfApplied=1<"+"/script>"}));document.close()}}}catch(e){}<@@/script>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wyvern Forge — صانع سكربتات وواجهات Roblox</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#eef2f0;--panel:#fff;--p2:#e5ece9;--line:#cdd8d3;--text:#14201b;--mute:#5d6d66;--gold:#b8801d;--teal:#0f7f6e;--err:#c23b2e;--code:#f5f8f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0b1210;--panel:#131c19;--p2:#1b2824;--line:#283733;--text:#e8f0ec;--mute:#8da39b;--gold:#e5ac40;--teal:#44c6af;--err:#ff7b6b;--code:#0e1614}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#0b1210;--panel:#131c19;--p2:#1b2824;--line:#283733;--text:#e8f0ec;--mute:#8da39b;--gold:#e5ac40;--teal:#44c6af;--err:#ff7b6b;--code:#0e1614}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Cairo,system-ui,sans-serif;padding-bottom:78px}
-button,input,select,textarea{font:inherit;color:inherit}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
-header h1{margin:0;font-size:19px;font-weight:800;flex:1}header h1 span{color:var(--gold)}
-.btn{background:var(--p2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:40px}
-.btn:hover{border-color:var(--gold)}.pri{background:var(--gold);border-color:var(--gold);color:#16130a;font-weight:700}
-nav{position:fixed;inset:auto 0 0 0;z-index:6;display:flex;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--panel);border-top:1px solid var(--line)}
-nav button{flex:1;border:0;background:none;border-radius:10px;padding:6px 2px;cursor:pointer;color:var(--mute);position:relative;line-height:1.25}
-nav button b{display:block;font-size:19px}nav button.on{background:var(--p2);color:var(--text);font-weight:700}
-nav .n{position:absolute;top:0;inset-inline-end:14%;background:var(--err);color:#fff;border-radius:9px;font-size:11px;padding:0 6px}
-main{max-width:1100px;margin:0 auto;padding:12px}.tab{display:none}.tab.on{display:block}
-.two{display:grid;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
-h2{margin:0 0 4px;font-size:17px}.hint{color:var(--mute);margin:0 0 10px;font-size:13px}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.add{border:1px dashed var(--gold);background:none;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--text)}.add:hover{background:var(--p2)}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.row label{display:flex;flex-direction:column;font-size:12px;color:var(--mute);gap:2px;flex:1;min-width:84px}
-input,select{padding:8px;border:1px solid var(--line);border-radius:9px;background:var(--p2);min-height:40px;width:100%}
-input[type=color]{padding:2px;width:48px;flex:none}input[type=range]{padding:0;accent-color:var(--gold)}
-.ct{display:flex;gap:8px;align-items:center}.ct input{flex:1}.tag{background:var(--c,var(--gold));color:#111;border-radius:7px;padding:2px 9px;font-size:12px;font-weight:700;white-space:nowrap}
-.acts{display:flex}.acts button{background:none;border:0;cursor:pointer;font-size:17px;color:var(--mute);padding:6px 8px}
-.add{min-height:46px;padding:8px 18px;font-size:15px;font-weight:600;border-style:solid;background:var(--p2)}.add:active{transform:scale(.96)}.acts button{font-size:21px;padding:8px 11px}summary{cursor:pointer;font-weight:700;font-size:16px}details[open]>summary{margin-bottom:6px}.empty{text-align:center;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:22px}
-.ltr{direction:ltr;text-align:left}
-.stage{display:flex;justify-content:center;padding:18px;background:var(--p2);border-radius:12px}
-.hp{width:250px;padding:14px;color:#fff;box-shadow:0 10px 30px #0006}.hp h3{margin:0 0 10px;font-size:17px;color:inherit}
-.hp .pb{display:block;width:100%;margin-bottom:8px;padding:9px;border:0;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;min-height:38px}
-.hp .ps{margin-bottom:8px;font-size:13px}.hp .ps input{padding:0;min-height:26px}.hp .pl{font-size:13px;opacity:.8;margin-bottom:8px}
-.st{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;direction:ltr}.st span{background:var(--p2);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px}
-.pill{border-radius:999px;padding:2px 10px;font-size:12px;background:var(--p2)}.pill.ed{background:var(--gold);color:#16130a}
-.row .ck{flex-direction:row;align-items:center;color:var(--text);font-size:14px;min-width:170px;gap:8px}.ck input{width:22px;min-height:22px;flex:none}.stage{position:relative;min-height:380px;align-items:center;overflow:hidden}.hp{transition:transform .2s,opacity .2s}.hp.off{transform:scale(.01);opacity:0;pointer-events:none}.ob{position:absolute;border:0;border-radius:12px;cursor:pointer;font-size:20px;font-weight:700;color:#fff;box-shadow:0 4px 14px #0005;touch-action:none}body{background:radial-gradient(900px 400px at 85% -10%,color-mix(in srgb,var(--gold) 14%,transparent),transparent),radial-gradient(700px 380px at 5% 0%,color-mix(in srgb,var(--teal) 12%,transparent),transparent),var(--bg);background-attachment:fixed}
-header{backdrop-filter:blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}.logo{font-size:28px}header h1 small{display:block;font-size:12px;font-weight:400;color:var(--mute)}
-header h1>span{background:linear-gradient(90deg,var(--gold),#ff8a4c);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pri{background:linear-gradient(135deg,var(--gold),#ff9a4c)}.card{box-shadow:0 2px 14px #0000001a;transition:border-color .15s}.card:hover{border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
-.stats{display:flex;gap:8px;flex-wrap:wrap;max-width:1100px;margin:10px auto 0;padding:0 12px}.stats span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px;color:var(--mute)}.stats b{color:var(--text)}
-.stage{background:radial-gradient(var(--line) 1px,transparent 1px) 0 0/16px 16px,var(--p2)}nav button.on{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 30%,var(--p2)),var(--p2));box-shadow:inset 0 0 0 1px var(--gold)}.tag{box-shadow:0 1px 6px #0003}
-.add.on{background:var(--gold);color:#16130a;border-color:var(--gold)}details.card>summary{list-style:none}details.card>summary::before{content:"◂ ";color:var(--gold)}details[open].card>summary::before{content:"▾ "}
-.hp .ptabs{display:flex;gap:4px;margin-bottom:10px}.hp .ptabs button{flex:1;padding:6px 4px;border:0;border-radius:8px;color:inherit;background:#ffffff1a;cursor:pointer;font:inherit;font-size:13px}
-@media(max-width:879px){.stats{display:none}}
-#adm{position:fixed;inset:0;z-index:50;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}#adm[hidden],#adm [hidden]{display:none}.adm-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;width:min(1000px,100%);max-height:100%;display:flex;flex-direction:column}
-.adm-ta{width:100%;height:min(66vh,620px);direction:ltr;text-align:left;font:12.5px/1.55 "Fira Code",monospace;tab-size:2;white-space:pre;border:1px solid var(--line);border-radius:10px;background:var(--code);color:var(--text);padding:10px;resize:none}
-.cta{width:100%;min-height:120px;font:12.5px/1.5 "Fira Code",monospace;border:1px solid var(--line);border-radius:9px;background:var(--code);padding:8px;margin:6px 0;resize:vertical;direction:ltr;text-align:left}.cb{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}.cb summary{font-size:14px}.hp .pt{width:100%;padding:9px;border-radius:8px;border:0;margin-bottom:8px;background:#ffffff22;color:inherit;font:inherit}.hp .sm{display:flex;align-items:center;gap:8px;margin-bottom:8px}.hp .sb{width:38px;margin:0;padding:6px}.ed{position:relative;direction:ltr;height:min(64vh,540px);border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--code)}
-.ed pre,.ed textarea{position:absolute;inset:0;margin:0;padding:12px;font:13px/1.65 "Fira Code",monospace;tab-size:2;white-space:pre;border:0;width:100%;height:100%;overflow:auto}
-.ed pre{overflow:hidden;pointer-events:none}.ed textarea{background:transparent;color:transparent;-webkit-text-fill-color:transparent;caret-color:var(--text);resize:none;outline:none}
-.k{color:var(--teal)}.s{color:var(--gold)}.c{color:var(--mute);font-style:italic}.nu{color:#c26ad8}.a{color:#4f8fe0}
-.pr{padding:9px 12px;border-radius:9px;margin-bottom:6px;background:var(--p2);border-inline-start:4px solid var(--c)}
-.log{direction:ltr;text-align:left;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:10px;font:12.5px "Fira Code",monospace;min-height:130px;max-height:40vh;overflow:auto;margin-top:10px}
-@media(min-width:880px){body{padding-bottom:0}nav{position:static;border:0;background:none;max-width:1100px;margin:10px auto 0;padding:0 12px}nav button{flex:none;padding:8px 18px;display:flex;gap:8px;align-items:center}nav button b{font-size:16px;display:inline}
-.two{grid-template-columns:1fr 330px;align-items:start}.two .sticky{position:sticky;top:76px}}
-</style>
-</head>
-<body>
-<header><span class="logo">🐉</span><h1>Wyvern <span>Forge</span><small>صانع واجهات وسكربتات Roblox</small></h1><button class="btn" id="admbtn" title="دخول الأدمن">🔒 أدمن</button><button class="btn pri" id="copy">نسخ الكود</button></header>
-<div class="stats" id="stats"></div>
-<nav id="nav"><button data-t="hub" class="on"><b>🎛️</b>الواجهة</button><button data-t="script"><b>🧱</b>السكربت</button><button data-t="code"><b>✍️</b>الكود</button><button data-t="test"><b>▶️</b>الاختبار<span class="n" id="cnt" hidden></span></button></nav>
-<main>
-<div class="tab on" id="t-hub"><div class="two"><div>
- <div class="card" id="tabsbar"></div>
-<div class="card"><h2>🧩 العناصر</h2><p class="hint">اختار نوع العنصر وهيتضاف في التاب الحالي.</p><div class="chips"><button class="add" data-ae="button">🔘 زر</button><button class="add" data-ae="slider">🎚️ سلايدر</button><button class="add" data-ae="toggle">🔀 مفتاح</button><button class="add" data-ae="label">📝 نص</button><button class="add" data-ae="textbox">⌨️ مربع كتابة</button><button class="add" data-ae="dropdown">📋 قائمة</button><button class="add" data-ae="stepper">➕ عدّاد</button><button class="add" data-ae="keybind">🎹 اختصار</button><button class="add" data-ae="divider">➖ فاصل</button></div><div id="els"></div></div>
-<details class="card"><summary>📦 حزم جاهزة</summary><p class="hint">كل حزمة بتضيف مجموعة عناصر مرة واحدة في التاب الحالي.</p><div class="chips" id="packs"></div></details>
-<details class="card"><summary>🎨 الشكل والألوان</summary><div class="chips" id="themes" style="margin:0 0 8px"></div><div class="row"><label>العنوان<input id="ht"></label><label style="flex:none;min-width:60px">اللون<input id="hc" type="color"></label><label style="flex:none;min-width:60px">الخلفية<input id="hb" type="color"></label></div>
-  <div class="row"><label>استدارة الحواف: <b id="rv"></b><input id="hr" type="range" min="0" max="24"></label><label>مكان اللوحة<select id="hp2"><option value="left">يسار</option><option value="center">وسط</option><option value="right">يمين</option></select></label></div></details>
-<details class="card"><summary>⚙️ فتح وقفل وحركة (اختياري)</summary><p class="hint">تحكم في زر فتح وقفل اللوحة، وفي حركتها وسحبها.</p><div class="row"><label class="ck"><input type="checkbox" id="k-showBtn">زر فتح/قفل</label><label class="ck"><input type="checkbox" id="k-startOpen">مفتوحة من البداية</label><label class="ck"><input type="checkbox" id="k-anim">حركة الفتح والقفل</label><label class="ck"><input type="checkbox" id="k-panelDrag">اللوحة تتحرك بالسحب</label><label class="ck"><input type="checkbox" id="k-btnDrag">الزر يتحرك بالسحب</label></div><div class="row"><label>نص الزر<input id="k-btnText" maxlength="6"></label><label>مكان الزر<select id="k-btnPos"><option value="tl">فوق يسار</option><option value="tr">فوق يمين</option><option value="bl">تحت يسار</option><option value="br">تحت يمين</option></select></label><label>اختصار الكيبورد<select id="k-key"><option value="">بدون</option><option>F</option><option>G</option><option>H</option><option>K</option><option>RightShift</option><option>Insert</option></select></label></div><div class="row"><label>حجم الزر: <b id="v-btnSize"></b><input type="range" id="k-btnSize" min="32" max="72"></label><label>عرض اللوحة: <b id="v-width"></b><input type="range" id="k-width" min="200" max="340"></label><label>شفافية اللوحة: <b id="v-alpha"></b><input type="range" id="k-alpha" min="0" max="60"></label></div></details></div>
- <div class="sticky card"><h2>معاينة مباشرة</h2><p class="hint">جرّب العناصر هنا كأنها داخل اللعبة.</p><div class="stage"><div class="hp" id="hp"></div><button class="ob" id="ob"></button></div><div class="st"></div></div></div></div>
-<div class="tab" id="t-script"><h2>سكربت اللاعب</h2><p class="hint">يشتغل مرة واحدة لكل لاعب أول ما يدخل اللعبة. رتّب البلوكات من فوق لتحت.</p><div class="chips" id="pal"></div><div id="blocks"></div></div>
-<div class="tab" id="t-code"><div class="chips" style="align-items:center"><button class="add" data-f="hub">Hub LocalScript</button><button class="add" data-f="script">Server Script</button><span class="pill" id="cs"></span><button class="btn" id="regen" style="margin-inline-start:auto">رجّع الكود الأصلي</button></div>
- <p class="hint">تقدر تعدّل الكود بإيدك. لو عدّلت، التغييرات اللي في الواجهة والبلوكات مش هتغيّره إلا لو رجّعت الكود الأصلي.</p>
- <div class="ed"><pre id="pre"></pre><textarea id="ta" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div></div>
-<div class="tab" id="t-test"><div class="two"><div><h2>الفحص</h2><p class="hint">بنراجع البلوكات والواجهة والكود المكتوب بإيدك.</p><div id="chks"></div></div>
- <div class="sticky card"><h2>المحاكي</h2><div class="row" style="margin:0 0 6px"><button class="btn pri" id="run">شغّل السكربت</button><button class="btn" id="clr">صفّر الحالة</button></div><div class="st" id="st2"></div><div class="log" id="log"></div><p class="hint" style="margin-top:8px">المحاكي بيشغّل كود السكربت (حتى لو عدّلته بإيدك) على مشغّل Lua. صيغ Luau الخاصة زي أنواع المتغيّرات وcontinue مش مدعومة هنا.</p></div></div></div>
-</main>
-<div id="adm" hidden><div class="adm-box">
-<div id="adm-login"><h2>🔒 دخول الأدمن</h2><p class="hint">اكتب الباسورد عشان تفتح محرر كود الموقع.</p><div class="row"><input id="adm-pw" type="password" class="ltr" placeholder="الباسورد" autocomplete="off"><button class="btn pri" id="adm-go" style="flex:none">دخول</button><button class="btn" id="adm-x1" style="flex:none">إغلاق</button></div><p id="adm-err" style="color:var(--err);margin:6px 0 0"></p></div>
-<div id="adm-edit" hidden><div class="row" style="margin:0"><h2 style="flex:1;margin:0">✍️ محرر كود الموقع (HTML كامل)</h2><button class="btn pri" id="adm-ap">تطبيق وحفظ</button><button class="btn" id="adm-rs">رجّع الأصلي</button><button class="btn" id="adm-cp">نسخ</button><button class="btn" id="adm-x2">إغلاق</button></div>
-<p class="hint" id="adm-st" style="margin:6px 0"></p><textarea id="adm-ta" class="adm-ta" spellcheck="false"></textarea>
-<p class="hint" style="margin:6px 0 0">التعديلات بتتحفظ في متصفحك إنت بس وبتتطبّق بعد إعادة التحميل تلقائيًا. لو الصفحة باظت من تعديل، ضيف <b>#reset</b> في آخر الرابط وافتحه عشان ترجع النسخة الأصلية.</p></div>
-</div></div>
-<script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"><@@/script>
-<script>
-const PR={WalkSpeed:[0,100,16],JumpPower:[0,200,50],Gravity:[0,400,196],FOV:[30,120,70],TimeOfDay:[0,24,14],Brightness:[0,10,2],FogEnd:[100,10000,10000],HipHeight:[0,20,2],Health:[0,100,100],CameraZoom:[10,500,128],Transparency:[0,100,0]},SP=["WalkSpeed","JumpPower","Gravity","TimeOfDay","Brightness","FogEnd","HipHeight","Health"];
-const BD={print:{l:"💬 اطبع رسالة",c:"#4f8fe0",f:[["text","text","Welcome!"]]},wait:{l:"⏳ انتظر (ثواني)",c:"#9a7ad6",f:[["secs","number",1]]},setprop:{l:"⚙️ غيّر خاصية",c:"#12a58f",f:[["prop","sel","WalkSpeed"],["value","number",24]]},tp:{l:"📍 انقل اللاعب",c:"#e5ac40",f:[["x","number",0],["y","number",10],["z","number",0]]},stat:{l:"⭐ أضف نقاط",c:"#e5ac40",f:[["name","text","Coins"],["amount","number",10]]},repeat:{l:"🔁 كرّر",c:"#d9604c",f:[["times","number",3]]},end:{l:"⏹️ نهاية التكرار",c:"#d9604c",f:[]}};
-const ET={button:["زر","#e5ac40"],slider:["سلايدر","#44c6af"],toggle:["مفتاح","#9a7ad6"],label:["نص","#8da39b"],textbox:["مربع كتابة","#4f8fe0"],dropdown:["قائمة","#d9604c"],stepper:["عدّاد","#12a58f"],keybind:["اختصار","#e5ac40"],divider:["فاصل","#8da39b"]};
-const HT={button:34,toggle:34,slider:46,label:20,textbox:34,dropdown:34,stepper:34,keybind:20,divider:10};
-const ED={button:{label:"زر جديد",prop:"WalkSpeed",val:"50"},slider:{label:"السرعة",prop:"WalkSpeed",min:0,max:100,val:16},toggle:{label:"وضع الليل",prop:"TimeOfDay",val:0},label:{label:"نص توضيحي"},textbox:{label:"اكتب هنا"},dropdown:{label:"اختيار",opts:"خيار 1,خيار 2,خيار 3"},stepper:{label:"عدّاد",prop:"WalkSpeed",min:0,max:100,step:5,val:16},keybind:{label:"اختصار",key:"F"},divider:{label:""}};
-const D_B=[{type:"print",v:{text:"Welcome!"}},{type:"setprop",v:{prop:"WalkSpeed",value:24}},{type:"repeat",v:{times:3}},{type:"stat",v:{name:"Coins",amount:10}},{type:"wait",v:{secs:1}},{type:"end",v:{}}];
-const D_H={title:"Wyvern Hub",accent:"#c9892b",panel:"#17201c",radius:12,pos:"left",tabs:[{name:"الرئيسية"}],font:"Gotham",text:"#ffffff",stroke:false,theme:"wyvern",showBtn:true,startOpen:true,anim:true,panelDrag:true,btnDrag:true,btnText:"☰",btnPos:"tl",key:"",btnSize:44,width:250,alpha:0,elements:[{type:"slider",...ED.slider},{type:"slider",label:"القفز",prop:"JumpPower",min:0,max:200,val:50},{type:"toggle",...ED.toggle},{type:"button",label:"ارجع للبداية",prop:"Teleport",val:"0,10,0"},{type:"label",label:"صُنع بواسطة Wyvern Forge"}]};
-let blocks,hub,ov={hub:null,script:null},cur="hub",sim,pv={open:true};
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"),q=s=>String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g," "),num=v=>{const n=parseFloat(v);return isNaN(n)?0:n};
-const clone=o=>JSON.parse(JSON.stringify(o));
-function save(){try{localStorage.setItem("wf2",JSON.stringify({blocks,hub,ov}))}catch(e){}}
-function load(){try{const d=JSON.parse(localStorage.getItem("wf2")||"null");if(d&&d.blocks&&d.hub){blocks=d.blocks;hub={...clone(D_H),...d.hub};ov=d.ov||ov;return}}catch(e){}blocks=clone(D_B);hub=clone(D_H)}
-/* ---- code generation ---- */
-function genScript(){
- const L=['local Players = game:GetService("Players")',''];
- if(blocks.some(b=>b.type==="stat"))L.push(`local function addStat(player, name, amount)
-  local folder = player:FindFirstChild("leaderstats")
-  if not folder then
-    folder = Instance.new("Folder")
-    folder.Name = "leaderstats"
-    folder.Parent = player
-  end
-  local stat = folder:FindFirstChild(name)
-  if not stat then
-    stat = Instance.new("IntValue")
-    stat.Name = name
-    stat.Parent = folder
-  end
-  stat.Value += amount
-end
-`);
- L.push(`local function onPlayer(player)
-  local character = player.Character or player.CharacterAdded:Wait()
-  local humanoid = character:WaitForChild("Humanoid")
-  local root = character:WaitForChild("HumanoidRootPart")`);
- let d=1;const I=()=>"  ".repeat(d),SM={WalkSpeed:v=>[`humanoid.WalkSpeed = ${v}`],JumpPower:v=>["humanoid.UseJumpPower = true",`humanoid.JumpPower = ${v}`],Gravity:v=>[`workspace.Gravity = ${v}`],TimeOfDay:v=>[`game:GetService("Lighting").ClockTime = ${v}`],Brightness:v=>[`game:GetService("Lighting").Brightness = ${v}`],FogEnd:v=>[`game:GetService("Lighting").FogEnd = ${v}`],HipHeight:v=>[`humanoid.HipHeight = ${v}`],Health:v=>[`humanoid.Health = ${v}`]};
- blocks.forEach(b=>{const v=b.v;
-  if(b.type==="end"){if(d>1)d--;L.push(I()+"end");return}
-  if(b.type==="print")L.push(I()+`print("${q(v.text)}")`);
-  if(b.type==="wait")L.push(I()+`task.wait(${num(v.secs)})`);
-  if(b.type==="setprop")(SM[v.prop]||SM.WalkSpeed)(num(v.value)).forEach(x=>L.push(I()+x));
-  if(b.type==="tp")L.push(I()+`root.CFrame = CFrame.new(${num(v.x)}, ${num(v.y)}, ${num(v.z)})`);
-  if(b.type==="stat")L.push(I()+`addStat(player, "${q(v.name)}", ${num(v.amount)})`);
-  if(b.type==="repeat"){L.push(I()+`for _ = 1, ${Math.max(0,Math.floor(num(v.times)))} do`);d++}});
- while(d>1){d--;L.push(I()+"end")}
- L.push(`end
+  <!-- شاشة الفوز -->
+  <div id="screen-victory" class="overlay">
+    <h1 style="color:#4ade80;">LEVEL CLEARED!</h1>
+    <div id="vic-stats" style="font-size:21px; line-height:1.7; margin-bottom:16px;"></div>
+    <button class="btn btn-green" id="btn-next-level">NEXT LEVEL</button>
+    <button class="btn btn-amber" id="btn-vic-shop">UPGRADE SHOP</button>
+    <button class="btn btn-slate" id="btn-vic-menu">MAIN MENU</button>
+  </div>
 
-Players.PlayerAdded:Connect(onPlayer)
-for _, player in Players:GetPlayers() do
-  task.spawn(onPlayer, player)
-end`);return L.join("\n")}
-const rgb=h=>{const n=parseInt(h.slice(1),16);return `Color3.fromRGB(${n>>16}, ${n>>8&255}, ${n&255})`};
-const lum=h=>{const n=parseInt(h.slice(1),16);return .299*(n>>16)+.587*(n>>8&255)+.114*(n&255)};
-const TH={wyvern:{n:"Wyvern",accent:"#c9892b",panel:"#17201c",text:"#ffffff",radius:12,alpha:0,font:"Gotham",stroke:false},neon:{n:"نيون",accent:"#00e5ff",panel:"#0a0f1f",text:"#e6faff",radius:6,alpha:10,font:"Code",stroke:true},glass:{n:"زجاج",accent:"#5b8cff",panel:"#1b2233",text:"#ffffff",radius:18,alpha:35,font:"Gotham",stroke:true},light:{n:"فاتح",accent:"#2f7de1",panel:"#f4f6fa",text:"#18202c",radius:10,alpha:0,font:"SourceSans",stroke:false},ocean:{n:"محيط",accent:"#1fb5c9",panel:"#0b2a3a",text:"#e8fbff",radius:14,alpha:0,font:"Gotham",stroke:false},sakura:{n:"ساكورا",accent:"#ec6fa0",panel:"#2a1722",text:"#ffe9f2",radius:20,alpha:0,font:"FredokaOne",stroke:true},forest:{n:"غابة",accent:"#4caf50",panel:"#142218",text:"#eaf6ea",radius:10,alpha:0,font:"SourceSans",stroke:false},sunset:{n:"غروب",accent:"#ff7a45",panel:"#2b1612",text:"#fff1e8",radius:14,alpha:0,font:"Gotham",stroke:false},mono:{n:"أبيض وأسود",accent:"#8a8a8a",panel:"#111111",text:"#ffffff",radius:0,alpha:0,font:"Code",stroke:true},retro:{n:"ريترو",accent:"#f5c518",panel:"#1d1b3a",text:"#ffe9a8",radius:0,alpha:0,font:"Arcade",stroke:true}};
-const FF={Gotham:"Cairo,sans-serif",Arcade:'"Fira Code",monospace',FredokaOne:"Cairo,sans-serif",SourceSans:"system-ui,sans-serif",Code:'"Fira Code",monospace'};
-const NEWT=["textbox","dropdown","stepper","keybind","divider"],pvv={},ARGS={toggle:"on",slider:"value",stepper:"value",textbox:"text",dropdown:"choice"};
-const opts=e=>{const a=String(e.opts||"").split(",").map(s=>s.trim()).filter(Boolean);return a.length?a:["-"]};
-function elBodyOld(e){const P=e.prop;
- if(e.type==="button"){if(P==="Print")return `print("${q(e.val)}")`;if(P==="Teleport"){const p=String(e.val).split(",").map(num);return `local root = getCharacter():FindFirstChild("HumanoidRootPart")\nif root then\n  root.CFrame = CFrame.new(${p[0]||0}, ${p[1]||0}, ${p[2]||0})\nend`}return `setProp("${P}", ${num(e.val)})`}
- if(e.type==="toggle")return `setProp("${P}", on and ${num(e.val)} or ${PR[P]?PR[P][2]:0})`;
- if(e.type==="slider"||e.type==="stepper")return `setProp("${P}", value)`;
- if(e.type==="textbox")return `print("Entered: " .. text)`;
- if(e.type==="dropdown")return `print("Selected: " .. choice)`;
- if(e.type==="keybind")return `print("${q(e.label)} pressed")`;return ""}
-function newEl(e,y,lb,pf){pf=pf||"frame";const b=(e.code!=null&&e.code!==""?e.code:elBody(e)).split("\n").map(l=>"  "+l).join("\n"),fn=`function(${ARGS[e.type]||""})\n${b}\nend`;
- if(e.type==="button")return `makeButton(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="toggle")return `makeToggle(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="slider")return `makeSlider(${pf}, ${y}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.val)}, ${fn})`;
- if(e.type==="stepper")return `makeStepper(${pf}, ${y}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.step)||1}, ${num(e.val)}, ${fn})`;
- if(e.type==="textbox")return `makeTextBox(${pf}, ${y}, "${lb}", ${fn})`;
- if(e.type==="dropdown")return `makeDropdown(${pf}, ${y}, "${lb}", {${opts(e).map(o=>`"${q(o)}"`).join(", ")}}, ${fn})`;
- if(e.type==="keybind")return `makeKeybind(Enum.KeyCode.${e.key||"F"}, ${fn})\nmakeLabel(${pf}, ${y}, "${lb} [${e.key||"F"}]", 20)`;
- return `makeDivider(${pf}, ${y})`}
-function newF(e,i){const E=(k,l,t)=>`<label>${l}<input class="ltr" ${t||""} data-e="${i}" data-k="${k}" value="${esc(e[k]??"")}"></label>`;
- if(e.type==="dropdown")return E("opts","الخيارات (بينها فاصلة)");
- if(e.type==="keybind")return `<label>المفتاح<select class="ltr" data-e="${i}" data-k="key">${"QWERTYUIOPASDFGHJKLZXCVBNM".split("").map(c=>`<option${c===e.key?" selected":""}>${c}</option>`).join("")}</select></label>`;
- if(e.type==="stepper")return `<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label>`+E("min","أقل",'type="number"')+E("max","أعلى",'type="number"')+E("step","الخطوة",'type="number"')+E("val","الافتراضي",'type="number"');return ""}
-function codeBox(e,i){if(e.type==="label"||e.type==="divider")return"";const a=ARGS[e.type]?`المتغيّر المتاح: <b>${ARGS[e.type]}</b> — `:"",v=e.code!=null&&e.code!==""?e.code:elBody(e);
- return `<details class="cb"><summary>✏️ كود العنصر${e.code?" ●":""}</summary><p class="hint">${a}اكتب كود Luau اللي يشتغل لما العنصر يتفعّل. تقدر تستخدم setProp و getCharacter(). المعاينة بتشغّله فعلًا لما تضغط على العنصر.</p><textarea class="cta" data-ec="${i}" spellcheck="false">${esc(v)}</textarea><button class="btn" data-ecr="${i}">رجّع الكود الأصلي</button></details>`}
-function pvEl(e,i){const l=esc(e.label),bs=`background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}`;
- if(e.type==="textbox")return `<input class="pt" data-pt="${i}" placeholder="${l}">`;
- if(e.type==="dropdown")return `<button class="pb" data-dd="${i}" style="${bs}">${l}: ${esc(opts(e)[pvv[i]||0]||"")}</button>`;
- if(e.type==="stepper")return `<div class="sm"><button class="pb sb" data-sm="${i}" style="${bs}">−</button><span style="flex:1;text-align:center">${l}: <b>${pvv["s"+i]??num(e.val)}</b></span><button class="pb sb" data-sp="${i}" style="${bs}">+</button></div>`;
- if(e.type==="keybind")return `<div class="pl">${l} [${e.key||"F"}]</div>`;
- return `<hr style="border:0;border-top:2px solid #ffffff33;margin:4px 0 12px">`}
-function drawThemes(){$("#themes").innerHTML=Object.entries(TH).map(([k,t])=>`<button class="add" data-th="${k}" style="border:2px solid ${hub.theme===k?t.accent:"var(--line)"}"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${t.accent};margin-inline-end:6px"></span>${t.n}</button>`).join("")}
-function genHub(){
- const T=hub.tabs&&hub.tabs.length?hub.tabs:[{name:"الرئيسية"}],multi=T.length>1,E=hub.elements,Y=[],TI=E.map(e=>Math.min(e.tab||0,T.length-1)),ys=T.map(()=>multi?4:48);E.forEach((e,i)=>{Y.push(ys[TI[i]]);ys[TI[i]]+=HT[e.type]+8});const H=(multi?84:0)+Math.max(...ys)+4,has=t=>E.some(e=>e.type===t);
- const W=Math.round(num(hub.width))||250,TS=Math.round(num(hub.btnSize))||44,uis=has("slider")||has("keybind")||hub.panelDrag||(hub.showBtn&&hub.btnDrag)||hub.key,bpos={tl:`UDim2.new(0, 16, 0, 16)`,tr:`UDim2.new(1, -${TS+16}, 0, 16)`,bl:`UDim2.new(0, 16, 1, -${TS+16})`,br:`UDim2.new(1, -${TS+16}, 1, -${TS+16})`}[hub.btnPos]||"UDim2.new(0, 16, 0, 16)";const pos=hub.pos==="left"?`UDim2.new(0, 16, 0.5, ${-Math.round(H/2)})`:hub.pos==="right"?`UDim2.new(1, -${W+16}, 0.5, ${-Math.round(H/2)})`:`UDim2.new(0.5, -${W/2}, 0.5, ${-Math.round(H/2)})`;
- const L=[`local Players = game:GetService("Players")`,uis?`local UserInputService = game:GetService("UserInputService")`:null,hub.anim?`local TweenService = game:GetService("TweenService")`:null,`local player = Players.LocalPlayer
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-local ACCENT = ${rgb(hub.accent)}
-local PANEL = ${rgb(hub.panel)}
-local MUTED = Color3.fromRGB(60, 70, 66)
-local TEXT = ${rgb(hub.text)}
-local BTEXT = ${lum(hub.accent)>150?"Color3.new(0, 0, 0)":"Color3.new(1, 1, 1)"}
-local FONT = Enum.Font.${hub.font}
+    const MAX_LEVEL = 5;
+    const SAVE_KEY = "chicken_hyper_galaxy_html_v1";
 
-local function getCharacter()
-  return player.Character or player.CharacterAdded:Wait()
-end
+    const LEVEL_THEMES = [
+      { name: "LVL 1: NEBULA OUTPOST", bg: "#050812", neb1: "rgba(148,51,235,0.16)", neb2: "rgba(14,165,233,0.15)", spd: 1.0, waves: 3, reward: 120 },
+      { name: "LVL 2: CRIMSON BELT", bg: "#13060b", neb1: "rgba(225,29,72,0.16)", neb2: "rgba(249,115,22,0.14)", spd: 1.18, waves: 3, reward: 200 },
+      { name: "LVL 3: CYBER NEON CORE", bg: "#070518", neb1: "rgba(20,184,166,0.16)", neb2: "rgba(217,70,239,0.15)", spd: 1.35, waves: 4, reward: 300 },
+      { name: "LVL 4: SOLAR FLARE STORM", bg: "#140d04", neb1: "rgba(245,158,11,0.18)", neb2: "rgba(234,88,12,0.15)", spd: 1.52, waves: 4, reward: 450 },
+      { name: "LVL 5: OMEGA THRONE", bg: "#0d0416", neb1: "rgba(168,85,247,0.20)", neb2: "rgba(250,204,21,0.16)", spd: 1.72, waves: 5, reward: 750 }
+    ];
 
-local function setProp(name, value)
-  local humanoid = getCharacter():FindFirstChildOfClass("Humanoid")
-  if name == "WalkSpeed" and humanoid then
-    humanoid.WalkSpeed = value
-  elseif name == "JumpPower" and humanoid then
-    humanoid.UseJumpPower = true
-    humanoid.JumpPower = value
-  elseif name == "Gravity" then
-    workspace.Gravity = value
-  elseif name == "FOV" then
-    workspace.CurrentCamera.FieldOfView = value
-  elseif name == "TimeOfDay" then
-    game:GetService("Lighting").ClockTime = value
-  elseif name == "Brightness" then
-    game:GetService("Lighting").Brightness = value
-  elseif name == "FogEnd" then
-    game:GetService("Lighting").FogEnd = value
-  elseif name == "HipHeight" and humanoid then
-    humanoid.HipHeight = value
-  elseif name == "Health" and humanoid then
-    humanoid.Health = value
-  elseif name == "CameraZoom" then
-    player.CameraMaxZoomDistance = value
-  elseif name == "Transparency" then
-    for _, part in getCharacter():GetDescendants() do
-      if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
-        part.Transparency = value / 100
-      end
-    end
-  end
-end
+    let state = "MENU"; // MENU, LEVELS, PLAYING, SHOP, GAMEOVER, VICTORY
+    let coins = 200;
+    let score = 0;
+    let bestScore = 0;
+    let currentLevel = 1;
+    let unlockedLevel = 1;
+    let wave = 1;
+    let wavesPerLevel = 3;
+    let enemiesRemaining = 0;
+    let bossActive = false;
+    let boss = null;
 
-local function makeLabel(parent, y, text, size)
-  local label = Instance.new("TextLabel")
-  label.Size = UDim2.new(1, -24, 0, size)
-  label.Position = UDim2.fromOffset(12, y)
-  label.BackgroundTransparency = 1
-  label.Font = FONT
-  label.TextSize = size - 6
-  label.TextXAlignment = Enum.TextXAlignment.Left
-  label.TextColor3 = TEXT
-  label.Text = text
-  label.Parent = parent
-  return label
-end
+    let comboCount = 0;
+    let comboTimer = 0;
 
-local function makeButton(parent, y, text, onClick)
-  local button = Instance.new("TextButton")
-  button.Size = UDim2.new(1, -24, 0, 34)
-  button.Position = UDim2.fromOffset(12, y)
-  button.BackgroundColor3 = ACCENT
-  button.Font = FONT
-  button.TextSize = 14
-  button.TextColor3 = BTEXT
-  button.Text = text
-  button.Parent = parent
-  Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
-  button.Activated:Connect(onClick)
-  return button
-end`,has("toggle")?`
-local function makeToggle(parent, y, text, onChange)
-  local on = false
-  local button
-  button = makeButton(parent, y, text .. ": OFF", function()
-    on = not on
-    button.Text = text .. (on and ": ON" or ": OFF")
-    button.BackgroundColor3 = on and ACCENT or MUTED
-    onChange(on)
-  end)
-  button.BackgroundColor3 = MUTED
-end`:null,has("slider")?`
-local function makeSlider(parent, y, text, min, max, default, onChange)
-  local label = makeLabel(parent, y, "", 18)
-  local track = Instance.new("Frame")
-  track.Size = UDim2.new(1, -24, 0, 8)
-  track.Position = UDim2.fromOffset(12, y + 28)
-  track.BackgroundColor3 = MUTED
-  track.Parent = parent
-  Instance.new("UICorner", track).CornerRadius = UDim.new(1, 0)
-  local fill = Instance.new("Frame")
-  fill.BackgroundColor3 = ACCENT
-  fill.Parent = track
-  Instance.new("UICorner", fill).CornerRadius = UDim.new(1, 0)
-  local function set(alpha, fire)
-    alpha = math.clamp(alpha, 0, 1)
-    local value = math.floor(min + (max - min) * alpha + 0.5)
-    fill.Size = UDim2.fromScale(alpha, 1)
-    label.Text = text .. ": " .. value
-    if fire then onChange(value) end
-  end
-  local function fromInput(input)
-    set((input.Position.X - track.AbsolutePosition.X) / track.AbsoluteSize.X, true)
-  end
-  set((default - min) / (max - min), false)
-  local dragging = false
-  track.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = true
-      fromInput(input)
-    end
-  end)
-  UserInputService.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-      fromInput(input)
-    end
-  end)
-  UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = false
-    end
-  end)
-end`:null,`
-local gui = Instance.new("ScreenGui")
-gui.Name = "WyvernHub"
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+    let upg = {
+      multishot: 1,
+      damage: 1,
+      firerate: 1,
+      speed: 1,
+      hp: 3,
+      magnet: 1,
+      nova: 1
+    };
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.fromOffset(${W}, ${H})
-frame.Position = ${pos}
-frame.BackgroundColor3 = PANEL
-frame.BackgroundTransparency = ${num(hub.alpha)/100}${hub.stroke?'\nlocal stroke = Instance.new("UIStroke")\nstroke.Color = ACCENT\nstroke.Thickness = 2\nstroke.Parent = frame':""}
-frame.Parent = gui
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, ${num(hub.radius)})
+    let currentHp = 3;
+    let overdriveTimer = 0;
+    let magnetTimer = 0;
+    let shieldTimer = 0;
+    let specialCharge = 0;
+    let fireCooldown = 0;
+    let spawnTimer = 0;
+    let screenShake = 0;
+    let flashAlpha = 0;
 
-local title = makeLabel(frame, 8, "${q(hub.title)}", 30)
-title.Font = FONT
-title.TextSize = 18`];
- if(has("stepper"))L.push(`
-local function makeStepper(parent, y, text, min, max, step, default, onChange)
-  local value = default
-  local label = makeLabel(parent, y, text .. ": " .. value, 34)
-  label.TextSize = 14
-  label.TextXAlignment = Enum.TextXAlignment.Center
-  local function bump(delta)
-    value = math.clamp(value + delta, min, max)
-    label.Text = text .. ": " .. value
-    onChange(value)
-  end
-  makeButton(parent, y, "-", function() bump(-step) end).Size = UDim2.fromOffset(34, 34)
-  local plus = makeButton(parent, y, "+", function() bump(step) end)
-  plus.Size = UDim2.fromOffset(34, 34)
-  plus.Position = UDim2.new(1, -46, 0, y)
-end`);
- if(has("textbox"))L.push(`
-local function makeTextBox(parent, y, placeholder, onEnter)
-  local box = Instance.new("TextBox")
-  box.Size = UDim2.new(1, -24, 0, 34)
-  box.Position = UDim2.fromOffset(12, y)
-  box.BackgroundColor3 = MUTED
-  box.Font = FONT
-  box.TextSize = 14
-  box.TextColor3 = TEXT
-  box.PlaceholderText = placeholder
-  box.Text = ""
-  box.ClearTextOnFocus = false
-  box.Parent = parent
-  Instance.new("UICorner", box).CornerRadius = UDim.new(0, 8)
-  box.FocusLost:Connect(function(enterPressed)
-    if enterPressed then onEnter(box.Text) end
-  end)
-end`);
- if(has("dropdown"))L.push(`
-local function makeDropdown(parent, y, text, options, onSelect)
-  local index = 1
-  local button
-  button = makeButton(parent, y, text .. ": " .. options[index], function()
-    index = index % #options + 1
-    button.Text = text .. ": " .. options[index]
-    onSelect(options[index])
-  end)
-end`);
- if(has("divider"))L.push(`
-local function makeDivider(parent, y)
-  local line = Instance.new("Frame")
-  line.Size = UDim2.new(1, -24, 0, 2)
-  line.Position = UDim2.fromOffset(12, y + 4)
-  line.BackgroundColor3 = MUTED
-  line.BorderSizePixel = 0
-  line.Parent = parent
-end`);
- if(has("keybind"))L.push(`
-local function makeKeybind(keyCode, callback)
-  UserInputService.InputBegan:Connect(function(input, processed)
-    if not processed and input.KeyCode == keyCode then callback() end
-  end)
-end`);
- if(multi){const tw=Math.floor((W-24-(T.length-1)*4)/T.length);L.push(`\nlocal pages = {}\nlocal tabButtons = {}\nlocal function showTab(index)\n  for i, page in pages do\n    page.Visible = i == index\n    tabButtons[i].BackgroundColor3 = i == index and ACCENT or MUTED\n  end\nend`);T.forEach((t,i)=>L.push(`\ndo -- tab: ${q(t.name)}\n  local page = Instance.new("Frame")\n  page.Size = UDim2.new(1, 0, 1, -84)\n  page.Position = UDim2.fromOffset(0, 84)\n  page.BackgroundTransparency = 1\n  page.Parent = frame\n  pages[${i+1}] = page\n  local tabButton = makeButton(frame, 44, "${q(t.name)}", function()\n    showTab(${i+1})\n  end)\n  tabButton.Size = UDim2.fromOffset(${tw}, 30)\n  tabButton.Position = UDim2.fromOffset(${12+i*(tw+4)}, 44)\n  tabButton.TextSize = 13\n  tabButtons[${i+1}] = tabButton\nend`))}
- E.forEach((e,i)=>{const yy=Y[i],lb=q(e.label),pf=multi?`pages[${TI[i]+1}]`:"frame";L.push("");if(e.type!=="label"){L.push(newEl(e,yy,lb,pf));return}
-  if(e.type==="label")L.push(`makeLabel(${pf}, ${yy}, "${lb}", 20)`);
-  if(e.type==="slider")L.push(`makeSlider(frame, ${yy}, "${lb}", ${num(e.min)}, ${num(e.max)}, ${num(e.val)}, function(value)\n  setProp("${e.prop}", value)\nend)`);
-  if(e.type==="toggle")L.push(`makeToggle(frame, ${yy}, "${lb}", function(on)\n  setProp("${e.prop}", on and ${num(e.val)} or ${PR[e.prop]?PR[e.prop][2]:0})\nend)`);
-  if(e.type==="button"){let body=`setProp("${e.prop}", ${num(e.val)})`;
-   if(e.prop==="Print")body=`print("${q(e.val)}")`;
-   if(e.prop==="Teleport"){const p=String(e.val).split(",").map(num);body=`local root = getCharacter():FindFirstChild("HumanoidRootPart")\n  if root then\n    root.CFrame = CFrame.new(${p[0]||0}, ${p[1]||0}, ${p[2]||0})\n  end`}
-   L.push(`makeButton(frame, ${yy}, "${lb}", function()\n  ${body}\nend)`)}});
- if(multi)L.push("\nshowTab(1)");
- if(hub.panelDrag||(hub.showBtn&&hub.btnDrag))L.push(`
-local function makeDraggable(target, handle)
-  local dragging, startInput, startPos
-  handle.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-      dragging = true
-      startInput = input.Position
-      startPos = target.Position
-      input.Changed:Connect(function()
-        if input.UserInputState == Enum.UserInputState.End then dragging = false end
-      end)
-    end
-  end)
-  UserInputService.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-      local delta = input.Position - startInput
-      target.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-  end)
-end`);
- if(hub.panelDrag)L.push("\ntitle.Active = true\nmakeDraggable(frame, title)");
- L.push(`\nlocal isOpen = ${hub.startOpen?"true":"false"}\nframe.Visible = isOpen`);
- if(hub.anim)L.push(`local scale = Instance.new("UIScale")\nscale.Scale = isOpen and 1 or 0.01\nscale.Parent = frame`);
- L.push(`\nlocal function setOpen(open)\n  isOpen = open\n`+(hub.anim?`  if open then frame.Visible = true end\n  local tween = TweenService:Create(scale, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {Scale = open and 1 or 0.01})\n  tween:Play()\n  if not open then\n    tween.Completed:Connect(function()\n      if not isOpen then frame.Visible = false end\n    end)\n  end`:`  frame.Visible = open`)+`\nend`);
- if(hub.showBtn){L.push(`\nlocal openButton = makeButton(gui, 0, "${q(hub.btnText)}", function()\n  setOpen(not isOpen)\nend)\nopenButton.Size = UDim2.fromOffset(${TS}, ${TS})\nopenButton.Position = ${bpos}\nopenButton.TextSize = 20`);if(hub.btnDrag)L.push("makeDraggable(openButton, openButton)")}
- if(hub.key)L.push(`\nUserInputService.InputBegan:Connect(function(input, processed)\n  if not processed and input.KeyCode == Enum.KeyCode.${hub.key} then\n    setOpen(not isOpen)\n  end\nend)`);
- return L.filter(x=>x!==null).join("\n")}
-const eff=k=>ov[k]!=null?ov[k]:(k==="hub"?genHub():genScript());
-function hl(c){return esc(c).replace(/(--.*$)|("(?:[^"\\]|\\.)*")|\b(local|function|end|for|do|in|if|then|else|elseif|while|return|repeat|until|true|false|nil|not|and|or)\b|\b(\d+\.?\d*)\b|\b(game|workspace|Players|Instance|Vector3|CFrame|UDim2|UDim|Color3|Enum|task|print|math)\b/gm,(m,c1,s,k,n,a)=>c1?`<span class="c">${c1}</span>`:s?`<span class="s">${s}</span>`:k?`<span class="k">${k}</span>`:n?`<span class="nu">${n}</span>`:`<span class="a">${a}</span>`)}
-/* ---- checks ---- */
-function lint(code,name){const R=[],t=code.replace(/--.*$/gm,"").replace(/"(?:[^"\\\n]|\\.)*"/g,"S"),cnt=r=>(t.match(r)||[]).length;
- if(t.includes('"'))R.push(["err",`${name}: في نص (string) مش مقفول بعلامة تنصيص.`]);
- const o=cnt(/\bfunction\b/g)+cnt(/\bif\b/g)+cnt(/\bdo\b/g),e=cnt(/\bend\b/g);
- if(o>e)R.push(["err",`${name}: ناقص ${o-e} كلمة end لقفل الدوال أو الشروط أو الحلقات.`]);if(e>o)R.push(["err",`${name}: في ${e-o} كلمة end زيادة.`]);
- if(cnt(/\(/g)!==cnt(/\)/g))R.push(["err",`${name}: الأقواس ( ) مش متوازنة.`]);return R}
-function checks(){const R=[],add=(l,m)=>R.push([l,m]);
- if(!blocks.length)add("warn","السكربت فاضي، مفيش حاجة هتحصل لما اللاعب يدخل.");
- const st=[];blocks.forEach((b,i)=>{const v=b.v,n=i+1;
-  if(b.type==="repeat"){st.push({i,w:false,t:num(v.times)});if(num(v.times)<=0)add("warn",`بلوك ${n}: التكرار 0 مرة، اللي جواه مش هيشتغل.`);if(num(v.times)>1000)add("warn",`بلوك ${n}: التكرار أكتر من 1000 مرة وممكن يهنّج السيرفر.`)}
-  if(b.type==="wait"){st.forEach(s=>s.w=true);if(num(v.secs)<0)add("err",`بلوك ${n}: مينفعش الانتظار يبقى بالسالب.`);if(num(v.secs)>60)add("warn",`بلوك ${n}: الانتظار أكتر من 60 ثانية.`)}
-  if(b.type==="end"){const s=st.pop();if(!s)add("err",`بلوك ${n}: "نهاية التكرار" من غير "كرّر" قبله.`);else if(s.t>50&&!s.w)add("warn",`التكرار عند بلوك ${s.i+1} كبير ومن غير انتظار، ضيف بلوك انتظر.`)}
-  if(b.type==="print"&&!String(v.text).trim())add("warn",`بلوك ${n}: الرسالة فاضية.`);
-  if(b.type==="setprop"&&num(v.value)<0)add("err",`بلوك ${n}: القيمة مينفعش تبقى سالبة.`);
-  if(b.type==="setprop"&&v.prop==="WalkSpeed"&&num(v.value)>100)add("warn",`بلوك ${n}: سرعة فوق 100 بتخلي التحكم صعب.`);
-  if(b.type==="stat"&&!String(v.name).trim())add("err",`بلوك ${n}: لازم تكتب اسم للنقاط.`);
-  if(b.type==="tp"&&num(v.y)<-500)add("warn",`بلوك ${n}: ارتفاع أقل من -500 هيوقّع اللاعب في الفراغ.`)});
- st.forEach(s=>add("warn",`"كرّر" عند بلوك ${s.i+1} من غير نهاية، الكود بيقفله تلقائيًا.`));
- const seen={};hub.elements.forEach((e,i)=>{const n=i+1;
-  if(e.type!=="label"&&e.type!=="divider"&&!String(e.label).trim())add("err",`عنصر ${n}: الاسم فاضي.`);
-  if(e.type!=="label"&&e.type!=="divider"&&seen[e.label])add("warn",`عنصر ${n}: الاسم "${e.label}" مكرر.`);seen[e.label]=1;
-  if(e.prop==="Sound"&&!/^\d+$/.test(String(e.val).trim()))add("warn",`عنصر ${n}: رقم الصوت لازم يبقى أرقام بس.`);if(e.prop==="Notify"&&!String(e.val).trim())add("warn",`عنصر ${n}: نص الإشعار فاضي.`);if(e.prop==="Teleport"&&!/^\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*$/.test(e.val))add("err",`عنصر ${n}: الانتقال محتاج 3 أرقام زي 0,10,0.`);
-  if(e.type==="slider"){if(num(e.min)>=num(e.max))add("err",`عنصر ${n}: الحد الأدنى لازم يبقى أقل من الأعلى.`);else if(num(e.val)<num(e.min)||num(e.val)>num(e.max))add("warn",`عنصر ${n}: القيمة الافتراضية خارج المدى.`)}});
- if(!hub.showBtn&&!hub.startOpen&&!hub.key)add("err","اللوحة مقفولة من البداية ومفيش زر أو اختصار يفتحها.");if(!hub.showBtn&&!hub.key&&hub.anim)add("warn","مفيش زر أو اختصار لقفل اللوحة، فحركة الفتح والقفل مش هتظهر.");if(String(hub.btnText).length>3)add("warn","نص الزر طويل، الأفضل رمز أو كلمة قصيرة.");hub.tabs.forEach((t,i)=>{if(!String(t.name).trim())add("err",`تاب ${i+1}: الاسم فاضي.`);if(!hub.elements.some(e=>tabOf(e)===i))add("warn",`التاب "${t.name}" فاضي.`)});if(Math.max(0,...hub.tabs.map((_,i)=>hub.elements.filter(e=>tabOf(e)===i).length))>8)add("warn","اللوحة فيها أكتر من 8 عناصر وممكن متتحملش على الشاشات الصغيرة.");
- if(!hub.elements.length)add("warn","اللوحة فاضية، ضيف عناصر من تبويب الواجهة.");
- [["hub","Hub"],["script","Server"]].forEach(([k,n])=>{if(ov[k]!=null)lint(ov[k],n).forEach(r=>R.push(r))});return R}
-function drawChecks(){const R=checks(),er=R.filter(r=>r[0]==="err").length,c=$("#cnt");c.hidden=!R.length;c.textContent=R.length;c.style.background=er?"var(--err)":"var(--gold)";
- $("#chks").innerHTML=R.length?R.map(r=>`<div class="pr" style="--c:${r[0]==="err"?"var(--err)":"var(--gold)"}"><b>${r[0]==="err"?"خطأ":"تنبيه"}</b> — ${esc(r[1])}</div>`).join(""):'<div class="pr" style="--c:var(--teal)"><b>تمام ✓</b> مفيش أي مشاكل في السكربت أو الواجهة أو الكود.</div>'}
-/* ---- builders ---- */
-function drawPal(){$("#pal").innerHTML=Object.entries(BD).map(([k,d])=>`<button class="add" data-add="${k}" style="border-color:${d.c}">＋ ${d.l}</button>`).join("")}
-function mv(a,i,d){const j=i+d;if(j<0||j>=a.length)return false;[a[i],a[j]]=[a[j],a[i]];return true}
-function drawBlocks(){let dp=0;$("#blocks").innerHTML=blocks.length?blocks.map((b,i)=>{const d=BD[b.type];if(b.type==="end")dp=Math.max(0,dp-1);const pad=dp*18;if(b.type==="repeat")dp++;
- const f=d.f.map(([k,t])=>`<label>${k}${t==="sel"?`<select class="ltr" data-i="${i}" data-k="${k}">${SP.map(p=>`<option value="${p}"${p===b.v[k]?" selected":""}>${PN[p]}</option>`).join("")}</select>`:`<input class="ltr" data-i="${i}" data-k="${k}" type="${t}" value="${esc(b.v[k]??"")}">`}</label>`).join("");
- return `<div class="card" style="margin-inline-start:${pad}px;border-inline-start:5px solid ${d.c}"><div class="ct"><span class="tag" style="--c:${d.c}">${d.l}</span><span style="flex:1"></span><span class="acts"><button data-bu="${i}">↑</button><button data-bd="${i}">↓</button><button data-brm="${i}">✕</button></span></div>${f?`<div class="row">${f}</div>`:""}</div>`}).join(""):'<div class="empty">لسه مفيش بلوكات. اضغط على أي بلوك فوق عشان تبدأ.</div>'}
-const PN={WalkSpeed:"السرعة",JumpPower:"القفز",Gravity:"الجاذبية",FOV:"زاوية الرؤية",TimeOfDay:"الوقت في اللعبة",Teleport:"انتقال لمكان",Print:"طباعة نص"};
-const ACT={Heal:"علاج كامل",Kill:"إعادة الظهور (قتل الشخصية)",Sit:"قعود / وقوف",Explode:"انفجار عند اللاعب",Notify:"إشعار على الشاشة",Launch:"قذف لفوق",Freeze:"تجميد / فك تجميد",Spin:"لفّ الشخصية",Sound:"تشغيل صوت"};
-const NOVAL=["Heal","Kill","Sit","Explode","Freeze"],VLB={Teleport:"الإحداثيات x,y,z",Print:"النص",Notify:"نص الإشعار",Launch:"القوة",Spin:"الدرجات",Sound:"رقم الصوت (ID)"},DVL={Teleport:"0,10,0",Print:"Hello",Notify:"تم!",Launch:"80",Spin:"90",Sound:""};
-const VL=p=>VLB[p]||"القيمة",DV=p=>p in DVL?DVL[p]:PR[p]?String(Math.round(PR[p][1]/2)):"";
-Object.assign(PN,{Brightness:"سطوع الإضاءة",FogEnd:"مسافة الضباب",HipHeight:"ارتفاع الجسم",Health:"الصحة",CameraZoom:"أقصى زوم للكاميرا",Transparency:"شفافية الشخصية %"},ACT);
-const mkS=(label,prop)=>({type:"slider",label,prop,min:PR[prop][0],max:PR[prop][1],val:PR[prop][2]}),mkB=(label,prop,val)=>({type:"button",label,prop,val:val||""});
-const PACKS={player:{n:"⚔️ أدوات اللاعب",els:[mkS("السرعة","WalkSpeed"),mkS("القفز","JumpPower"),mkS("الجاذبية","Gravity"),mkB("علاج كامل","Heal"),mkB("قذف لفوق","Launch","80"),mkB("قعود / وقوف","Sit")]},
- light:{n:"🌅 الإضاءة والجو",els:[mkS("السطوع","Brightness"),mkS("الوقت","TimeOfDay"),mkS("الضباب","FogEnd"),{type:"toggle",label:"وضع الليل",prop:"TimeOfDay",val:0}]},
- cam:{n:"🎥 الكاميرا والشكل",els:[mkS("زاوية الرؤية","FOV"),mkS("زوم الكاميرا","CameraZoom"),mkS("شفافية الشخصية","Transparency"),{type:"stepper",label:"ارتفاع الجسم",prop:"HipHeight",min:0,max:20,step:1,val:2}]},
- fun:{n:"💥 مؤثرات",els:[mkB("انفجار","Explode"),mkB("لفّ 90°","Spin","90"),mkB("تجميد","Freeze"),mkB("إشعار","Notify","أهلًا بيك!"),mkB("إعادة الظهور","Kill")]}};
-function drawPacks(){$("#packs").innerHTML=Object.entries(PACKS).map(([k,t])=>`<button class="add" data-pk="${k}">${t.n}</button>`).join("")}
-function actBody(P,val){const n=num(val),H=t=>`local humanoid = getCharacter():FindFirstChildOfClass("Humanoid")\nif humanoid then\n  ${t}\nend`,R=t=>`local root = getCharacter():FindFirstChild("HumanoidRootPart")\nif root then\n  ${t.replace(/\n/g,"\n  ")}\nend`;
- if(P==="Heal")return H("humanoid.Health = humanoid.MaxHealth");
- if(P==="Kill")return H("humanoid.Health = 0");
- if(P==="Sit")return H("humanoid.Sit = not humanoid.Sit");
- if(P==="Explode")return R(`local boom = Instance.new("Explosion")\nboom.Position = root.Position\nboom.BlastPressure = 0\nboom.BlastRadius = 8\nboom.Parent = workspace`);
- if(P==="Launch")return R(`root.AssemblyLinearVelocity = Vector3.new(0, ${n||80}, 0)`);
- if(P==="Freeze")return R("root.Anchored = not root.Anchored");
- if(P==="Spin")return R(`root.CFrame = root.CFrame * CFrame.Angles(0, math.rad(${n||90}), 0)`);
- if(P==="Notify")return `game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Wyvern", Text = "${q(val)}", Duration = 3})`;
- if(P==="Sound")return `local sound = Instance.new("Sound")\nsound.SoundId = "rbxassetid://${String(val).replace(/\D/g,"")}"\nsound.Parent = workspace\nsound:Play()\ngame:GetService("Debris"):AddItem(sound, 10)`;
- return elBodyOld({type:"button",prop:P,val})}
-function elBody(e){const m=e.more||[];
- if(e.type==="button")return [actBody(e.prop,e.val)].concat(m.map(x=>actBody(x.prop,x.val))).join("\n");
- let b=elBodyOld(e);
- if(e.type==="slider"||e.type==="stepper")b+=m.map(x=>`\nsetProp("${x.prop}", value)`).join("");
- if(e.type==="toggle")b+=m.map(x=>`\nsetProp("${x.prop}", on and ${num(x.val)} or ${PR[x.prop]?PR[x.prop][2]:0})`).join("");
- return b}
-function actSim(P,val){const n=num(val);
- if(P==="Print")say(val);
- else if(P==="Teleport"){const p=String(val).split(",").map(num);sim.pos=[p[0]||0,p[1]||0,p[2]||0];say(`Teleported to (${sim.pos.join(", ")})`)}
- else if(P==="Heal")setP("Health",100);
- else if(P==="Kill")setP("Health",0);
- else if(P==="Sit"){sim.sit=!sim.sit;say(sim.sit?"Sit = true":"Sit = false")}
- else if(P==="Explode")say(`💥 Explosion at (${sim.pos.join(", ")})`);
- else if(P==="Launch"){sim.pos=[sim.pos[0],sim.pos[1]+(n||80),sim.pos[2]];say(`Launched up ${n||80}`)}
- else if(P==="Freeze"){sim.frozen=!sim.frozen;say(sim.frozen?"Anchored = true":"Anchored = false")}
- else if(P==="Spin")say(`Rotated ${n||90}°`);
- else if(P==="Notify")say(`🔔 ${val}`);
- else if(P==="Sound")say(`🔊 rbxassetid://${String(val).replace(/\D/g,"")}`);
- else setP(P,n)}
-function moreBox(e,i){if(!["button","slider","toggle","stepper"].includes(e.type))return"";const m=e.more||[],isB=e.type==="button",ex=isB?["Teleport","Print"].concat(Object.keys(ACT)):[];
- return `<div class="cb"><b>➕ إجراءات إضافية</b><p class="hint">${isB?"بتشتغل بالترتيب بعد الإجراء الأساسي.":"بتتغيّر مع نفس العنصر."}</p>`+m.map((x,j)=>`<div class="row"><select class="ltr" data-m="${i}:${j}" data-mk="prop">${propOpts(x.prop,ex)}</select>${(isB&&NOVAL.includes(x.prop))||(!isB&&e.type!=="toggle")?"":`<input class="ltr" data-m="${i}:${j}" data-mk="val" value="${esc(x.val??"")}" placeholder="${isB?VL(x.prop):"القيمة وهو شغّال"}">`}<button class="btn" data-mrm="${i}:${j}">✕</button></div>`).join("")+`<button class="add" data-madd="${i}">＋ إجراء إضافي</button></div>`}
-let pvTab=0,curTab=0;
-const tabOf=e=>Math.min(e.tab||0,hub.tabs.length-1);
-function drawTabs(){if(curTab>=hub.tabs.length)curTab=0;const T=hub.tabs;$("#tabsbar").innerHTML=`<h2>📑 التابات</h2><p class="hint">كل تاب ليه عناصره. اختار تاب وضيف فيه، وبعدها ضيف تاب جديد.</p><div class="chips" style="margin:0 0 8px">${T.map((t,i)=>`<button class="add${i===curTab?" on":""}" data-tab="${i}">${esc(t.name)} <small>(${hub.elements.filter(e=>tabOf(e)===i).length})</small></button>`).join("")}<button class="add" data-tabadd="1">＋ تاب جديد</button></div><div class="row"><label>اسم التاب<input id="tabname" value="${esc(T[curTab].name)}"></label>${T.length>1?`<button class="btn" data-tabrm="1">🗑 احذف التاب وعناصره</button>`:""}</div>`}
-function tabBar(){if(hub.tabs.length<2)return"";if(pvTab>=hub.tabs.length)pvTab=0;return `<div class="ptabs">`+hub.tabs.map((t,i)=>`<button data-ptab="${i}" style="${i===pvTab?`background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}`:""}">${esc(t.name)}</button>`).join("")+`</div>`}
-function propOpts(sel,extra){return Object.keys(PR).concat(extra||[]).map(p=>`<option value="${p}"${p===sel?" selected":""}>${PN[p]}</option>`).join("")}
-function drawEls(){$("#els").innerHTML=hub.elements.some(e=>tabOf(e)===curTab)?hub.elements.map((e,i)=>{if(tabOf(e)!==curTab)return"";const t=ET[e.type];let f="";
- if(e.type==="button")f=`<label>الإجراء<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop,["Teleport","Print"].concat(Object.keys(ACT)))}</select></label>${NOVAL.includes(e.prop)?"":`<label>${VL(e.prop)}<input class="ltr" data-e="${i}" data-k="val" value="${esc(e.val)}"></label>`}`;
- if(e.type==="toggle")f=`<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label><label>قيمتها وهو شغّال<input class="ltr" type="number" data-e="${i}" data-k="val" value="${esc(e.val)}"></label>`;
- if(e.type==="slider")f=`<label>الخاصية<select class="ltr" data-e="${i}" data-k="prop" data-re="1">${propOpts(e.prop)}</select></label><label>أقل<input class="ltr" type="number" data-e="${i}" data-k="min" value="${e.min}"></label><label>أعلى<input class="ltr" type="number" data-e="${i}" data-k="max" value="${e.max}"></label><label>الافتراضي<input class="ltr" type="number" data-e="${i}" data-k="val" value="${e.val}"></label>`;
- f+=newF(e,i);return `<div class="card"><div class="ct"><span class="tag" style="--c:${t[1]}">${t[0]}</span><input data-e="${i}" data-k="label" value="${esc(e.label)}"><span class="acts"><button data-eu="${i}">↑</button><button data-ed="${i}">↓</button><button data-erm="${i}">✕</button></span></div>${f?`<div class="row">${f}</div>`:""}${moreBox(e,i)}${codeBox(e,i)}</div>`}).join(""):'<div class="empty">اللوحة فاضية. ضيف زر أو سلايدر من فوق.</div>'}
-function drawSet(){$("#ht").value=hub.title;$("#hc").value=hub.accent;$("#hb").value=hub.panel;$("#hr").value=hub.radius;$("#rv").textContent=hub.radius;$("#hp2").value=hub.pos;$$("[id^=k-]").forEach(i=>{const k=i.id.slice(2);if(i.type==="checkbox")i.checked=!!hub[k];else i.value=hub[k];const v=$("#v-"+k);if(v)v.textContent=hub[k]})}
-function drawPrev(){const p=$("#hp"),o=$("#ob"),n=parseInt(hub.panel.slice(1),16);p.style.background=`rgba(${n>>16},${n>>8&255},${n&255},${1-hub.alpha/100})`;p.style.borderRadius=hub.radius+"px";p.style.width=hub.width+"px";p.style.color=hub.text;p.style.border=hub.stroke?`2px solid ${hub.accent}`:"0";p.style.fontFamily=FF[hub.font]||"inherit";p.style.transition=hub.anim?"":"none";p.classList.toggle("off",!pv.open);o.hidden=!hub.showBtn;o.textContent=hub.btnText;o.style.width=o.style.height=hub.btnSize+"px";o.style.background=hub.accent;o.style.color=lum(hub.accent)>150?"#000":"#fff";o.style.top=o.style.bottom=o.style.left=o.style.right="auto";o.style[hub.btnPos[0]==="t"?"top":"bottom"]="12px";o.style[hub.btnPos[1]==="l"?"left":"right"]="12px";
- p.innerHTML=`<h3>${esc(hub.title)}</h3>`+tabBar()+hub.elements.map((e,i)=>tabOf(e)!==pvTab?"":NEWT.includes(e.type)?pvEl(e,i):e.type==="button"?`<button class="pb" data-pb="${i}" style="background:${hub.accent};color:${lum(hub.accent)>150?"#000":"#fff"}">${esc(e.label)}</button>`:e.type==="toggle"?`<button class="pb" data-tg="${i}" style="background:#3c4642">${esc(e.label)}: OFF</button>`:e.type==="slider"?`<div class="ps">${esc(e.label)}: <b>${e.val}</b><input type="range" data-sl="${i}" min="${e.min}" max="${e.max}" value="${e.val}" style="accent-color:${hub.accent}"></div>`:`<div class="pl">${esc(e.label)}</div>`).join("")}
-/* ---- simulator ---- */
-function fresh(){sim={t:0,pr:Object.fromEntries(Object.entries(PR).map(([k,v])=>[k,v[2]])),pos:[0,3,0],stats:{},log:[]}}
-function say(m,c){sim.log.push(`<div style="color:${c||"inherit"}">[${sim.t.toFixed(1)}s] ${esc(m)}</div>`)}
-function setP(p,v,quiet){sim.pr[p]=v;if(!quiet)say(`${p} = ${v}`)}
-function drawSim(){const h=Object.entries(sim.pr).map(([k,v])=>`<span>${k} ${v}</span>`).join("")+`<span>Pos ${sim.pos.join(", ")}</span>`+Object.entries(sim.stats).map(([k,v])=>`<span>${esc(k)}: ${v}</span>`).join("");
- $$(".st").forEach(e=>e.innerHTML=h);$("#log").innerHTML=sim.log.join("")||'<span style="color:var(--mute)">اضغط "شغّل السكربت" أو جرّب أزرار اللوحة.</span>';$("#log").scrollTop=1e6}
-const PRE=`
-local js=require("js")
-local B=js.global.__B
-local function any()
-  return setmetatable({},{__index=function() return any() end,__call=function() return any() end})
-end
-math.clamp=function(v,a,b) return math.min(b,math.max(a,v)) end
-math.round=function(v) return math.floor(v+0.5) end
-typeof=type
-function __iter(t)
-  if type(t)=="function" then return t end
-  if #t>0 then return ipairs(t) end
-  return pairs(t)
-end
-local function fmt(...)
-  local t={}
-  for i=1,select("#",...) do t[#t+1]=tostring((select(i,...))) end
-  return table.concat(t," ")
-end
-print=function(...) B:log(fmt(...)) end
-warn=function(...) B:warn(fmt(...)) end
-local function bridge(map)
-  return {
-    __index=function(t,k) if map[k] then return B:get(map[k]) end end,
-    __newindex=function(t,k,v) if map[k] then B:set(map[k],v) else rawset(t,k,v) end end
-  }
-end
-local cfmt={__mul=function(a) return a end}
-CFrame=setmetatable({new=function(x,y,z) return setmetatable({X=x or 0,Y=y or 0,Z=z or 0},cfmt) end},{__index=function() return any() end})
-local humanoid=setmetatable({Name="Humanoid",UseJumpPower=true,MaxHealth=100,Sit=false},bridge({WalkSpeed="WalkSpeed",JumpPower="JumpPower",Health="Health",HipHeight="HipHeight"}))
-local root=setmetatable({Name="HumanoidRootPart"},{
-  __index=function(t,k) if k=="CFrame" then return CFrame.new(B:get("x"),B:get("y"),B:get("z")) end end,
-  __newindex=function(t,k,v) if k=="CFrame" then B:tp(v.X or 0,v.Y or 0,v.Z or 0) else rawset(t,k,v) end end
-})
-local char={Name="Character",Humanoid=humanoid,HumanoidRootPart=root}
-function char:FindFirstChildOfClass(c) if c=="Humanoid" then return humanoid end end
-function char:FindFirstChild(n) return rawget(self,n) end
-function char:WaitForChild(n) return rawget(self,n) end
-local function newInst(class)
-  local o={ClassName=class,Name=class,_kids={}}
-  return setmetatable(o,{
-    __index=function(t,k)
-      if k=="Value" then return rawget(t,"_v") or 0 end
-      if k=="FindFirstChild" or k=="WaitForChild" then return function(self,n) return self._kids[n] end end
-      if k=="Destroy" then return function() end end
-      return any()
-    end,
-    __newindex=function(t,k,v)
-      if k=="Value" then
-        rawset(t,"_v",v)
-        local p=rawget(t,"Parent")
-        if p and rawget(p,"Name")=="leaderstats" then B:stat(t.Name,v) end
-        return
-      end
-      rawset(t,k,v)
-      if k=="Parent" and type(v)=="table" and rawget(v,"_kids") then v._kids[t.Name]=t end
-    end
-  })
-end
-local player=newInst("Player")
-player.Name="Player1"
-player.Character=char
-player.CharacterAdded={Wait=function() return char end,Connect=function() return any() end}
-local got,handlers=false,{}
-Players={LocalPlayer=player,
-  GetPlayers=function() got=true return {player} end,
-  PlayerAdded={Connect=function(self,f) handlers[#handlers+1]=f return any() end}}
-local lighting=setmetatable({},bridge({ClockTime="TimeOfDay"}))
-workspace=setmetatable({CurrentCamera=setmetatable({},bridge({FieldOfView="FOV"}))},bridge({Gravity="Gravity"}))
-local services={Players=Players,Lighting=lighting,Workspace=workspace}
-game={GetService=function(self,n) return services[n] or any() end,Workspace=workspace}
-task={wait=function(n) B:wait(n or 0) return n or 0 end,spawn=function(f,...) f(...) end,defer=function(f,...) f(...) end,delay=function(t,f,...) B:wait(t) f(...) end}
-wait=function(n) B:wait(n or 0) return n or 0 end
-Instance={new=function(c,p) local o=newInst(c) if p then o.Parent=p end return o end}
-Enum=any() UDim2=any() UDim=any() Color3=any() Vector3=any() TweenInfo=any()
-function getCharacter() return char end
-function setProp(n,v) B:set(n,v) end
-_G.player=player
-function __fire() if not got then for _,f in ipairs(handlers) do f(player) end end end
-`;
-window.__B={log:m=>say(String(m)),warn:m=>say("\u26a0 "+m,"var(--gold)"),wait:n=>{sim.t+=Math.max(0,+n||0);if(sim.t>600)throw new Error("\u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0639\u062f\u0651\u0649 10 \u062f\u0642\u0627\u064a\u0642 \u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629")},get:k=>k==="x"?sim.pos[0]:k==="y"?sim.pos[1]:k==="z"?sim.pos[2]:sim.pr[k],set:(k,v)=>setP(k,+v),tp:(x,y,z)=>{sim.pos=[+x,+y,+z];say(`Teleported to (${sim.pos.join(", ")})`)},stat:(n,v)=>{sim.stats[n]=+v;say(`${n} = ${v}`)}};
-let luaOK=false;
-function luau(c){return c.replace(/^([ \t]*)([\w.\[\]"']+?)[ \t]*(\+|-|\*|\/|\.\.)=[ \t]*(.+)$/gm,"$1$2 = $2 $3 ($4)").replace(/\bfor\s+([\w\s,]+?)\s+in\s+(.+?)\s+do\b/g,(m,v,x)=>/^\s*(i?pairs|next)\b/.test(x)?m:`for ${v} in __iter(${x}) do`)}
-function runLua(code,fire,reset){
- if(typeof fengari==="undefined"){say("\u0645\u0634\u063a\u0651\u0644 Lua \u0645\u0634 \u0645\u062a\u062d\u0645\u0651\u0644 (\u0645\u062d\u062a\u0627\u062c \u0625\u0646\u062a\u0631\u0646\u062a).","var(--err)");return false}
- try{if(reset||!luaOK){fengari.load(PRE,"=prelude")();luaOK=true}
-  fengari.load("if debug and debug.sethook then pcall(debug.sethook,function() error('timeout') end,'',3000000) end","=h")();
-  try{fengari.load(luau(code),"=code")();if(fire)fengari.load("__fire()","=fire")()}
-  finally{fengari.load("if debug and debug.sethook then pcall(debug.sethook) end","=h")()}
-  return true}catch(e){const m=String(e&&e.message||e);say(/timeout/.test(m)?"\u0627\u0644\u0643\u0648\u062f \u0634\u063a\u0651\u0627\u0644 \u0644\u0648\u0642\u062a \u0637\u0648\u064a\u0644 \u062c\u062f\u064b\u0627 (\u062d\u0644\u0642\u0629 \u0644\u0627 \u0646\u0647\u0627\u0626\u064a\u0629\u061f)":"\u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u0643\u0648\u062f: "+m,"var(--err)");return false}}
-function runBody(e,a,v){runLua((a?`local ${a} = ${typeof v==="number"||typeof v==="boolean"?String(v):JSON.stringify(String(v))}\n`:"")+e.code)}
-function runScript(){fresh();say("Player joined","var(--teal)");if(typeof fengari!=="undefined"){runLua(eff("script"),true,true);say("Script finished","var(--teal)");drawSim();return}const lp=[];let i=0,g=0;
- while(i<blocks.length&&g++<5000){const b=blocks[i],v=b.v;
-  if(b.type==="print")say(v.text);
-  else if(b.type==="wait")sim.t+=Math.max(0,num(v.secs));
-  else if(b.type==="setprop")setP(v.prop,num(v.value));
-  else if(b.type==="tp"){sim.pos=[num(v.x),num(v.y),num(v.z)];say(`Teleported to (${sim.pos.join(", ")})`)}
-  else if(b.type==="stat"){sim.stats[v.name]=(sim.stats[v.name]||0)+num(v.amount);say(`${v.name} += ${num(v.amount)} → ${sim.stats[v.name]}`)}
-  else if(b.type==="repeat"){const t=Math.floor(num(v.times));if(t<=0){let d=1,j=i+1;while(j<blocks.length&&d){if(blocks[j].type==="repeat")d++;if(blocks[j].type==="end")d--;j++}i=j;continue}lp.push({s:i,n:t})}
-  else if(b.type==="end"&&lp.length){const l=lp[lp.length-1];if(--l.n>0){i=l.s+1;continue}lp.pop()}
-  i++}
- if(g>=5000)say("تم الإيقاف: خطوات كتير جدًا، راجع التكرار.","var(--err)");say("Script finished","var(--teal)");drawSim()}
-/* ---- code editor ---- */
-function syncEd(){const t=eff(cur);$("#ta").value=t;paintEd();$$("[data-f]").forEach(b=>b.style.background=b.dataset.f===cur?"var(--p2)":"")}
-function paintEd(){const t=$("#ta").value;$("#pre").innerHTML=hl(t)+"\n";const e=ov[cur]!=null,s=$("#cs");s.textContent=e?"":"مولّد تلقائيًا";s.style.display=e?"none":"";s.className="pill"}
-function drawStats(){const m=hub.elements.reduce((a,e)=>a+(e.more||[]).length+(["button","slider","toggle","stepper"].includes(e.type)?1:0),0);$("#stats").innerHTML=`<span>التابات: <b>${hub.tabs.length}</b></span><span>العناصر: <b>${hub.elements.length}</b></span><span>الإجراءات: <b>${m}</b></span><span>بلوكات السكربت: <b>${blocks.length}</b></span><span>المشاكل: <b>${checks().length}</b></span>`}
-function refresh(){save();syncEd();drawChecks();drawStats()}
-/* ---- events ---- */
-document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;const d=t.dataset;
- if(d.t){$$("nav button").forEach(x=>x.classList.toggle("on",x===t));$$(".tab").forEach(x=>x.classList.toggle("on",x.id==="t-"+d.t));scrollTo(0,0);if(d.t==="code")syncEd();return}
- if(d.add){const v={};BD[d.add].f.forEach(([k,,x])=>v[k]=x);blocks.push({type:d.add,v});drawBlocks();refresh()}
- if(d.brm!==undefined){blocks.splice(+d.brm,1);drawBlocks();refresh()}
- if(d.bu!==undefined&&mv(blocks,+d.bu,-1)){drawBlocks();refresh()}
- if(d.bd!==undefined&&mv(blocks,+d.bd,1)){drawBlocks();refresh()}
- if(d.ae){hub.elements.push({type:d.ae,tab:curTab,...clone(ED[d.ae])});drawTabs();drawEls();drawPrev();refresh()}
- if(d.erm!==undefined){hub.elements.splice(+d.erm,1);drawTabs();drawEls();drawPrev();refresh()}
- if(d.eu!==undefined&&mv(hub.elements,+d.eu,-1)){drawEls();drawPrev();refresh()}
- if(d.ed!==undefined&&mv(hub.elements,+d.ed,1)){drawEls();drawPrev();refresh()}
- if(d.pb!==undefined){const b=hub.elements[+d.pb];say(`زر: ${b.label}`,"var(--gold)");if(b.code)runBody(b);else if(b.prop==="Print")say(b.val);else if(b.prop==="Teleport"){const p=String(b.val).split(",").map(num);sim.pos=[p[0]||0,p[1]||0,p[2]||0];say(`Teleported to (${sim.pos.join(", ")})`)}else actSim(b.prop,b.val);if(!b.code)(b.more||[]).forEach(m=>actSim(m.prop,m.val));drawSim()}
- if(d.tg!==undefined){const b=hub.elements[+d.tg],on=t.dataset.on!=="1";t.dataset.on=on?"1":"";t.textContent=`${b.label}: ${on?"ON":"OFF"}`;t.style.background=on?hub.accent:"#3c4642";if(b.code)runBody(b,"on",on);else{setP(b.prop,on?num(b.val):PR[b.prop][2]);(b.more||[]).forEach(m=>setP(m.prop,on?num(m.val):PR[m.prop]?PR[m.prop][2]:0))}drawSim()}
- if(t.id==="ob"){if(t._moved){t._moved=0;return}pv.open=!pv.open;drawPrev();return}
- if(d.dd!==undefined){const i=+d.dd,o=opts(hub.elements[i]);pvv[i]=((pvv[i]||0)+1)%o.length;say(`${hub.elements[i].label}: ${o[pvv[i]]}`,"var(--gold)");if(hub.elements[i].code)runBody(hub.elements[i],"choice",o[pvv[i]]);drawPrev();drawSim();return}
- if(d.sm!==undefined||d.sp!==undefined){const i=+(d.sm??d.sp),x=hub.elements[i],k="s"+i,v=Math.min(num(x.max),Math.max(num(x.min),(pvv[k]??num(x.val))+(d.sp!==undefined?1:-1)*(num(x.step)||1)));pvv[k]=v;if(x.code)runBody(x,"value",v);else{if(PR[x.prop])setP(x.prop,v);(x.more||[]).forEach(m=>setP(m.prop,v))}say(`${x.label}: ${v}`,"var(--gold)");drawPrev();drawSim();return}
- if(d.ecr!==undefined){delete hub.elements[+d.ecr].code;drawEls();refresh();return}
- if(d.tab!==undefined){curTab=+d.tab;pvTab=curTab;drawTabs();drawEls();drawPrev();return}
- if(d.tabadd){hub.tabs.push({name:"تاب "+(hub.tabs.length+1)});curTab=pvTab=hub.tabs.length-1;drawTabs();drawEls();drawPrev();refresh();return}
- if(d.tabrm){const i=curTab;hub.elements=hub.elements.filter(x=>tabOf(x)!==i);hub.elements.forEach(x=>{if((x.tab||0)>i)x.tab=(x.tab||0)-1});hub.tabs.splice(i,1);curTab=pvTab=Math.max(0,i-1);drawTabs();drawEls();drawPrev();refresh();return}
- if(d.ptab!==undefined){pvTab=+d.ptab;drawPrev();return}
- if(d.madd!==undefined){const x=hub.elements[+d.madd],b=x.type==="button";(x.more=x.more||[]).push({prop:b?"Notify":"Brightness",val:b?"تم!":"5"});drawEls();refresh();return}
- if(d.mrm!==undefined){const[a,b]=d.mrm.split(":");hub.elements[+a].more.splice(+b,1);drawEls();refresh();return}
- if(d.pk){hub.elements.push(...clone(PACKS[d.pk].els).map(x=>({...x,tab:curTab})));drawTabs();drawEls();drawPrev();refresh();return}
- if(d.th){const {n,...x}=TH[d.th];Object.assign(hub,x,{theme:d.th});drawSet();drawThemes();drawPrev();refresh();return}
- if(d.f){cur=d.f;syncEd()}
- if(t.id==="regen"){ov[cur]=null;refresh()}
- if(t.id==="run")runScript();if(t.id==="clr"){fresh();drawSim()}
- if(t.id==="copy"){const x=eff(cur),ok=()=>{t.textContent="تم النسخ ✓";setTimeout(()=>t.textContent="نسخ الكود",1400)},fb=()=>{const a=document.createElement("textarea");a.value=x;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(_){}a.remove()};try{navigator.clipboard.writeText(x).then(ok,fb)}catch(_){fb()}}});
-document.addEventListener("input",e=>{const t=e.target,d=t.dataset;
- if(d.i!==undefined){blocks[+d.i].v[d.k]=t.value;refresh()}
- if(d.e!==undefined&&!d.re){hub.elements[+d.e][d.k]=t.value;drawPrev();refresh()}
- if(d.sl!==undefined){const b=hub.elements[+d.sl];t.previousElementSibling.textContent=t.value;if(!b.code){setP(b.prop,num(t.value),true);(b.more||[]).forEach(m=>setP(m.prop,num(t.value),true))}drawSim()}
- if(d.m!==undefined&&d.mk==="val"){const[a,b]=d.m.split(":");hub.elements[+a].more[+b].val=t.value;refresh()}
- if(d.ec!==undefined){hub.elements[+d.ec].code=t.value;refresh()}
- if(t.id==="tabname"){hub.tabs[curTab].name=t.value;drawPrev();refresh()}
- if(t.id==="ht"){hub.title=t.value;drawPrev();refresh()}
- if(t.id==="hc"||t.id==="hb"){hub[t.id==="hc"?"accent":"panel"]=t.value;drawPrev();refresh()}
- if(t.id==="hr"){hub.radius=+t.value;$("#rv").textContent=t.value;drawPrev();refresh()}
- if(t.id&&t.id.startsWith("k-")){const k=t.id.slice(2);hub[k]=t.type==="checkbox"?t.checked:t.type==="range"?+t.value:t.value;const v=$("#v-"+k);if(v)v.textContent=t.value;if(k==="startOpen")pv.open=hub.startOpen;drawPrev();refresh()}
- if(t.id==="ta"){ov[cur]=t.value;paintEd();save();drawChecks()}});
-document.addEventListener("change",e=>{const t=e.target,d=t.dataset;
- if(d.i!==undefined){drawBlocks()}
- if(d.re){const el=hub.elements[+d.e],p=t.value;el.prop=p;
-  if(el.type==="slider"||el.type==="stepper"){[el.min,el.max,el.val]=PR[p]}else if(el.type==="toggle")el.val=PR[p][0];else el.val=DV(p);drawEls();drawPrev();refresh()}
- if(d.m!==undefined&&d.mk==="prop"){const[a,b]=d.m.split(":"),el=hub.elements[+a],x=el.more[+b];x.prop=t.value;x.val=el.type==="button"?DV(t.value):"5";drawEls();refresh()}
- if(t.id==="tabname")drawTabs();
- if(t.id==="hp2"){hub.pos=t.value;refresh()}
- if(d.sl!==undefined){const b=hub.elements[+d.sl];say(`${b.label}: ${t.value}`,"var(--gold)");if(b.code)runBody(b,"value",num(t.value));drawSim()}});
-$("#ta").addEventListener("scroll",e=>{$("#pre").scrollTop=e.target.scrollTop;$("#pre").scrollLeft=e.target.scrollLeft});
-$("#ta").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart;t.setRangeText("  ",s,t.selectionEnd,"end");t.dispatchEvent(new Event("input"))}});
-const AH="717c28c9bb586c82578a84394b29435fd2ee7e44f7d46458c5971317c97a0bf0",AC="1166955294057941",MK='<script type="text/plain" id="wf-src"><'+'/script>',A=id=>document.getElementById(id);
-function cyrb(s){let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return String(4294967296*(2097151&b)+(a>>>0))}
-async function okPass(p){try{if(window.crypto&&crypto.subtle){const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(p));return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("")===AH}}catch(e){}return cyrb(p)===AC}
-function srcNow(){const el=A("wf-src");if(el&&el.textContent.trim())return el.textContent.split("<"+"@@/script").join("</"+"script");return "<!DOCTYPE html>\n"+document.documentElement.outerHTML}
-function embed(src){if(!src.includes(MK))return src;return src.replace(MK,()=>'<script type="text/plain" id="wf-src">'+src.split("</"+"script").join("<"+"@@/script")+"<"+"/script>")}
-function admView(ed){A("adm-login").hidden=ed;A("adm-edit").hidden=!ed;if(ed){A("adm-ta").value=srcNow();let m=false;try{m=!!localStorage.getItem("wf_admin_html")}catch(e){}A("adm-st").textContent=m?"فيه تعديلات محفوظة مطبّقة حاليًا.":"دي النسخة الأصلية من الموقع."}else{A("adm-pw").value="";A("adm-err").textContent="";setTimeout(()=>A("adm-pw").focus(),60)}}
-function admOpen(){A("adm").hidden=false;let ok=false;try{ok=sessionStorage.getItem("wf_admin")==="1"}catch(e){}admView(ok)}
-async function admLogin(){if(await okPass(A("adm-pw").value)){try{sessionStorage.setItem("wf_admin","1")}catch(e){}admView(true)}else A("adm-err").textContent="الباسورد غلط."}
-A("admbtn").onclick=admOpen;A("adm-go").onclick=admLogin;A("adm-pw").onkeydown=e=>{if(e.key==="Enter")admLogin()};
-A("adm-x1").onclick=A("adm-x2").onclick=()=>{A("adm").hidden=true};
-A("adm-ap").onclick=()=>{try{localStorage.setItem("wf_admin_html",embed(A("adm-ta").value));location.reload()}catch(e){A("adm-st").textContent="مقدرتش أحفظ: "+e.message}};
-A("adm-rs").onclick=()=>{try{localStorage.removeItem("wf_admin_html")}catch(e){}location.reload()};
-A("adm-cp").onclick=()=>{const t=A("adm-ta");t.select();try{document.execCommand("copy");A("adm-st").textContent="تم النسخ ✓"}catch(e){}};
-A("adm-ta").onkeydown=e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target;t.setRangeText("  ",t.selectionStart,t.selectionEnd,"end")}};
-load();pv.open=hub.startOpen;fresh();drawPal();drawBlocks();drawSet();drawTabs();drawEls();drawPrev();drawThemes();drawPacks();drawSim();refresh();
-function dragify(el,h,flag){let s=null;h.addEventListener("pointerdown",e=>{if(!hub[flag]||(e.target!==h&&e.target.closest("input,button")))return;s={x:e.clientX,y:e.clientY,tx:el._x||0,ty:el._y||0};h.setPointerCapture(e.pointerId)});h.addEventListener("pointermove",e=>{if(!s)return;const dx=e.clientX-s.x,dy=e.clientY-s.y;if(Math.abs(dx)+Math.abs(dy)<4&&!s.m)return;s.m=1;el._x=s.tx+dx;el._y=s.ty+dy;el.style.translate=el._x+"px "+el._y+"px"});h.addEventListener("pointerup",()=>{if(s&&s.m)el._moved=1;s=null})}
-dragify($("#hp"),$("#hp"),"panelDrag");document.addEventListener("keydown",e=>{const t=e.target;if(e.key==="Enter"&&t.dataset&&t.dataset.pt!==undefined){say(`${hub.elements[+t.dataset.pt].label}: ${t.value}`,"var(--gold)");{const x=hub.elements[+t.dataset.pt];if(x.code)runBody(x,"text",t.value)}drawSim();return}if(/INPUT|TEXTAREA|SELECT/.test(t.tagName))return;hub.elements.forEach(x=>{if(x.type==="keybind"&&String(x.key||"F").toLowerCase()===e.key.toLowerCase()){say(`${x.label} [${x.key}]`,"var(--gold)");if(x.code)runBody(x);drawSim()}})});dragify($("#ob"),$("#ob"),"btnDrag");
-<@@/script>
-<script type="text/plain" id="wf-src"><@@/script>
+    let player = { x: 400, y: 500, tilt: 0 };
+    let lasers = [];
+    let chickens = [];
+    let eggs = [];
+    let pickups = [];
+    let particles = [];
+    let shockwaves = [];
+    let stars = [];
+
+    const keys = { left: false, right: false };
+
+    // صوت توليدي بسيط بـ Web Audio API
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    }
+
+    function playSfx(type) {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === "laser") {
+        osc.type = "square";
+        osc.frequency.setValueAtTime(1100, now);
+        osc.frequency.exponentialRampToValueAtTime(220, now + 0.07);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+        osc.start(now); osc.stop(now + 0.07);
+      } else if (type === "explosion") {
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(28, now + 0.25);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now); osc.stop(now + 0.25);
+      } else if (type === "coin") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(1046, now);
+        osc.frequency.setValueAtTime(1568, now + 0.06);
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.start(now); osc.stop(now + 0.14);
+      } else if (type === "powerup" || type === "buy") {
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(1320, now + 0.18);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.start(now); osc.stop(now + 0.18);
+      } else if (type === "nova") {
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(750, now);
+        osc.frequency.exponentialRampToValueAtTime(45, now + 0.42);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+        osc.start(now); osc.stop(now + 0.42);
+      } else if (type === "hit") {
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(210, now);
+        osc.frequency.exponentialRampToValueAtTime(60, now + 0.18);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.start(now); osc.stop(now + 0.18);
+      } else if (type === "victory") {
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.12);
+        osc.frequency.setValueAtTime(783.99, now + 0.24);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.start(now); osc.stop(now + 0.45);
+      }
+    }
+
+    function saveProgress() {
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify({
+          coins, bestScore, unlockedLevel, upg
+        }));
+      } catch (e) {}
+    }
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(SAVE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (typeof data.coins === "number") coins = data.coins;
+        if (typeof data.bestScore === "number") bestScore = data.bestScore;
+        if (typeof data.unlockedLevel === "number") unlockedLevel = Math.min(MAX_LEVEL, Math.max(1, data.unlockedLevel));
+        if (data.upg) upg = { ...upg, ...data.upg };
+      } catch (e) {}
+    }
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      player.y = canvas.height - 75;
+      player.x = Math.min(Math.max(player.x, 40), canvas.width - 40);
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 110; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          s: 1.5 + Math.random() * 2.8,
+          spd: 65 + Math.random() * 145,
+          a: 0.35 + Math.random() * 0.65
+        });
+      }
+    }
+
+    function clearEntities() {
+      bossActive = false;
+      boss = null;
+      lasers = [];
+      chickens = [];
+      eggs = [];
+      pickups = [];
+      particles = [];
+      shockwaves = [];
+      document.getElementById("boss-bar-wrap").style.display = "none";
+    }
+
+    function switchState(next) {
+      state = next;
+      document.getElementById("screen-menu").classList.toggle("active", state === "MENU");
+      document.getElementById("screen-levels").classList.toggle("active", state === "LEVELS");
+      document.getElementById("screen-shop").classList.toggle("active", state === "SHOP");
+      document.getElementById("screen-gameover").classList.toggle("active", state === "GAMEOVER");
+      document.getElementById("screen-victory").classList.toggle("active", state === "VICTORY");
+      document.getElementById("hud").classList.toggle("active", state === "PLAYING");
+      document.getElementById("touch-controls").classList.toggle("active", state === "PLAYING");
+
+      if (state !== "PLAYING") {
+        clearEntities();
+        screenShake = 0;
+        flashAlpha = 0;
+      }
+      if (state === "LEVELS") renderLevelsScreen();
+      if (state === "SHOP") {
+        document.getElementById("shop-banner").textContent = "طور أسلحتك ودروعك قبل الهجوم!";
+        renderShopScreen();
+      }
+    }
+
+    function renderLevelsScreen() {
+      const box = document.getElementById("levels-container");
+      box.innerHTML = "";
+      LEVEL_THEMES.forEach((th, idx) => {
+        const lvl = idx + 1;
+        const btn = document.createElement("button");
+        btn.className = "btn btn-slate";
+        if (lvl <= unlockedLevel) {
+          btn.textContent = `${th.name}  |  مكافأة: +${th.reward} عملة`;
+          btn.onclick = () => { ensureAudio(); startLevel(lvl); };
+        } else {
+          btn.disabled = true;
+          btn.textContent = `${th.name}  [مغلق]`;
+        }
+        box.appendChild(btn);
+      });
+    }
+
+    function getUpgradeCost(key) {
+      switch (key) {
+        case "multishot": return upg.multishot * 140;
+        case "damage": return upg.damage * 90;
+        case "firerate": return upg.firerate * 85;
+        case "speed": return upg.speed * 70;
+        case "hp": return (upg.hp - 2) * 100;
+        case "magnet": return upg.magnet * 80;
+        case "nova": return upg.nova * 110;
+      }
+      return 9999;
+    }
+
+    function renderShopScreen() {
+      document.getElementById("shop-coins").textContent = `رصيدك الحالي: ${coins} عملة ذهبية`;
+      const list = document.getElementById("shop-list");
+      list.innerHTML = "";
+
+      const defs = [
+        { key: "multishot", title: `الطلقات المتعددة (${upg.multishot}/5)`, max: upg.multishot >= 5 },
+        { key: "damage", title: `قوة الليزر (Lv.${upg.damage})`, max: false },
+        { key: "firerate", title: `سرعة الإطلاق (${upg.firerate}/8)`, max: upg.firerate >= 8 },
+        { key: "speed", title: `سرعة المركبة (${upg.speed}/7)`, max: upg.speed >= 7 },
+        { key: "hp", title: `درع المركبة (${upg.hp} HP)`, max: false },
+        { key: "magnet", title: `مغناطيس الجذب (${upg.magnet}/5)`, max: upg.magnet >= 5 },
+        { key: "nova", title: `قوة الضربة الخاصة NOVA (${upg.nova}/5)`, max: upg.nova >= 5 }
+      ];
+
+      defs.forEach(d => {
+        const row = document.createElement("div");
+        row.className = "shop-item";
+        const label = document.createElement("div");
+        label.style.fontWeight = "700";
+        label.textContent = d.title;
+
+        const btn = document.createElement("button");
+        const cost = getUpgradeCost(d.key);
+        if (d.max) {
+          btn.textContent = "MAX";
+          btn.disabled = true;
+        } else {
+          btn.textContent = `شراء (${cost})`;
+          btn.disabled = coins < cost;
+          btn.onclick = () => buyUpgrade(d.key);
+        }
+
+        row.appendChild(label);
+        row.appendChild(btn);
+        list.appendChild(row);
+      });
+    }
+
+    function buyUpgrade(key) {
+      ensureAudio();
+      const cost = getUpgradeCost(key);
+      const banner = document.getElementById("shop-banner");
+      if (coins < cost) {
+        playSfx("hit");
+        banner.style.color = "#f87171";
+        banner.textContent = "رصيدك غير كافٍ للتطوير ده!";
+        return;
+      }
+      if (key === "multishot" && upg.multishot < 5) { coins -= cost; upg.multishot++; }
+      else if (key === "damage") { coins -= cost; upg.damage++; }
+      else if (key === "firerate" && upg.firerate < 8) { coins -= cost; upg.firerate++; }
+      else if (key === "speed" && upg.speed < 7) { coins -= cost; upg.speed++; }
+      else if (key === "hp") { coins -= cost; upg.hp++; }
+      else if (key === "magnet" && upg.magnet < 5) { coins -= cost; upg.magnet++; }
+      else if (key === "nova" && upg.nova < 5) { coins -= cost; upg.nova++; }
+      else return;
+
+      saveProgress();
+      playSfx("buy");
+      banner.style.color = "#4ade80";
+      banner.textContent = "تم التطوير وحفظه بنجاح!";
+      renderShopScreen();
+    }
+
+    function startLevel(lvl) {
+      currentLevel = Math.min(MAX_LEVEL, Math.max(1, lvl));
+      clearEntities();
+      const th = LEVEL_THEMES[currentLevel - 1];
+      wavesPerLevel = th.waves;
+      score = 0;
+      wave = 1;
+      comboCount = 0;
+      comboTimer = 0;
+      currentHp = upg.hp;
+      overdriveTimer = 0;
+      magnetTimer = 0;
+      shieldTimer = 1.5;
+      specialCharge = 0;
+      fireCooldown = 0;
+      spawnTimer = 0;
+      player.x = canvas.width * 0.5;
+      player.y = canvas.height - 75;
+      player.tilt = 0;
+      switchState("PLAYING");
+      startWave(1);
+    }
+
+    function startWave(w) {
+      if (state !== "PLAYING") return;
+      wave = w;
+      if (wave > wavesPerLevel) {
+        bossActive = true;
+        enemiesRemaining = 0;
+        spawnBoss();
+      } else {
+        bossActive = false;
+        enemiesRemaining = 7 + currentLevel * 2 + wave * 3;
+      }
+    }
+
+    function spawnBoss() {
+      const maxHp = 110 + currentLevel * 95;
+      boss = {
+        x: canvas.width * 0.5,
+        y: 125,
+        hp: maxHp,
+        maxHp,
+        dir: 1,
+        shootTimer: 0.4,
+        radius: 56
+      };
+      document.getElementById("boss-bar-wrap").style.display = "block";
+      document.getElementById("boss-bar-fill").style.width = "100%";
+      screenShake = 12;
+      flashAlpha = 0.25;
+    }
+
+    function completeLevel() {
+      if (state !== "PLAYING") return;
+      const th = LEVEL_THEMES[currentLevel - 1];
+      coins += th.reward;
+      if (score > bestScore) bestScore = score;
+      if (currentLevel >= unlockedLevel && unlockedLevel < MAX_LEVEL) {
+        unlockedLevel = currentLevel + 1;
+      }
+      saveProgress();
+      playSfx("victory");
+      document.getElementById("vic-stats").innerHTML =
+        `LEVEL ${currentLevel} CLEARED!<br/>مكافأة الليفل: +${th.reward} عملة<br/>النقاط: ${score} | الأعلى: ${bestScore}`;
+      document.getElementById("btn-next-level").style.display = currentLevel < MAX_LEVEL ? "inline-block" : "none";
+      switchState("VICTORY");
+    }
+
+    function getComboMult() {
+      return Math.min(5, Math.max(1, 1 + Math.floor(comboCount / 5)));
+    }
+
+    function registerKill() {
+      comboCount++;
+      comboTimer = 3.5;
+    }
+
+    function fireWeapons() {
+      playSfx("laser");
+      const count = Math.min(7, upg.multishot + (overdriveTimer > 0 ? 2 : 0));
+      const dmg = upg.damage + (overdriveTimer > 0 ? 1 : 0);
+      const spread = 0.13;
+      for (let i = 0; i < count; i++) {
+        const offset = i - (count - 1) / 2;
+        const angle = offset * spread;
+        lasers.push({
+          x: player.x + offset * 10,
+          y: player.y - 26,
+          vx: Math.sin(angle) * 820,
+          vy: -Math.cos(angle) * 820,
+          angle,
+          dmg,
+          gold: overdriveTimer > 0
+        });
+      }
+    }
+
+    function spawnChicken() {
+      const roll = Math.random();
+      let variant = "normal";
+      let hp = 2 + currentLevel + Math.floor(wave * 1.2);
+      let vy = 85 + Math.random() * 45 + currentLevel * 10 + wave * 4;
+      let sway = 95;
+      let radius = 22;
+
+      if (roll < 0.09) {
+        variant = "golden";
+        hp = 3 + currentLevel + wave;
+        vy = 120 + Math.random() * 45;
+        sway = 155;
+      } else if (roll < 0.30) {
+        variant = "rusher";
+        hp = 2 + currentLevel + wave;
+        vy = 165 + Math.random() * 65 + currentLevel * 14;
+        sway = 55;
+      } else if (roll < 0.50) {
+        variant = "armored";
+        hp = 6 + currentLevel * 3 + wave * 2;
+        vy = 60 + Math.random() * 35 + currentLevel * 6;
+        sway = 70;
+        radius = 25;
+      } else if (roll < 0.68) {
+        variant = "sniper";
+        hp = 3 + currentLevel + Math.floor(wave * 1.4);
+        vy = 75 + Math.random() * 40;
+        sway = 120;
+      }
+
+      chickens.push({
+        x: 60 + Math.random() * Math.max(80, canvas.width - 120),
+        y: -35,
+        hp,
+        vy,
+        sway,
+        phase: Math.random() * Math.PI * 2,
+        shootTimer: 0.9 + Math.random() * 1.4,
+        variant,
+        radius,
+        hitFlash: 0
+      });
+    }
+
+    function spawnEgg(x, y, vx, vy) {
+      eggs.push({ x, y, vx, vy, r: 9 });
+    }
+
+    function spawnPickup(x, y, kind, ptype = "") {
+      pickups.push({ x, y, kind, ptype, r: 16 });
+    }
+
+    function spawnExplosion(x, y, color, count, radius) {
+      shockwaves.push({ x, y, r: 10, maxR: radius, color, alpha: 0.7 });
+      for (let i = 0; i < count; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const spd = 40 + Math.random() * 190;
+        particles.push({
+          x, y,
+          vx: Math.cos(ang) * spd,
+          vy: Math.sin(ang) * spd,
+          size: 4 + Math.random() * 5,
+          color,
+          life: 0.38
+        });
+      }
+    }
+
+    function triggerNova() {
+      if (state !== "PLAYING" || specialCharge < 100) return;
+      specialCharge = 0;
+      screenShake = 20;
+      flashAlpha = 0.55;
+      playSfx("nova");
+      const novaDmg = 30 + upg.damage * 10 + upg.nova * 18;
+      shockwaves.push({ x: player.x, y: player.y, r: 20, maxR: 520 + upg.nova * 50, color: "#38bdf8", alpha: 0.85 });
+      eggs = [];
+
+      for (let i = chickens.length - 1; i >= 0; i--) {
+        chickens[i].hp -= novaDmg;
+        if (chickens[i].hp <= 0) {
+          registerKill();
+          score += 35 * getComboMult();
+          spawnExplosion(chickens[i].x, chickens[i].y, "#facc15", 14, 90);
+          spawnPickup(chickens[i].x, chickens[i].y, "coin");
+          chickens.splice(i, 1);
+        }
+      }
+      if (bossActive && boss) {
+        boss.hp -= (novaDmg + 25);
+        document.getElementById("boss-bar-fill").style.width = `${Math.max(0, (boss.hp / boss.maxHp) * 100)}%`;
+        spawnExplosion(boss.x, boss.y, "#a855f7", 24, 140);
+        if (boss.hp <= 0) completeLevel();
+      }
+    }
+
+    function damagePlayer() {
+      if (shieldTimer > 0) {
+        shockwaves.push({ x: player.x, y: player.y, r: 15, maxR: 85, color: "#60a5fa", alpha: 0.7 });
+        return;
+      }
+      comboCount = 0;
+      comboTimer = 0;
+      currentHp--;
+      screenShake = 14;
+      flashAlpha = 0.25;
+      playSfx("hit");
+      spawnExplosion(player.x, player.y, "#ef4444", 18, 100);
+
+      if (currentHp <= 0) {
+        if (score > bestScore) bestScore = score;
+        saveProgress();
+        playSfx("explosion");
+        document.getElementById("go-stats").innerHTML =
+          `LEVEL ${currentLevel}<br/>النقاط: ${score} | الأعلى: ${bestScore}<br/>الفلوس الحالية: ${coins}`;
+        switchState("GAMEOVER");
+      }
+    }
+
+    function update(dt) {
+      const th = LEVEL_THEMES[currentLevel - 1];
+      const bgSpdMult = (state === "PLAYING" ? ((bossActive ? 1.85 : 1.0) * th.spd) : 0.85);
+
+      for (const s of stars) {
+        s.y += s.spd * bgSpdMult * dt;
+        if (s.y > canvas.height) {
+          s.y = -4;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      if (state !== "PLAYING") return;
+
+      if (screenShake > 0) screenShake = Math.max(0, screenShake - dt * 28);
+      if (flashAlpha > 0) flashAlpha = Math.max(0, flashAlpha - dt * 1.4);
+      if (overdriveTimer > 0) overdriveTimer = Math.max(0, overdriveTimer - dt);
+      if (magnetTimer > 0) magnetTimer = Math.max(0, magnetTimer - dt);
+      if (shieldTimer > 0) shieldTimer = Math.max(0, shieldTimer - dt);
+      if (comboTimer > 0) {
+        comboTimer -= dt;
+        if (comboTimer <= 0) comboCount = 0;
+      }
+
+      let moveDir = 0;
+      if (keys.left) moveDir -= 1;
+      if (keys.right) moveDir += 1;
+      const spd = (440 + upg.speed * 58) * (bossActive ? 1.2 : 1.0);
+      player.x = Math.min(Math.max(player.x + moveDir * spd * dt, 40), canvas.width - 40);
+      player.tilt += (moveDir * 0.22 - player.tilt) * Math.min(1, dt * 14);
+
+      fireCooldown -= dt;
+      const delay = Math.max(0.06, (0.32 - upg.firerate * 0.03) * (overdriveTimer > 0 ? 0.55 : 1.0));
+      if (fireCooldown <= 0) {
+        fireCooldown = delay;
+        fireWeapons();
+      }
+
+      if (!bossActive && enemiesRemaining > 0) {
+        spawnTimer -= dt;
+        if (spawnTimer <= 0) {
+          spawnTimer = Math.max(0.22, 0.9 - currentLevel * 0.09 - wave * 0.04);
+          enemiesRemaining--;
+          spawnChicken();
+        }
+      }
+
+      // تحديث الليزر
+      for (let i = lasers.length - 1; i >= 0; i--) {
+        const l = lasers[i];
+        l.x += l.vx * dt;
+        l.y += l.vy * dt;
+        if (l.y < -30 || l.x < -30 || l.x > canvas.width + 30) {
+          lasers.splice(i, 1);
+          continue;
+        }
+        let hit = false;
+        for (let j = chickens.length - 1; j >= 0; j--) {
+          const c = chickens[j];
+          if (Math.hypot(l.x - c.x, l.y - c.y) < c.radius + 8) {
+            c.hp -= l.dmg;
+            c.hitFlash = 0.08;
+            specialCharge = Math.min(100, specialCharge + 3.5);
+            hit = true;
+            if (c.hp <= 0) {
+              registerKill();
+              const mult = getComboMult();
+              if (c.variant === "golden") {
+                score += 120 * mult;
+                coins += 35;
+                playSfx("powerup");
+                spawnExplosion(c.x, c.y, "#fef08a", 20, 120);
+                spawnPickup(c.x, c.y, "powerup", "overdrive");
+              } else {
+                score += 30 * mult;
+                playSfx("explosion");
+                spawnExplosion(c.x, c.y, "#f8fafc", 14, 85);
+                if (Math.random() < 0.78) spawnPickup(c.x, c.y, "coin");
+                if (Math.random() < 0.25) {
+                  const ptypes = ["overdrive", "heal", "magnet", "nova", "shield"];
+                  spawnPickup(c.x, c.y, "powerup", ptypes[Math.floor(Math.random() * ptypes.length)]);
+                }
+              }
+              chickens.splice(j, 1);
+            }
+            break;
+          }
+        }
+        if (!hit && bossActive && boss) {
+          if (Math.hypot(l.x - boss.x, l.y - boss.y) < boss.radius + 8) {
+            boss.hp -= l.dmg;
+            specialCharge = Math.min(100, specialCharge + 2.5);
+            hit = true;
+            document.getElementById("boss-bar-fill").style.width = `${Math.max(0, (boss.hp / boss.maxHp) * 100)}%`;
+            if (boss.hp <= 0) {
+              playSfx("explosion");
+              score += 600 * getComboMult();
+              coins += 65;
+              spawnExplosion(boss.x, boss.y, "#a855f7", 36, 180);
+              completeLevel();
+            }
+          }
+        }
+        if (hit) lasers.splice(i, 1);
+      }
+
+      // تحديث الفراخ
+      const tNow = performance.now() * 0.005;
+      for (let i = chickens.length - 1; i >= 0; i--) {
+        const c = chickens[i];
+        c.y += c.vy * th.spd * (bossActive ? 1.3 : 1.0) * dt;
+        c.x += Math.sin(tNow + c.phase) * c.sway * dt;
+        c.x = Math.min(Math.max(c.x, 35), canvas.width - 35);
+        if (c.hitFlash > 0) c.hitFlash -= dt;
+
+        c.shootTimer -= dt;
+        if (c.shootTimer <= 0) {
+          c.shootTimer = (1.3 + Math.random() * 1.6) / Math.max(0.85, th.spd * 0.85);
+          spawnEgg(c.x, c.y + 18, 0, 300 + currentLevel * 22 + wave * 12);
+        }
+
+        if (Math.hypot(c.x - player.x, c.y - player.y) < c.radius + 18) {
+          chickens.splice(i, 1);
+          damagePlayer();
+          continue;
+        }
+        if (c.y > canvas.height + 40) chickens.splice(i, 1);
+      }
+
+      // تحديث البوس
+      if (bossActive && boss) {
+        boss.x += boss.dir * (195 + currentLevel * 24 + wave * 12) * dt;
+        if (boss.x > canvas.width - 100) boss.dir = -1;
+        if (boss.x < 100) boss.dir = 1;
+
+        boss.shootTimer -= dt;
+        if (boss.shootTimer <= 0) {
+          boss.shootTimer = Math.max(0.45, 1.25 - currentLevel * 0.12 - wave * 0.04);
+          const angles = currentLevel >= 3 ? [-0.45, -0.22, 0, 0.22, 0.45] : [-0.35, 0, 0.35];
+          for (const a of angles) {
+            spawnEgg(boss.x, boss.y + 40, Math.sin(a) * 350, Math.cos(a) * 350);
+          }
+        }
+      }
+
+      // تحديث البيض
+      for (let i = eggs.length - 1; i >= 0; i--) {
+        const e = eggs[i];
+        e.x += e.vx * dt;
+        e.y += e.vy * dt;
+        if (Math.hypot(e.x - player.x, e.y - player.y) < e.r + 16) {
+          eggs.splice(i, 1);
+          damagePlayer();
+          continue;
+        }
+        if (e.y > canvas.height + 30 || e.x < -30 || e.x > canvas.width + 30) eggs.splice(i, 1);
+      }
+
+      // تحديث العملات والتعزيزات
+      const magRad = 140 + upg.magnet * 75 + (magnetTimer > 0 ? 260 : 0);
+      for (let i = pickups.length - 1; i >= 0; i--) {
+        const p = pickups[i];
+        const dist = Math.hypot(p.x - player.x, p.y - player.y);
+        if (dist < magRad && dist > 1) {
+          p.x += ((player.x - p.x) / dist) * (340 + upg.magnet * 60) * dt;
+          p.y += ((player.y - p.y) / dist) * (340 + upg.magnet * 60) * dt;
+        } else {
+          p.y += 185 * dt;
+        }
+
+        if (dist < p.r + 22) {
+          if (p.kind === "coin") {
+            coins += 15;
+            score += 10 * getComboMult();
+            specialCharge = Math.min(100, specialCharge + 5);
+            playSfx("coin");
+          } else {
+            playSfx("powerup");
+            if (p.ptype === "overdrive") overdriveTimer = 7;
+            else if (p.ptype === "heal") currentHp = Math.min(upg.hp, currentHp + 1);
+            else if (p.ptype === "magnet") magnetTimer = 8;
+            else if (p.ptype === "nova") specialCharge = 100;
+            else if (p.ptype === "shield") shieldTimer = 6;
+          }
+          pickups.splice(i, 1);
+          continue;
+        }
+        if (p.y > canvas.height + 35) pickups.splice(i, 1);
+      }
+
+      // موجات ومؤثرات
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const pt = particles[i];
+        pt.x += pt.vx * dt;
+        pt.y += pt.vy * dt;
+        pt.life -= dt;
+        if (pt.life <= 0) particles.splice(i, 1);
+      }
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        const sw = shockwaves[i];
+        sw.r += (sw.maxR - sw.r) * Math.min(1, dt * 11);
+        sw.alpha -= dt * 2.2;
+        if (sw.alpha <= 0) shockwaves.splice(i, 1);
+      }
+
+      if (!bossActive && enemiesRemaining === 0 && chickens.length === 0) {
+        startWave(wave + 1);
+      }
+
+      // تحديث HUD
+      document.getElementById("hud-score").textContent = `النقاط: ${score}`;
+      document.getElementById("hud-coins").textContent = `الفلوس: ${coins}`;
+      document.getElementById("hud-combo").textContent = comboCount > 1 ? `COMBO x${getComboMult()} (${comboTimer.toFixed(1)}s)` : "";
+      document.getElementById("hud-wave").textContent = `L${currentLevel} - Wave ${Math.min(wave, wavesPerLevel)}/${wavesPerLevel}`;
+      document.getElementById("hud-hp").textContent = `الصحة: ${currentHp} / ${upg.hp}`;
+      document.getElementById("nova-bar-fill").style.width = `${specialCharge}%`;
+
+      let buffs = "";
+      if (overdriveTimer > 0) buffs += `OVERDRIVE ${overdriveTimer.toFixed(1)}s  `;
+      if (magnetTimer > 0) buffs += `MAGNET ${magnetTimer.toFixed(1)}s  `;
+      if (shieldTimer > 0) buffs += `SHIELD ${shieldTimer.toFixed(1)}s  `;
+      if (specialCharge >= 100) buffs += `[اضغط Q للضربة NOVA!]`;
+      document.getElementById("hud-buffs").textContent = buffs;
+    }
+
+    function draw() {
+      const th = LEVEL_THEMES[currentLevel - 1];
+      ctx.save();
+      if (screenShake > 0) {
+        ctx.translate((Math.random() - 0.5) * screenShake * 2, (Math.random() - 0.5) * screenShake * 2);
+      }
+
+      ctx.fillStyle = th.bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // سدم خفيفة
+      ctx.fillStyle = th.neb1;
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.22, canvas.height * 0.28, 190, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = th.neb2;
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.78, canvas.height * 0.42, 220, 0, Math.PI * 2);
+      ctx.fill();
+
+      // النجوم
+      for (const s of stars) {
+        ctx.fillStyle = `rgba(210, 235, 255, ${s.a})`;
+        ctx.fillRect(s.x, s.y, s.s, s.s);
+      }
+
+      if (state === "PLAYING") {
+        // الليزر
+        for (const l of lasers) {
+          ctx.save();
+          ctx.translate(l.x, l.y);
+          ctx.rotate(l.angle);
+          ctx.fillStyle = l.gold ? "#facc15" : "#38bdf8";
+          ctx.fillRect(-3.5, -11, 7, 22);
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(-1.5, -10, 3, 20);
+          ctx.restore();
+        }
+
+        // الفراخ
+        for (const c of chickens) {
+          ctx.save();
+          ctx.translate(c.x, c.y);
+          let body = "#f8fafc";
+          if (c.variant === "golden") body = "#fef08a";
+          else if (c.variant === "rusher") body = "#fca5a5";
+          else if (c.variant === "armored") body = "#94a3b8";
+          else if (c.variant === "sniper") body = "#d8b4fe";
+          if (c.hitFlash > 0) body = "#ffffff";
+
+          ctx.fillStyle = body;
+          ctx.beginPath();
+          ctx.arc(0, 0, c.radius * 0.78, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#dc2626";
+          ctx.fillRect(-5, -c.radius - 3, 10, 6);
+
+          ctx.fillStyle = "#f97316";
+          ctx.beginPath();
+          ctx.moveTo(-4, 2); ctx.lineTo(4, 2); ctx.lineTo(0, 9);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = "#0f172a";
+          ctx.fillRect(-7, -5, 3, 3);
+          ctx.fillRect(4, -5, 3, 3);
+          ctx.restore();
+        }
+
+        // الزعيم
+        if (bossActive && boss) {
+          ctx.save();
+          ctx.translate(boss.x, boss.y);
+          ctx.fillStyle = "#7e22ce";
+          ctx.beginPath();
+          ctx.arc(0, 0, boss.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#eab308";
+          ctx.beginPath();
+          ctx.arc(0, 12, boss.radius * 0.48, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#ef4444";
+          ctx.fillRect(-18, -14, 9, 7);
+          ctx.fillRect(9, -14, 9, 7);
+          ctx.restore();
+        }
+
+        // البيض
+        for (const e of eggs) {
+          ctx.fillStyle = "#fde68a";
+          ctx.beginPath();
+          ctx.ellipse(e.x, e.y, 7, 9.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // العملات والتعزيزات
+        for (const p of pickups) {
+          if (p.kind === "coin") {
+            ctx.fillStyle = "#eab308";
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 9, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#fef08a";
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 5.5, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            const pcols = { overdrive: "#facc15", heal: "#4ade80", magnet: "#38bdf8", nova: "#e879f9", shield: "#60a5fa" };
+            ctx.fillStyle = pcols[p.ptype] || "#ffffff";
+            ctx.fillRect(p.x - 11, p.y - 11, 22, 22);
+          }
+        }
+
+        // المركبة
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        ctx.rotate(player.tilt);
+
+        // لهب المحرك
+        ctx.fillStyle = Math.random() < 0.5 ? "#facc15" : "#f97316";
+        ctx.beginPath();
+        ctx.moveTo(-7, 22); ctx.lineTo(7, 22); ctx.lineTo(0, 36);
+        ctx.closePath();
+        ctx.fill();
+
+        // جسم المركبة
+        ctx.fillStyle = "#0ea5e9";
+        ctx.beginPath();
+        ctx.moveTo(0, -26);
+        ctx.lineTo(24, 20);
+        ctx.lineTo(-24, 20);
+        ctx.closePath();
+        ctx.fill();
+
+        // قمرة القيادة
+        ctx.fillStyle = "#bae6fd";
+        ctx.beginPath();
+        ctx.arc(0, -2, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (shieldTimer > 0) {
+          ctx.strokeStyle = "rgba(96, 165, 250, 0.85)";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.arc(0, 0, 34, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        // موجات الصدمة والبارتكلز
+        for (const sw of shockwaves) {
+          ctx.strokeStyle = sw.color;
+          ctx.globalAlpha = Math.max(0, sw.alpha);
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+
+        for (const pt of particles) {
+          ctx.fillStyle = pt.color;
+          ctx.globalAlpha = Math.max(0, pt.life / 0.38);
+          ctx.fillRect(pt.x, pt.y, pt.size, pt.size);
+        }
+        ctx.globalAlpha = 1;
+
+        if (flashAlpha > 0) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${flashAlpha})`;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      ctx.restore();
+    }
+
+    let lastTime = performance.now();
+    function loop(now) {
+      const dt = Math.min(0.05, (now - lastTime) / 1000);
+      lastTime = now;
+      update(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    // أحداث التحكم والأزرار
+    window.addEventListener("resize", resize);
+    window.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") keys.left = true;
+      if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") keys.right = true;
+      if (e.key === "q" || e.key === "Q" || e.key === "Shift") triggerNova();
+    });
+    window.addEventListener("keyup", e => {
+      if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") keys.left = false;
+      if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") keys.right = false;
+    });
+
+    canvas.addEventListener("pointermove", e => {
+      if (state === "PLAYING" && e.pointerType === "mouse") {
+        player.x = Math.min(Math.max(e.clientX, 40), canvas.width - 40);
+      }
+    });
+
+    const bLeft = document.getElementById("btn-left");
+    const bRight = document.getElementById("btn-right");
+    bLeft.addEventListener("pointerdown", () => keys.left = true);
+    bLeft.addEventListener("pointerup", () => keys.left = false);
+    bLeft.addEventListener("pointerleave", () => keys.left = false);
+    bRight.addEventListener("pointerdown", () => keys.right = true);
+    bRight.addEventListener("pointerup", () => keys.right = false);
+    bRight.addEventListener("pointerleave", () => keys.right = false);
+    document.getElementById("btn-nova").addEventListener("click", triggerNova);
+
+    document.getElementById("btn-play-current").onclick = () => { ensureAudio(); startLevel(unlockedLevel); };
+    document.getElementById("btn-open-levels").onclick = () => { ensureAudio(); switchState("LEVELS"); };
+    document.getElementById("btn-open-shop").onclick = () => { ensureAudio(); switchState("SHOP"); };
+    document.getElementById("btn-levels-back").onclick = () => switchState("MENU");
+    document.getElementById("btn-shop-back").onclick = () => switchState("MENU");
+    document.getElementById("btn-retry").onclick = () => startLevel(currentLevel);
+    document.getElementById("btn-go-shop").onclick = () => switchState("SHOP");
+    document.getElementById("btn-go-menu").onclick = () => switchState("MENU");
+    document.getElementById("btn-next-level").onclick = () => startLevel(Math.min(MAX_LEVEL, currentLevel + 1));
+    document.getElementById("btn-vic-shop").onclick = () => switchState("SHOP");
+    document.getElementById("btn-vic-menu").onclick = () => switchState("MENU");
+
+    loadProgress();
+    resize();
+    initStars();
+    requestAnimationFrame(loop);
+  </script>
 <script>
 
 </script></body>
-</html>
-</script>
-</body>
 </html>
